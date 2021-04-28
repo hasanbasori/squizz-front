@@ -1,11 +1,17 @@
-import React from "react";
+import React from 'react'
+import './HomePage.postcss'
+import Layout, { HeaderPublic, Content, Footer } from '../components/Layout'
 
 function HomePage() {
-    return (
-        <div>
-            <h1>Homepage</h1>
-        </div>
-    )
+  return (
+    <Layout>
+      <HeaderPublic />
+      <Content>
+        <h1>Home Page</h1>
+      </Content>
+      <Footer />
+    </Layout>
+  )
 }
 
 export default HomePage
