@@ -5,12 +5,12 @@ const HeaderStyled = styled.div`
   /* STYLE HERE */
 `
 
-function HeaderPublic() {
+function HeaderCreator() {
   return (
-    <HeaderStyled className="header-public">
+    <HeaderStyled className="header-creator">
       <h2>HEADER PUBLIC COMPONENT</h2>
     </HeaderStyled>
   )
 }
 
-export default HeaderPublic
+export default HeaderCreator
