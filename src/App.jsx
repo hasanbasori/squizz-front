@@ -1,45 +1,58 @@
-import React, { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { useState } from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Auth from "./pages/Auth";
+import Main from "./pages/Main";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import "./App.css";
+import { useContext } from 'react'
+import { AuthContext } from './contexts/AuthContextProvider'
+
+const privateRoutes = [
+  {
+    path: "/",
+    component: HomePage,
+  },
+];
+
+const publicRoutes = [
+  {
+    path: "/",
+    component: Main,
+  },
+  {
+    path: "/auth/login",
+    component: LoginPage,
+  },
+  {
+    path: "/auth/register",
+    component: RegisterPage,
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { isAuthenticated } = useContext(AuthContext)
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <BrowserRouter>
+        <Switch>
+          {isAuthenticated &&
+            privateRoutes.map((el) => (
+              <Route exact key={el.path} path={el.path} component={el.component} />
+            ))}
+
+          {!isAuthenticated &&
+            publicRoutes.map((el) => (
+              <Route exact key={el.path} path={el.path} component={el.component} />
+            ))}
+
+          <Redirect to="/" />
+        </Switch>
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
