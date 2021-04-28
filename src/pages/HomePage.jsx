@@ -1,10 +1,15 @@
 import React from "react";
+import Layout, { HeaderPublic, Content, Footer } from '../components/Layout'
 
 function HomePage() {
     return (
-        <div>
-            <h1>Homepage</h1>
-        </div>
+        <Layout>
+            <HeaderPublic/>
+            <Content>
+                <h1>Home Page</h1>
+            </Content>
+            <Footer />
+        </Layout>
     )
 }
 
