@@ -1,11 +1,12 @@
 import React from 'react'
+import Button from '../components/Button'
 
-import Layout, { Content } from '../components/Layout'
-
+import Layout, { Content, HeaderPublic } from '../components/Layout'
 
 function LoginPage() {
   return (
     <Layout>
+      <HeaderPublic />
       <Content>
         <h1 className="text-red-500">LoginPage</h1>
         <h2>HEADING 2</h2>
@@ -15,7 +16,7 @@ function LoginPage() {
         <h6>HEADING 6</h6>
 
         <a href="#">Link</a>
-        <button>TEST BTN</button>
+        <Button type="secondary" disabled>TEST BTN</Button>
       </Content>
     </Layout>
   )

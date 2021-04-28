@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --header-height: 64px;
+  --bg-header-color: #F2F2F2;
+}
+
 @layer base {
-  h1,h2,h3,h4,h5,h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-black;
   }
   h1 {
@@ -27,19 +32,17 @@
   a {
     @apply text-blue-600 underline;
   }
+  button {
+    @apply text-sm;
+  }
   button:focus {
-    outline: 1px dotted;
-    outline: 5px auto -webkit-focus-ring-color;
+    @apply outline-none;
   }
 }
-
-
 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }

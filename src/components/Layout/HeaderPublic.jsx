@@ -1,15 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
+import './HeaderPublic.postcss'
 
-const HeaderStyled = styled.div`
-  /* STYLE HERE */
-`
-
-function HeaderPublic() {
+function HeaderPublic({ style }) {
   return (
-    <HeaderStyled className="header-public">
-      <h2>HEADER PUBLIC COMPONENT</h2>
-    </HeaderStyled>
+    <div className="header-public" style={{ ...style }}>
+      <div>HEADER PUBLIC COMPONENT</div>
+    </div>
   )
 }
 
