@@ -1,10 +1,10 @@
 import React from 'react'
-
+import './PlayButton.postcss'
 /**
  * @param { { type: 'primary' | 'secondary' | 'success' | 'warning' | 'danger', style: import('react').CSSProperties, disabled: boolean } } props
  * @return import('react').ReactElement | null | undefined
  */
-function Button(props) {
+function PlayButton(props) {
   const { type, style, children, disabled } = props
 
   return (
@@ -22,4 +22,4 @@ function Button(props) {
   )
 }
 
-export default Button
+export default PlayButton

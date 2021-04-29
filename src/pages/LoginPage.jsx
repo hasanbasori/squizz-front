@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../components/Button'
+import PlayButton from '../components/PlayButton'
 
 import Layout, { Content, HeaderPublic } from '../components/Layout'
 
@@ -16,7 +16,7 @@ function LoginPage() {
         <h6>HEADING 6</h6>
 
         <a href="#">Link</a>
-        <Button type="secondary" disabled>TEST BTN</Button>
+        <PlayButton type="secondary" disabled>TEST BTN</PlayButton>
       </Content>
     </Layout>
   )
