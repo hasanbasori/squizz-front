@@ -9,10 +9,10 @@ function PlayButton(props) {
 
   return (
     <button
-      className={`play-button text-secondary-normal font-bold py-2 px-4 border-b-4 border-${type}-normal  bg-${type}-normal rounded ${
+      className={`play-button  font-bold py-2 px-4 border-b-4  rounded ${
         disabled
-          ? 'text-disabled cursor-not-allowed'
-          : 'hover:text-secondary-hover hover:border-${type}-hover hover:bg-${type}-hover'
+          ? 'text-disabled cursor-not-allowed bg-gray-300'
+          : `hover:text-secondary-hover hover:border-${type}-hover hover:bg-${type}-hover border-${type}-normal bg-${type}-normal text-${type}-normal`
       } ${className ? className : ''}`}
       type={htmlType}
       {...{ disabled, type: htmlType, style: { ...style } }}

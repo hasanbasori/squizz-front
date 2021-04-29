@@ -3,9 +3,9 @@ import './Separator.postcss'
 
 function Separator({ children }) {
   return (
-    <div class="separator">
+    <div className="separator">
       <hr />
-      <span class="content">{children}</span>
+      <span className="content">{children}</span>
       <hr />
     </div>
   )
