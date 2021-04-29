@@ -1,11 +1,11 @@
 import React from 'react'
 import './PlayButton.postcss'
 /**
- * @param { { type: 'primary' | 'secondary' | 'success' | 'warning' | 'danger', style: import('react').CSSProperties, disabled: boolean } } props
+ * @param { { type: 'primary' | 'secondary' | 'success' | 'warning' | 'danger', style?: import('react').CSSProperties, disabled?: boolean, className?: string } } props
  * @return import('react').ReactElement | null | undefined
  */
 function PlayButton(props) {
-  const { type, style, children, disabled } = props
+  const { type, className, style, children, disabled } = props
 
   return (
     <button
@@ -13,7 +13,7 @@ function PlayButton(props) {
         disabled
           ? 'text-disabled cursor-not-allowed'
           : 'hover:text-secondary-hover hover:border-${type}-hover hover:bg-${type}-hover'
-      }`}
+      } ${className ? className : ''}`}
       style={{ ...style }}
       disabled={disabled}
     >
