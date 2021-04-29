@@ -5,6 +5,7 @@ import Auth from "./pages/Auth";
 import Main from "./pages/Main";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import CreatorHomePage from './pages/CreatorHomePage'
 import "./App.css";
 import { useContext } from 'react'
 import { AuthContext } from './contexts/AuthContextProvider'
@@ -12,7 +13,7 @@ import { AuthContext } from './contexts/AuthContextProvider'
 const privateRoutes = [
   {
     path: "/",
-    component: HomePage,
+    component: CreatorHomePage,
   },
 ];
 
@@ -38,12 +39,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {isAuthenticated &&
+          {!isAuthenticated &&
             privateRoutes.map((el) => (
               <Route exact key={el.path} path={el.path} component={el.component} />
             ))}
 
-          {!isAuthenticated &&
+          {isAuthenticated &&
             publicRoutes.map((el) => (
               <Route exact key={el.path} path={el.path} component={el.component} />
             ))}

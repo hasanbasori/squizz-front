@@ -1,5 +1,5 @@
 import React from 'react'
-import './Auth.postcss'
+// import './Auth.postcss'
 
 function Auth() {
   return (

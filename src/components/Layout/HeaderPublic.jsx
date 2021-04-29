@@ -1,6 +1,6 @@
 import React from 'react'
 // import styled from 'styled-components'
-import './HeaderPublic.postcss'
+// import './HeaderPublic.postcss'
 
 function HeaderPublic({ style }) {
   return (

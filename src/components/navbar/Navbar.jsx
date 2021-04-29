@@ -11,7 +11,7 @@ const StyledButton = styled.button`
 
 const Header = styled.div`
   background-color: green;
-  height: 200px;
+  height: 60px;
   width: 100%;
   display: flex;
   align-item: center;

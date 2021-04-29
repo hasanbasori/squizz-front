@@ -1,5 +1,5 @@
 import React from 'react'
-import './HomePage.postcss'
+// import './HomePage.postcss'
 import Layout, { HeaderPublic, Content, Footer } from '../components/Layout'
 
 function HomePage() {
