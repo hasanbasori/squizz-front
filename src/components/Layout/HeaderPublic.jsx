@@ -11,16 +11,27 @@ function HeaderPublic({ className, style }) {
       style={{ ...style }}
     >
       <div className="header-left">
-        <img src="/src/assets/logos/logo.png" alt="Logo" className="w-12" />
+        <img
+          src="/src/assets/logos/logo.png"
+          alt="Logo"
+          className="w-12 inline-block"
+        />
+        <PlayButton type="primary" className="btn-signup ml-4">
+          News
+        </PlayButton>
+        <button className="ml-4">School</button>
+        <button className="ml-4">Work</button>
+        <button className="ml-4">Home</button>
+        <button className="ml-4">Academy</button>
       </div>
       <div className="header-right">
-        <button>Contact sales</button>
-        <button>Explore content</button>
-        <button>Play</button>
-        <PlayButton type="success" className="btn-signup">
+        <button className="ml-4">Contact sales</button>
+        <button className="ml-4">Explore content</button>
+        <button className="ml-4">Play</button>
+        <PlayButton type="success" className="btn-signup ml-4">
           Sign up
         </PlayButton>
-        <button>Log in</button>
+        <button className="ml-4">Log in</button>
       </div>
     </div>
   )
