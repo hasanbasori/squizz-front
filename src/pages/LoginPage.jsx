@@ -14,9 +14,11 @@ import {
   InputGroup,
   InputRightElement,
   Button,
-  Link
+  Link,
+  Divider
 } from '@chakra-ui/react'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
+import Separator from '../components/Separator'
 
 function LoginPage() {
   const [isShowPwd, setIsShowPwd] = useState(false)
@@ -83,6 +85,8 @@ function LoginPage() {
               Login
             </PlayButton>
           </form>
+
+          <Separator>or</Separator>
         </div>
       </Content>
     </Layout>
