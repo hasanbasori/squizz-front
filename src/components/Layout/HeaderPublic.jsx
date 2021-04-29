@@ -2,10 +2,11 @@ import React from 'react'
 import PlayButton from '../PlayButton'
 import './HeaderPublic.postcss'
 
+
 function HeaderPublic({ className, style }) {
   return (
     <div
-      className={`header-public flex justify-between items-center px-6 ${
+      className={`layout-header-public flex justify-between items-center px-6 ${
         className ? className : ''
       }`}
       style={{ ...style }}
