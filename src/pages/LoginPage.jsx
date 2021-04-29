@@ -130,7 +130,7 @@ function LoginPage() {
             <div>
               <FaApple />
             </div>
-            <div>Continue With Apple</div>
+            <div>Continue with Apple</div>
             <div />
           </Button>
           <br />
