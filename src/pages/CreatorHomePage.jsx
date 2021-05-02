@@ -18,10 +18,10 @@ function CreatorHomePage() {
     <Layout>
       <HeaderCreator />
       <Content>
-        <div className="grid grid-flow-row grid-cols-4 gap-4 px-36 pt-6">
-          <div className="col-span-1 h-full">
-            <div className="content-box h-40 mb-4 ">
-              <div className="px-6 pt-4 mb-4">
+        <div className="flex flex-wrap px-36 pt-6">
+          <div className="w-full sm:w-1/3 lg:w-3/12">
+            <div className="content-box py-4 mb-4 ">
+              <div className="px-6 mb-4">
                 <p className="text-md font-bold">Creator name</p>
                 <p className="text-xs font-bold text-gray-500">
                   Creator username
@@ -66,7 +66,7 @@ function CreatorHomePage() {
             </div>
           </div>
 
-          <div className="col-start-2 col-span-2 h-full pt-4">
+          <div className="w-full sm:w-2/3 lg:w-6/12 px-4 pb-4">
             <div
               className="rounded h-52 mb-4 shadow-md text-left"
               style={{ backgroundColor: '#26890c' }}
@@ -102,7 +102,7 @@ function CreatorHomePage() {
             </div>
           </div>
 
-          <div className="col-start-4 col-span-1 h-full">
+          <div className="hidden lg:block lg:w-3/12">
             <div className="content-box h-52 mb-4">
               <Tabs>
                 <TabList>

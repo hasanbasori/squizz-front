@@ -24,7 +24,7 @@ import {
 function HeaderCreator({ style, className }) {
   return (
     <div
-      className="header-creator w-full flex flex-row justify-between items-center bg-gray-50 shadow-md px-6"
+      className="header-creator w-full flex flex-row justify-between items-center bg-gray-50 px-6 shadow-md relative"
       style={{ ...style }}
     >
       <div className="w-3/6 gap-5 flex flex-row items-center justify-around">

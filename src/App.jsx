@@ -1,7 +1,8 @@
 import "./App.css";
-import CreatorHomePage from './pages/CreatorHomePage'
 import React, { useState } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import CreatorHomePage from './pages/CreatorHomePage'
+import CreatorLibraryPage from './pages/CreatorLibraryPage'
 import HomePage from './pages/HomePage'
 import Auth from './pages/Auth'
 import Main from './pages/Main'
@@ -21,7 +22,7 @@ const privateRoutes = [
   },
   {
     path: "/my-library",
-    component: CreatorHomePage,
+    component: CreatorLibraryPage,
   },
 ]
 
@@ -64,7 +65,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {isAuthenticated &&
+          {!isAuthenticated &&
             privateRoutes.map((el) => (
               <Route
                 exact
@@ -74,7 +75,7 @@ function App() {
               />
             ))}
 
-          {!isAuthenticated &&
+          {isAuthenticated &&
             publicRoutes.map((el) => (
               <Route
                 exact
