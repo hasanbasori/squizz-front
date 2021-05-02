@@ -15,6 +15,10 @@ const privateRoutes = [
     path: "/",
     component: CreatorHomePage,
   },
+  {
+    path: "/my-library",
+    component: CreatorHomePage,
+  },
 ];
 
 const publicRoutes = [

@@ -1,10 +1,10 @@
 import React from 'react'
 // import styled from 'styled-components'
-// import './HeaderPublic.postcss'
+import './HeaderPublic.postcss'
 
-function HeaderPublic({ style }) {
+function HeaderPublic({ style, className }) {
   return (
-    <div className="header-public" style={{ ...style }}>
+    <div className={`header-public ${className? className : ''}`} style={{ ...style }}>
       <div>HEADER PUBLIC COMPONENT</div>
     </div>
   )

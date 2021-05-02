@@ -7,7 +7,7 @@ import Content from './Content'
 import Footer from './Footer'
 
 const LayoutWrapped = styled.div`
-  background-color: silver;
+  background-color: #f2f2f2;
 `
 
 function Layout({ children }) {
