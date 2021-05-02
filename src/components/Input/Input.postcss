@@ -1,0 +1,13 @@
+.input-component {
+  @apply relative h-12 mb-5;
+
+  input {
+    @apply h-full w-full border-gray-300 px-2 transition-all rounded-sm border-solid border-2;
+  }
+  input:focus {
+    @apply focus:outline-none;
+  }
+  label {
+    @apply absolute left-2 transition-all px-1 bg-white -top-3;
+  }
+}

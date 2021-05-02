@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import './Content.postcss'
 
 const ContentStyled = styled.div`
   height: 100vh;
@@ -8,7 +9,7 @@ const ContentStyled = styled.div`
 function Content({ style, className, children }) {
   return (
     <ContentStyled
-      className={`content ${className ? className : ''}`}
+      className={`layout-content ${className ? className : ''}`}
       style={{ ...style }}
     >
       {children}
