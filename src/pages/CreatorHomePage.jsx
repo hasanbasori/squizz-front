@@ -42,11 +42,11 @@ function CreatorHomePage() {
               </div>
             </div>
 
-            <div className="content-box h-72 mb-4">
-              <p className="px-4 py-3 font-bold">Challenge in process</p>
+            <div className="content-box py-3 mb-4">
+              <p className="px-4 pb-3 font-bold">Challenge in process</p>
               <hr />
-              <div className="detail-box h-48">
-                <p className="px-12 py-6 text-sm">
+              <div className="detail-box py-6">
+                <p className="px-12 pb-4 text-sm">
                   Find engaging learning games for kids to play independently
                   with questions and answers displayed on their devices.
                 </p>
@@ -76,11 +76,11 @@ function CreatorHomePage() {
                 More Players - more fun! Invite 2 or more
               </p>
             </div>
-            <div className="content-box h-64 mb-4">
-              <p className="px-4 py-3 font-bold">Collections</p>
+            <div className="content-box py-3 mb-4">
+              <p className="px-4 pb-3 font-bold">Collections</p>
               <hr />
-              <div className="detail-box h-40">
-                <p className="px-12 py-6 text-sm">
+              <div className="detail-box py-6">
+                <p className="px-12 pb-6 text-sm">
                   Welcome to Collections! Here you can create collections and
                   add several squizzs to them. Get started by creating your
                   first collection and assign to your learners.
@@ -103,7 +103,7 @@ function CreatorHomePage() {
           </div>
 
           <div className="hidden lg:block lg:w-3/12">
-            <div className="content-box h-52 mb-4">
+            <div className="content-box py-4 mb-4">
               <Tabs>
                 <TabList>
                   <Tab
@@ -185,11 +185,11 @@ function CreatorHomePage() {
                 squizz
               </div> */}
             </div>
-            <div className="content-box h-64 items-center">
-              <p className="px-4 py-3 font-bold">Latest reports</p>
+            <div className="content-box py-3 items-center">
+              <p className="px-4 pb-3 font-bold">Latest reports</p>
               <hr />
-              <div className="detail-box h-36">
-                <p className="px-12 py-6 text-sm">
+              <div className="detail-box py-6">
+                <p className="px-12 pb-4 text-sm">
                   Host your first squizz to see reports here.
                 </p>
                 <Button
@@ -202,7 +202,13 @@ function CreatorHomePage() {
                   Host Squizz
                 </Button>
               </div>
-              <Button variant="link" fontSize="sm" color="#1368ce" w='full' h={7}>
+              <Button
+                variant="link"
+                fontSize="sm"
+                color="#1368ce"
+                w="full"
+                h={7}
+              >
                 Learn more
               </Button>
             </div>

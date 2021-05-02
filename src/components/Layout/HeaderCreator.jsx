@@ -87,7 +87,7 @@ function HeaderCreator({ style, className }) {
         >
           Share
         </Button>
-        <Button w="100px" bgColor="#1368ce" color="white">
+        <Button w="100px" bgColor="#1368ce" color="white" >
           Create
         </Button>
         <IconButton
