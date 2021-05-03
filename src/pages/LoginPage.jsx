@@ -41,7 +41,7 @@ function LoginPage() {
   function handleSubmitLogin(formValues) {
     console.log(formValues)
   }
-
+  console.log('Loginnnnnn')
   return (
     <Layout>
       <HeaderAuthentication />

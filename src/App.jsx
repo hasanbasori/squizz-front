@@ -1,4 +1,4 @@
-import "./App.css";
+import './App.css'
 import React, { useState } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import CreatorHomePage from './pages/CreatorHomePage'
@@ -17,13 +17,13 @@ import { AuthContext } from './contexts/AuthContextProvider'
 
 const privateRoutes = [
   {
-    path: "/",
-    component: CreatorHomePage,
+    path: '/',
+    component: CreatorHomePage
   },
   {
-    path: "/my-library",
-    component: CreatorLibraryPage,
-  },
+    path: '/my-library',
+    component: CreatorLibraryPage
+  }
 ]
 
 const publicRoutes = [
@@ -65,25 +65,29 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {!isAuthenticated &&
-            privateRoutes.map((el) => (
-              <Route
-                exact
-                key={el.path}
-                path={el.path}
-                component={el.component}
-              />
-            ))}
-
           {isAuthenticated &&
-            publicRoutes.map((el) => (
-              <Route
-                exact
-                key={el.path}
-                path={el.path}
-                component={el.component}
-              />
-            ))}
+            privateRoutes.map((el) => {
+              return (
+                <Route
+                  exact
+                  key={el.path}
+                  path={el.path}
+                  component={el.component}
+                />
+              )
+            })}
+
+          {!isAuthenticated &&
+            publicRoutes.map((el) => {
+              return (
+                <Route
+                  exact
+                  key={el.path}
+                  path={el.path}
+                  component={el.component}
+                />
+              )
+            })}
 
           {/* <Redirect to="/" /> */}
         </Switch>
