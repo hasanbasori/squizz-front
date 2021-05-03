@@ -73,13 +73,6 @@ function HeaderCreator({ style, className }) {
         <Button w="100px" bgColor="#1368ce" color="white">
           Create
         </Button>
-        {/* <IconButton
-          icon={<FiUser />}
-          bgColor="#1368ce"
-          color="white"
-          borderRadius="full"
-          _hover={{ color: 'white', bgColor: '#1368ce' }}
-        /> */}
 
         <Menu>
           <MenuButton
