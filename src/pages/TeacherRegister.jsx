@@ -19,26 +19,26 @@ function TeacherRegister() {
         <br />
 
         <div className="teacher-type-wrap">
-          <div className="teacher-type-box">
-            <div className="school">teacher icon</div>
+          <div className="teacher-type-box hover:shadow-lg">
+            <div className="school ">teacher icon</div>
             <div className="type-user">School</div>
           </div>
 
-          <div className="teacher-type-box">
+          <div className="teacher-type-box hover:shadow-lg">
             <div className="higher-education">
               <div className="circle-box"></div>
             </div>
             <div className="type-user">Higher education</div>
           </div>
 
-          <div className="teacher-type-box">
+          <div className="teacher-type-box hover:shadow-lg">
             <div className="school-adminstration"></div>
             <div className="type-user">
               School <br /> adminstration
             </div>
           </div>
 
-          <div className="teacher-type-box">
+          <div className="teacher-type-box hover:shadow-lg">
             <div className="business"></div>
             <div className="type-user">Business</div>
           </div>

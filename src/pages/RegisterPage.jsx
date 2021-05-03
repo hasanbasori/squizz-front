@@ -23,7 +23,7 @@ function RegisterPage() {
 
           <div className="users-type-wrap">
             <div
-              className="users-type-box"
+              className="users-type-box hover:shadow-lg"
               onClick={() => {
                 return history.push(`/auth/register/teacher`, {
                   userType: 'TEACHER'
@@ -35,7 +35,7 @@ function RegisterPage() {
             </div>
 
             <div
-              className="users-type-box"
+              className="users-type-box hover:shadow-lg"
               onClick={() =>
                 history.push(`/auth/register/student`, {
                   userType: 'STUDENT'
@@ -49,7 +49,7 @@ function RegisterPage() {
             </div>
 
             <div
-              className="users-type-box"
+              className="users-type-box hover:shadow-lg"
               onClick={() =>
                 history.push(`/auth/register/personal`, {
                   userType: 'PERSONAL'
@@ -61,7 +61,7 @@ function RegisterPage() {
             </div>
 
             <div
-              className="users-type-box"
+              className="users-type-box hover:shadow-lg"
               onClick={() =>
                 history.push(`/auth/register/professional`, {
                   userType: 'PROFESSIONAL'
