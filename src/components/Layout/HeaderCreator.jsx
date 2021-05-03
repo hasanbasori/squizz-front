@@ -1,7 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 import './HeaderCreator.postcss'
-import { Button, IconButton, Text, Icon } from '@chakra-ui/react'
+import {
+  Button,
+  IconButton,
+  Text,
+  Icon,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  MenuCommand,
+  MenuDivider
+} from '@chakra-ui/react'
 import {
   FiUser,
   FiHome,
@@ -18,7 +33,9 @@ function HeaderCreator({ style, className }) {
       style={{ ...style }}
     >
       <div className="w-3/6 flex flex-row items-center justify-between">
-        <h1 className="text-3xl text-red-700 font-bold">Squizz!</h1>
+        <a href="/" className="text-3xl text-red-700 font-bold">
+          Squizz!
+        </a>
         <a href="/" className="flex items-center pl-4 hover:text-red-700">
           <Icon as={FiHome} w={5} h={5} mr="8px" />
           <p className="text-base font-semibold">Home</p>
@@ -27,7 +44,10 @@ function HeaderCreator({ style, className }) {
           <Icon as={FiCompass} w={5} h={5} mr="8px" />
           <p className="text-base font-semibold">Discover</p>
         </a>
-        <a href="/my-library/all" className="flex items-center pl-2 hover:text-red-700">
+        <a
+          href="/my-library/all"
+          className="flex items-center pl-2 hover:text-red-700"
+        >
           <Icon as={FiList} w={5} h={5} mr="8px" />
           <p className="text-base font-semibold">Library</p>
         </a>
@@ -53,13 +73,32 @@ function HeaderCreator({ style, className }) {
         <Button w="100px" bgColor="#1368ce" color="white">
           Create
         </Button>
-        <IconButton
+        {/* <IconButton
           icon={<FiUser />}
           bgColor="#1368ce"
           color="white"
           borderRadius="full"
           _hover={{ color: 'white', bgColor: '#1368ce' }}
-        />
+        /> */}
+
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label="Options"
+            icon={<FiUser />}
+            variant="ghost"
+            bgColor="#1368ce"
+            color="white"
+            borderRadius="full"
+          />
+          <MenuList py={0}>
+            <MenuItem bgColor="#f2f2f2">Creator Username</MenuItem>
+            <MenuItem>Setting</MenuItem>
+            <MenuItem>Profile Setting</MenuItem>
+            <MenuItem>Support Center</MenuItem>
+            <MenuItem>Sign out</MenuItem>
+          </MenuList>
+        </Menu>
       </div>
     </div>
   )
