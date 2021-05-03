@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import CreatorHomePage from './pages/CreatorHomePage'
-import CreatorLibraryPage from './pages/CreatorLibraryPage'
+import CreatorLibraryAllPage from './pages/CreatorLibraryAllPage'
 import HomePage from './pages/HomePage'
 import Auth from './pages/Auth'
 import Main from './pages/Main'
@@ -21,8 +21,8 @@ const privateRoutes = [
     component: CreatorHomePage,
   },
   {
-    path: "/my-library",
-    component: CreatorLibraryPage,
+    path: "/my-library/all",
+    component: CreatorLibraryAllPage,
   },
 ]
 
