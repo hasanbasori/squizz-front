@@ -9,8 +9,8 @@ function CreatorReports() {
     <Layout>
       <HeaderCreator />
       <Content>
-        <div className="flex flex-col mt-8 mx-4 min-h-screen">
-          <div className="flex w-1/4 absolute right-0">
+        <div className="flex flex-col mt-8 mx-4 min-h-screen items-end">
+          <div className="flex w-1/4 mb-6">
             <div className="w-2/3 ">
               <Input placeholder="Search" borderColor="gray.400" />
             </div>
@@ -27,7 +27,7 @@ function CreatorReports() {
               </Button>
             </div>
           </div>
-          <div className="py-52 border rounded shadow-md relative top-16">
+          <div className="py-52 border rounded shadow-md w-full">
             <p className="text-4xl font-bold mb-4">Nothing to see here!</p>
             <p className="text-md font-semibold mb-8">
               Come back after hosting your first squizz to view your game
