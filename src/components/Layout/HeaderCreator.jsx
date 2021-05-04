@@ -48,13 +48,17 @@ function ModalCreate() {
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader fontSize="2xl" fontWeight="700">Create a new squizz</ModalHeader>
+          <ModalHeader fontSize="2xl" fontWeight="700">
+            Create a new squizz
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody bgColor="#f2f2f2" pt={8} pb={60} px={6} display="flex">
             <div className="rounded py-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
               <p className="mb-8 text-2xl font-bold">New squizz</p>
               <img src="" alt="" />
-              <Button h='100%' px={6} py={1.5} bgColor="#26890c" color='white'>Create</Button>
+              <Button h="100%" px={6} py={1.5} bgColor="#26890c" color="white">
+                Create
+              </Button>
             </div>
             <div className="rounded py-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
               <p className="mb-8 text-2xl font-bold">Template 1</p>
@@ -80,41 +84,54 @@ function ModalCreate() {
 }
 
 function HeaderCreator({ style, className }) {
+  const menusDetail = [
+    {
+      href: '/',
+      title: 'Home',
+      icon: FiHome
+    },
+    {
+      href: '#',
+      title: 'Discover',
+      icon: FiCompass
+    },
+    {
+      href: '/my-library/all',
+      title: 'Library',
+      icon: FiList
+    },
+    {
+      href: '/reports',
+      title: 'Reports',
+      icon: FiBarChart
+    },
+    {
+      href: '/groups',
+      title: 'Groups',
+      icon: FiUsers
+    }
+  ]
+
   return (
     <div
       className="header-creator w-full flex flex-row justify-between items-center bg-gray-50 px-6 shadow-md relative"
       style={{ ...style }}
     >
-      <div className="w-3/6 flex flex-row items-center justify-between">
-        <a href="/" className="text-3xl text-red-700 font-bold">
+      <div className="w-3/6 flex flex-row items-center justify-between h-full">
+        <a href="/" className="text-3xl text-red-700 font-bold mr-2">
           Squizz!
         </a>
-        <a href="/" className="flex items-center pl-4 hover:text-red-700">
-          <Icon as={FiHome} w={5} h={5} mr="8px" />
-          <p className="text-base font-semibold">Home</p>
-        </a>
-        <a href="#" className="flex items-center pl-2 hover:text-red-700">
-          <Icon as={FiCompass} w={5} h={5} mr="8px" />
-          <p className="text-base font-semibold">Discover</p>
-        </a>
-        <a
-          href="/my-library/all"
-          className="flex items-center pl-2 hover:text-red-700"
-        >
-          <Icon as={FiList} w={5} h={5} mr="8px" />
-          <p className="text-base font-semibold">Library</p>
-        </a>
-        <a
-          href="/reports"
-          className="flex items-center pl-2 hover:text-red-700"
-        >
-          <Icon as={FiBarChart} w={5} h={5} mr="8px" />
-          <p className="text-base font-semibold">Reports</p>
-        </a>
-        <a href="/groups" className="flex items-center pl-2 hover:text-red-700">
-          <Icon as={FiUsers} w={5} h={5} mr="8px" />
-          <p className="text-base font-semibold">Groups</p>
-        </a>
+
+        {menusDetail.map(({ href, title, icon }, index) => (
+          <a
+            key={index}
+            href={href}
+            className="flex h-full items-center ml-2 border-b-4 border-transparent hover:text-red-700 hover:border-red-700 focus:border-red-700"
+          >
+            <Icon as={icon} w={5} h={5} mr="8px" />
+            <p className="text-base font-semibold">{title}</p>
+          </a>
+        ))}
       </div>
       <div className="w-3/6 gap-4 flex flex-row items-center justify-end">
         <Button

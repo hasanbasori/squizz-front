@@ -14,7 +14,6 @@ import RegisterPage from './pages/RegisterPage'
 import TeacherRegister from './pages/TeacherRegister'
 import StudentRegister from './pages/StudentRegister'
 import PersonalRegister from './pages/PersonalRegister'
-import './App.css'
 import { useContext } from 'react'
 import { AuthContext } from './contexts/AuthContextProvider'
 

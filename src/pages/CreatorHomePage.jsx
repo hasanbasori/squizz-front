@@ -113,13 +113,15 @@ function CreatorHomePage() {
                       borderColor: 'blue.400'
                     }}
                     _active={{
-                      bgColor: 'white'
+                      bgColor: 'white',
+                      outline: 'none'
                     }}
                     _selected={{
                       color: 'black',
                       borderBottom: '2px',
                       borderColor: 'blue.400',
-                      boxShadow: 'none'
+                      boxShadow: 'none',
+                      outline: 'none'
                     }}
                     fontWeight="600"
                     color="gray.500"
@@ -133,13 +135,15 @@ function CreatorHomePage() {
                       borderColor: 'blue.400'
                     }}
                     _active={{
-                      bgColor: 'white'
+                      bgColor: 'white',
+                      outline: 'none'
                     }}
                     _selected={{
                       color: 'black',
                       borderBottom: '2px',
                       borderColor: 'blue.400',
-                      boxShadow: 'none'
+                      boxShadow: 'none',
+                      outline: 'none'
                     }}
                     fontWeight="600"
                     color="gray.500"
