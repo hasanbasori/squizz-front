@@ -83,32 +83,52 @@ function ModalCreate() {
   )
 }
 
-function HeaderCreator({ style, className }) {
+function HeaderCreator({ style, className, pathName }) {
   const menusDetail = [
     {
       href: '/',
       title: 'Home',
-      icon: FiHome
+      icon: FiHome,
+      className:
+        pathName === 'homepage'
+          ? 'border-red-700 text-red-700'
+          : 'border-transparent'
     },
     {
       href: '#',
       title: 'Discover',
-      icon: FiCompass
+      icon: FiCompass,
+      className:
+        pathName === 'discover'
+          ? 'border-red-700 text-red-700'
+          : 'border-transparent'
     },
     {
       href: '/my-library/all',
       title: 'Library',
-      icon: FiList
+      icon: FiList,
+      className:
+        pathName === 'library'
+          ? 'border-red-700 text-red-700'
+          : 'border-transparent'
     },
     {
       href: '/reports',
       title: 'Reports',
-      icon: FiBarChart
+      icon: FiBarChart,
+      className:
+        pathName === 'reports'
+          ? 'border-red-700 text-red-700'
+          : 'border-transparent'
     },
     {
       href: '/groups',
       title: 'Groups',
-      icon: FiUsers
+      icon: FiUsers,
+      className:
+        pathName === 'groups'
+          ? 'border-red-700 text-red-700'
+          : 'border-transparent'
     }
   ]
 
@@ -122,11 +142,11 @@ function HeaderCreator({ style, className }) {
           Squizz!
         </a>
 
-        {menusDetail.map(({ href, title, icon }, index) => (
+        {menusDetail.map(({ href, title, icon, className }, index) => (
           <a
             key={index}
             href={href}
-            className="flex h-full items-center ml-2 border-b-4 border-transparent hover:text-red-700 hover:border-red-700 focus:border-red-700"
+            className={`flex h-full items-center ml-2 border-b-4 hover:text-red-700 hover:border-red-700 ${className}`}
           >
             <Icon as={icon} w={5} h={5} mr="8px" />
             <p className="text-base font-semibold">{title}</p>

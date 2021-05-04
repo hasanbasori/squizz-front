@@ -16,7 +16,7 @@ import {
 function CreatorHomePage() {
   return (
     <Layout>
-      <HeaderCreator />
+      <HeaderCreator pathName="homepage" />
       <Content>
         <div className="flex flex-wrap px-36 pt-6">
           <div className="w-full sm:w-1/3 lg:w-3/12">

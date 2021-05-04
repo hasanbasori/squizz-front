@@ -16,7 +16,7 @@ import {
 function CreatorGroupsPage() {
   return (
     <Layout>
-      <HeaderCreator />
+      <HeaderCreator pathName="groups" />
       <Content>
         <div className="flex flex-col mt-10 px-44">
           <div className="flex justify-between">

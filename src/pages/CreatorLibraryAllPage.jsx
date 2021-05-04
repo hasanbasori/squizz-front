@@ -26,7 +26,7 @@ function CreatorLibraryAllPage() {
 
   return (
     <Layout>
-      <HeaderCreator />
+      <HeaderCreator pathName="library"/>
       <Content>
         <div className="flex">
           <div className="shadow-md bg-gray-50 pt-8 pb-40 min-h-screen">

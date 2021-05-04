@@ -7,7 +7,7 @@ import { FiTrash2 } from 'react-icons/fi'
 function CreatorReports() {
   return (
     <Layout>
-      <HeaderCreator />
+      <HeaderCreator pathName="reports" />
       <Content>
         <div className="flex flex-col mt-8 mx-4 min-h-screen items-end">
           <div className="flex w-1/4 mb-6">
