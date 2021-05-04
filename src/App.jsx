@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import CreatorHomePage from './pages/CreatorHomePage'
 import CreatorLibraryAllPage from './pages/CreatorLibraryAllPage'
+import CreatorProfilePage from './pages/CreatorProfilePage'
 import HomePage from './pages/HomePage'
 import Auth from './pages/Auth'
 import Main from './pages/Main'
@@ -24,6 +25,10 @@ const privateRoutes = [
     path: "/my-library/all",
     component: CreatorLibraryAllPage,
   },
+  {
+    path: "/profiles",
+    component: CreatorProfilePage,
+  }
 ]
 
 const publicRoutes = [
@@ -65,7 +70,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {isAuthenticated &&
+          {!isAuthenticated &&
             privateRoutes.map((el) => {
               return (
                 <Route
@@ -77,7 +82,7 @@ function App() {
               )
             })}
 
-          {!isAuthenticated &&
+          {isAuthenticated &&
             publicRoutes.map((el) => {
               return (
                 <Route
