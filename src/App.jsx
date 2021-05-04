@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import CreatorHomePage from './pages/CreatorHomePage'
 import CreatorLibraryAllPage from './pages/CreatorLibraryAllPage'
+import CreatorReportsPage from './pages/CreatorReportsPage'
 import CreatorProfilePage from './pages/CreatorProfilePage'
 import HomePage from './pages/HomePage'
 import Auth from './pages/Auth'
@@ -24,6 +25,10 @@ const privateRoutes = [
   {
     path: "/my-library/all",
     component: CreatorLibraryAllPage,
+  },
+  {
+    path: "/reports",
+    component: CreatorReportsPage,
   },
   {
     path: "/profiles",

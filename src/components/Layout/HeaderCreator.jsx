@@ -54,7 +54,7 @@ function HeaderCreator({ style, className }) {
           <Icon as={FiList} w={5} h={5} mr="8px" />
           <p className="text-base font-semibold">Library</p>
         </a>
-        <a href="#" className="flex items-center pl-2 hover:text-red-700">
+        <a href="/reports" className="flex items-center pl-2 hover:text-red-700">
           <Icon as={FiBarChart} w={5} h={5} mr="8px" />
           <p className="text-base font-semibold">Reports</p>
         </a>
