@@ -23,7 +23,10 @@ import {
   FiCompass,
   FiList,
   FiBarChart,
-  FiUsers
+  FiUsers,
+  FiLogOut,
+  FiSettings,
+  FiHelpCircle
 } from 'react-icons/fi'
 
 function HeaderCreator({ style, className }) {
@@ -88,10 +91,10 @@ function HeaderCreator({ style, className }) {
             <MenuItem bgColor="#f2f2f2">
               <a href="/profiles">Creator Username</a>
             </MenuItem>
-            <MenuItem>Setting</MenuItem>
+            <MenuItem icon={<FiSettings />}>Setting</MenuItem>
             <MenuItem>Profile Setting</MenuItem>
-            <MenuItem>Support Center</MenuItem>
-            <MenuItem>Sign out</MenuItem>
+            <MenuItem icon={<FiHelpCircle />}>Support Center</MenuItem>
+            <MenuItem icon={<FiLogOut />}>Sign out</MenuItem>
           </MenuList>
         </Menu>
       </div>
