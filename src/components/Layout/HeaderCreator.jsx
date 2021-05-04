@@ -15,7 +15,14 @@ import {
   MenuOptionGroup,
   MenuIcon,
   MenuCommand,
-  MenuDivider
+  MenuDivider,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton
 } from '@chakra-ui/react'
 import {
   FiUser,
@@ -28,6 +35,49 @@ import {
   FiSettings,
   FiHelpCircle
 } from 'react-icons/fi'
+import { useDisclosure } from '@chakra-ui/react'
+
+function ModalCreate() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <Button onClick={onOpen} w="100px" bgColor="#1368ce" color="white">
+        Create
+      </Button>
+
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader fontSize="2xl" fontWeight="700">Create a new squizz</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody bgColor="#f2f2f2" pt={8} pb={60} px={6} display="flex">
+            <div className="rounded py-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
+              <p className="mb-8 text-2xl font-bold">New squizz</p>
+              <img src="" alt="" />
+              <Button h='100%' px={6} py={1.5} bgColor="#26890c" color='white'>Create</Button>
+            </div>
+            <div className="rounded py-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
+              <p className="mb-8 text-2xl font-bold">Template 1</p>
+              <img src="" alt="" />
+              <p>Topic template quiz</p>
+            </div>
+            <div className="rounded py-4 w-1/3 bg-white shadow-md flex flex-col items-center">
+              <p className="mb-8 text-2xl font-bold">Template 2</p>
+              <img src="" alt="" />
+              <p>Topic template quiz</p>
+            </div>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button bgColor="#f2f2f2" mx="auto" onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  )
+}
 
 function HeaderCreator({ style, className }) {
   return (
@@ -54,7 +104,10 @@ function HeaderCreator({ style, className }) {
           <Icon as={FiList} w={5} h={5} mr="8px" />
           <p className="text-base font-semibold">Library</p>
         </a>
-        <a href="/reports" className="flex items-center pl-2 hover:text-red-700">
+        <a
+          href="/reports"
+          className="flex items-center pl-2 hover:text-red-700"
+        >
           <Icon as={FiBarChart} w={5} h={5} mr="8px" />
           <p className="text-base font-semibold">Reports</p>
         </a>
@@ -73,9 +126,7 @@ function HeaderCreator({ style, className }) {
         >
           Share
         </Button>
-        <Button w="100px" bgColor="#1368ce" color="white">
-          Create
-        </Button>
+        <ModalCreate />
 
         <Menu>
           <MenuButton
