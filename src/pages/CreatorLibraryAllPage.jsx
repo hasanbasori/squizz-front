@@ -178,7 +178,7 @@ function CreatorLibraryAllPage() {
                 <div className="flex w-4/6">
                   <a
                     href="#"
-                    className="px-4 py-1 text-sm font-bold text-gray-700 hover:underline"
+                    className="py-1 text-sm font-bold text-gray-700 hover:underline"
                   >
                     Creator Username
                   </a>
