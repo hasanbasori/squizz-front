@@ -85,7 +85,9 @@ function HeaderCreator({ style, className }) {
             borderRadius="full"
           />
           <MenuList py={0}>
-            <MenuItem bgColor="#f2f2f2">Creator Username</MenuItem>
+            <MenuItem bgColor="#f2f2f2">
+              <a href="/profiles">Creator Username</a>
+            </MenuItem>
             <MenuItem>Setting</MenuItem>
             <MenuItem>Profile Setting</MenuItem>
             <MenuItem>Support Center</MenuItem>
