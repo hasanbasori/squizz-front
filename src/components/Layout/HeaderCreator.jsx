@@ -36,12 +36,25 @@ import {
   FiHelpCircle
 } from 'react-icons/fi'
 import { useDisclosure } from '@chakra-ui/react'
+import quiz from '../../../pic/quiz.png'
 
 function ModalCreate() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Button onClick={onOpen} w="100px" bgColor="#1368ce" color="white">
+      <Button
+        onClick={onOpen}
+        w="100px"
+        bgColor="#1368ce"
+        color="white"
+        borderBottom="4px"
+        borderColor="blue.800"
+        _hover={{
+          borderBottom: '2px',
+          borderColor: 'blue.800',
+          bgColor: '#1260be'
+        }}
+      >
         Create
       </Button>
 
@@ -55,20 +68,28 @@ function ModalCreate() {
           <ModalBody bgColor="#f2f2f2" pt={8} pb={60} px={6} display="flex">
             <div className="rounded py-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
               <p className="mb-8 text-2xl font-bold">New squizz</p>
-              <img src="" alt="" />
-              <Button h="100%" px={6} py={1.5} bgColor="#26890c" color="white">
+              <img src={quiz} alt="" className="w-2/3 mb-4" />
+              <a
+                href="/create-quiz"
+                className="h-full px-6 py-1 bg-green-500 text-white rounded"
+              >
                 Create
-              </Button>
+              </a>
+              {/* h="100%" px={6} py={1.5} bgColor="#26890c" color="white" */}
             </div>
-            <div className="rounded py-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
-              <p className="mb-8 text-2xl font-bold">Template 1</p>
+            <div className="rounded pb-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
+              <div className="mb-8 text-2xl font-bold h-2/3 w-full bg-gray-300 rounded-t">
+                <p className="ml-2 rounded-b-2xl border bg-white w-2/5 text-sm text-center">Template 1</p>
+              </div>
               <img src="" alt="" />
-              <p>Topic template quiz</p>
+              <p className="ml-2 w-full text-lg text-left">Topic template quiz</p>
             </div>
-            <div className="rounded py-4 w-1/3 bg-white shadow-md flex flex-col items-center">
-              <p className="mb-8 text-2xl font-bold">Template 2</p>
+            <div className="rounded pb-4 w-1/3 bg-white shadow-md flex flex-col items-center">
+              <div className="mb-8 text-2xl font-bold h-2/3 w-full bg-gray-300 rounded-t">
+                <p className="ml-2 rounded-b-2xl border bg-white w-2/5 text-sm text-center">Template 2</p>
+              </div>
               <img src="" alt="" />
-              <p>Topic template quiz</p>
+              <p className="ml-2 w-full text-lg text-left">Topic template quiz</p>
             </div>
           </ModalBody>
 
@@ -83,7 +104,7 @@ function ModalCreate() {
   )
 }
 
-function HeaderCreator({ style, className, pathName }) {
+function HeaderCreateQuiz({ style, className, pathName }) {
   const menusDetail = [
     {
       href: '/',
@@ -146,7 +167,7 @@ function HeaderCreator({ style, className, pathName }) {
           <a
             key={index}
             href={href}
-            className={`flex h-full items-center ml-2 border-b-4 hover:text-red-700 hover:border-red-700 ${className}`}
+            className={`flex h-full items-center ml-2 border-b-2 hover:border-b-4 hover:text-red-700 hover:border-red-700 ${className}`}
           >
             <Icon as={icon} w={5} h={5} mr="8px" />
             <p className="text-base font-semibold">{title}</p>
@@ -190,4 +211,4 @@ function HeaderCreator({ style, className, pathName }) {
   )
 }
 
-export default HeaderCreator
+export default HeaderCreateQuiz
