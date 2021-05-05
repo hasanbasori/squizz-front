@@ -5,6 +5,7 @@ import CreatorHomePage from './pages/CreatorHomePage'
 import CreatorLibraryAllPage from './pages/CreatorLibraryAllPage'
 import CreatorReportsPage from './pages/CreatorReportsPage'
 import CreatorGroupsPage from './pages/CreatorGroupsPage'
+import CreateQuizPage from './pages/CreateQuizPage'
 import CreatorProfilePage from './pages/CreatorProfilePage'
 import HomePage from './pages/HomePage'
 import Auth from './pages/Auth'
@@ -33,6 +34,10 @@ const privateRoutes = [
   {
     path: "/groups",
     component: CreatorGroupsPage,
+  },
+  {
+    path: "/create-quiz",
+    component: CreateQuizPage,
   },
   {
     path: "/profiles",
