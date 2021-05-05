@@ -105,6 +105,8 @@ function ModalCreate() {
 }
 
 function HeaderCreateQuiz({ style, className, pathName }) {
+  const noSelectNavbar = 'border-transparent border-b-4 hover:border-b-4 hover:text-red-700 hover:border-red-700'
+
   const menusDetail = [
     {
       href: '/',
@@ -113,7 +115,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
       className:
         pathName === 'homepage'
           ? 'border-red-700 text-red-700'
-          : 'border-transparent'
+          : noSelectNavbar
     },
     {
       href: '#',
@@ -122,7 +124,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
       className:
         pathName === 'discover'
           ? 'border-red-700 text-red-700'
-          : 'border-transparent'
+          : noSelectNavbar
     },
     {
       href: '/my-library/all',
@@ -131,7 +133,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
       className:
         pathName === 'library'
           ? 'border-red-700 text-red-700'
-          : 'border-transparent'
+          : noSelectNavbar
     },
     {
       href: '/reports',
@@ -140,7 +142,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
       className:
         pathName === 'reports'
           ? 'border-red-700 text-red-700'
-          : 'border-transparent'
+          : noSelectNavbar
     },
     {
       href: '/groups',
@@ -149,7 +151,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
       className:
         pathName === 'groups'
           ? 'border-red-700 text-red-700'
-          : 'border-transparent'
+          : noSelectNavbar
     }
   ]
 
@@ -167,7 +169,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
           <a
             key={index}
             href={href}
-            className={`flex h-full items-center ml-2 border-b-2 hover:border-b-4 hover:text-red-700 hover:border-red-700 ${className}`}
+            className={`flex h-full items-center ml-2 border-b-2 ${className}`}
           >
             <Icon as={icon} w={5} h={5} mr="8px" />
             <p className="text-base font-semibold">{title}</p>
