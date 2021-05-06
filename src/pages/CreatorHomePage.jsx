@@ -18,7 +18,7 @@ function CreatorHomePage() {
     <Layout>
       <HeaderCreator pathName="homepage" />
       <Content>
-        <div className="flex flex-wrap px-36 pt-6">
+        <div className="flex flex-wrap sm:px-8 md:px-16 lg:px-36 pt-6">
           <div className="w-full sm:w-1/3 lg:w-3/12">
             <div className="content-box py-4 mb-4 ">
               <div className="px-6 mb-4">
