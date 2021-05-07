@@ -77,6 +77,7 @@ module.exports = {
   },
   variants: {
     extend: {
+      borderWidth: ['hover', 'focus'],
       opacity: ['disabled']
     }
   },

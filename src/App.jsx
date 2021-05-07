@@ -1,11 +1,12 @@
+import './App.css'
 import React, { useState } from 'react'
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Redirect,
-  useParams
-} from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import CreatorHomePage from './pages/CreatorHomePage'
+import CreatorLibraryAllPage from './pages/CreatorLibraryAllPage'
+import CreatorReportsPage from './pages/CreatorReportsPage'
+import CreatorGroupsPage from './pages/CreatorGroupsPage'
+import CreateQuizPage from './pages/CreateQuizPage'
+import CreatorProfilePage from './pages/CreatorProfilePage'
 import HomePage from './pages/HomePage'
 import Auth from './pages/Auth'
 import Main from './pages/Main'
@@ -22,12 +23,31 @@ import { AuthContext } from './contexts/AuthContextProvider'
 const privateRoutes = [
   {
     path: '/',
-    component: HomePage
+    component: CreatorHomePage
+  },
+  {
+    path: '/my-library/all',
+    component: CreatorLibraryAllPage
+  },
+  {
+    path: '/reports',
+    component: CreatorReportsPage
+  },
+  {
+    path: '/groups',
+    component: CreatorGroupsPage
+  },
+  {
+    path: '/create-quiz',
+    component: CreateQuizPage
+  },
+  {
+    path: '/profiles',
+    component: CreatorProfilePage
   }
 ]
 
 const publicRoutes = [
-
   {
     path: '/auth/login',
     component: LoginPage
@@ -70,25 +90,31 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {isAuthenticated &&
-            privateRoutes.map((el) => (
-              <Route
-                exact
-                key={el.path}
-                path={el.path}
-                component={el.component}
-              />
-            ))}
+          {!isAuthenticated &&
+            privateRoutes.map((el) => {
+              console.log('private el', el)
+              return (
+                <Route
+                  exact
+                  key={el.path}
+                  path={el.path}
+                  component={el.component}
+                />
+              )
+            })}
 
           {!isAuthenticated &&
-            publicRoutes.map((el) => (
-              <Route
-                exact
-                key={el.path}
-                path={el.path}
-                component={el.component}
-              />
-            ))}
+            publicRoutes.map((el) => {
+              console.log('el', el)
+              return (
+                <Route
+                  exact
+                  key={el.path}
+                  path={el.path}
+                  component={el.component}
+                />
+              )
+            })}
 
           {/* <Redirect to="/" /> */}
         </Switch>

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import './Content.postcss'
 
 const ContentStyled = styled.div`
-  height: 100vh;
+  min-height: 100vh;
 `
 
 function Content({ style, className, children }) {

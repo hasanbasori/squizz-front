@@ -6,7 +6,7 @@ function Main() {
     <Layout>
       <HeaderPublic />
       <Content>
-        <h1>Home Page</h1>
+        <h1>MAIN PAGE</h1>
       </Content>
       <Footer />
     </Layout>
