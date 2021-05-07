@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect,
+  useParams
+} from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Auth from './pages/Auth'
 import Main from './pages/Main'
@@ -8,6 +14,7 @@ import RegisterPage from './pages/RegisterPage'
 import TeacherRegister from './pages/TeacherRegister'
 import StudentRegister from './pages/StudentRegister'
 import PersonalRegister from './pages/PersonalRegister'
+import RegisterFormPage from './pages/RegisterFormPage'
 import './App.css'
 import { useContext } from 'react'
 import { AuthContext } from './contexts/AuthContextProvider'
@@ -20,6 +27,7 @@ const privateRoutes = [
 ]
 
 const publicRoutes = [
+
   {
     path: '/auth/login',
     component: LoginPage
@@ -46,7 +54,11 @@ const publicRoutes = [
     component: RegisterPage
   },
   {
-    path: '/',
+    path: '/auth/register/:userType/form',
+    component: RegisterFormPage
+  },
+  {
+    path: '/mainpage',
     component: Main
   }
 ]

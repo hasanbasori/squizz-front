@@ -1,5 +1,6 @@
 .teacher-register-component {
-  top: calc(var(--header-height) + 1)
+  top: calc(var(--header-height) + 1);
+  position:relative;
   @apply relative;
   @apply flex justify-center items-center flex-col;
 }
@@ -21,8 +22,11 @@
 
 .school{
   width:100%;
-  background-color:#26086c;
+  background-color:#47188f;
   height: 190px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 .circle-box{
   width:40%
@@ -34,18 +38,27 @@
   width:100%;
   background-color:#47188f;
   height: 190px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .school-adminstration{
   width:100%;
-  background-color:#26086c;
+  background-color:#47188f;
   height: 190px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .business{
   width:100%;
   background-color:#47188f;
   height: 190px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
   
 }
@@ -71,4 +84,24 @@ p{
   font-weight: bold
   /* box-shadow: 1px 1px 1px 1px silver */
 
+}
+
+
+.hovicon {
+  background-color:#26086c;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size: 45px;
+  line-height: 90px;
+  cursor: pointer;
+  margin: 20px;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  z-index: 1;
+  color: #fff;
 }

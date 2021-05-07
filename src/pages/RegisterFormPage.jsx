@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import PlayButton from '../components/PlayButton'
-import './LoginPage.postcss'
-import { FcGoogle } from 'react-icons/fc'
+import './RegisterFormPage.postcss'
 import { FaMicrosoft, FaApple, FaGoogle } from 'react-icons/fa'
 import Layout, { Content, HeaderAuthentication } from '../components/Layout'
 import { useForm, Controller } from 'react-hook-form'
@@ -16,43 +16,47 @@ import {
   InputGroup,
   InputRightElement,
   Button,
-  Link as LinkChakra,
+  Link as ChakraLink,
   Divider
 } from '@chakra-ui/react'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import Separator from '../components/Separator'
-import { useHistory, Link } from 'react-router-dom'
-const loginSchema = yup.object().shape({
-  email: yup.string().required(),
-  password: yup.string().required()
-})
+import { Link, useParams } from 'react-router-dom'
+import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 
-function LoginPage() {
+function RegisterFormPage() {
   const [isShowPwd, setIsShowPwd] = useState(false)
+  const { userType } = useParams()
+
+  const history = useHistory()
+  const [input, setInput] = useState({
+    email: '',
+    password: '',
+    position: ''
+  })
 
   const {
     control,
     handleSubmit,
     formState: { errors }
-  } = useForm({
-    resolver: yupResolver(loginSchema)
-  })
+  } = useForm()
 
-  function handleSubmitLogin(formValues) {
+  function handleSubmitRegister(formValues) {
     console.log(formValues)
   }
-  console.log('Loginnnnnn')
+
+  console.log('Register')
   return (
     <Layout>
       <HeaderAuthentication />
       <Content
         style={{ height: 'calc(100vh - var(--header-height))' }}
-        className="login-page-content flex justify-center items-center"
+        className="register-form-page-content flex justify-center items-center"
       >
-        <div className="form-container p-6 rounded-md bg-white">
-          <h1 className="form-title">Log in</h1>
+        <div className="form-container p-6 min-h-3/4 rounded-md bg-white">
+          <h1 className="form-title">Sign up with your email</h1>
           <br />
-          <form onSubmit={handleSubmit(handleSubmitLogin)}>
+          <form onSubmit={handleSubmit(handleSubmitRegister)}>
             <Controller
               name="email"
               control={control}
@@ -86,32 +90,30 @@ function LoginPage() {
                       </Button>
                     </InputRightElement>
                   </InputGroup>
-                  <FormErrorMessage>
-                    {errors.password?.message}
-                  </FormErrorMessage>
                 </FormControl>
               )}
             />
             <br />
-            <p>
-              Forgot password?{' '}
-              <Link className="textprimary-normal">Reset your password</Link>
+            <p style={{ textAlign: 'left' }}>
+              <Checkbox style={{ marginTop: 5 }} /> &nbsp; I wish to receive
+              information, offers, recommendations, &nbsp; &nbsp; &nbsp; &nbsp;
+              and updates from Squizz!
             </p>
             <br />
             {/* <PlayButton type="secondary">Login</PlayButton> */}
             <PlayButton
-              className="btn-login w-full"
+              className="btn-register w-full"
               htmlType="submit"
               type="success"
             >
-              Login
+              Sign Up
             </PlayButton>
             <br />
             <br />
           </form>
           <Separator>or</Separator>
           <br />
-          <Button className="btn-other-login">
+          <Button className="btn-other-signup">
             <div>
               <FaGoogle />
             </div>
@@ -119,17 +121,16 @@ function LoginPage() {
             <div />
           </Button>
           <br />
-          <Button className="btn-other-login">
+          <Button className="btn-other-signup">
             {' '}
             <div>
               <FaMicrosoft />
             </div>
             <div> Continue with Microsoft</div>
             <div />
-          </Button>{' '}
+          </Button>
           <br />
-          <Button className="btn-other-login">
-            {' '}
+          <Button className="btn-other-signup">
             <div>
               <FaApple />
             </div>
@@ -137,11 +138,12 @@ function LoginPage() {
             <div />
           </Button>
           <br />
+          <br />
           <p>
-            Don't have an account?{' '}
-            <LinkChakra className="text-primary-normal">
-              <Link to="/auth/register">Sign up</Link>
-            </LinkChakra>
+            Already have an account?
+            <Link style={{ marginLeft: 7, color: 'sienna' }} to="/auth/login">
+              Log in
+            </Link>
           </p>
         </div>
       </Content>
@@ -149,34 +151,4 @@ function LoginPage() {
   )
 }
 
-export default LoginPage
-
-// import React from 'react'
-// import PlayButton from '../components/PlayButton'
-// import HeaderLoginAndRegister from '../components/Layout/HeaderLoginAndRegisterr'
-
-// import Layout, { Content, HeaderPublic } from '../components/Layout'
-
-// function LoginPage() {
-//   return (
-//     <Layout>
-//       <HeaderLoginAndRegister />
-//       <HeaderPublic />
-//       <Content>
-//         <h1 className="text-red-500">LoginPage</h1>
-//         <h2>HEADING 2</h2>
-//         <h3>HEADING 3</h3>
-//         <h4>HEADING 4</h4>
-//         <h5>HEADING 5</h5>
-//         <h6>HEADING 6</h6>
-
-//         <a href="#">Link</a>
-//         <PlayButton type="secondary" disabled>
-//           TEST BTN
-//         </PlayButton>
-//       </Content>
-//     </Layout>
-//   )
-// }
-
-// export default LoginPage
+export default RegisterFormPage
