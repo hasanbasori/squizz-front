@@ -51,6 +51,7 @@ function ModalCreate() {
         borderColor="blue.800"
         _hover={{
           borderBottom: '2px',
+          height: '37px',
           borderColor: 'blue.800',
           bgColor: '#1260be'
         }}
@@ -177,7 +178,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
         ))}
       </div>
       
-      <div className="w-3/6 gap-4 flex flex-row items-center justify-end">
+      <div className="w-3/6 gap-4 flex flex-row items-end justify-end">
         <Button
           variant="ghost"
           border="1px solid"
