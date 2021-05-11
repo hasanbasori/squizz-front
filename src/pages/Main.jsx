@@ -95,12 +95,11 @@ function Main() {
             <div className="banner-wraper4 shadow-md">
               <div className="banner-text4 p-8">
                 <div className="text-xl font-black">
-                  Empower your school <br />
-                  or district with Squizz!
+                  Reserve your spot at the Kahoot! EDU Summit!
                 </div>
                 <div className="text-sm mt-2.5 font-medium">
-                  Empower your school or district with Squizz! Connect teachers
-                  with a Squizz! EDU site license for time-saving collaboration.
+                  Join us on June 16 and 17 for inspiring sessions on preparing
+                  a future-proof plan for coming back to the classroom.
                 </div>
                 <div className=" mt-2.5">
                   <Link>Learn more &gt;</Link>
@@ -109,7 +108,7 @@ function Main() {
               <div className="picture4">
                 {' '}
                 <img
-                  src="https://res.cloudinary.com/dpca8fz8n/image/upload/v1620679735/desktoplogo-mosaic_uunmmm.png"
+                  src="https://res.cloudinary.com/dpca8fz8n/image/upload/v1620722275/Mosaic-desktop_KES21_qghiwa.png"
                   alt="picture3"
                 />
               </div>
