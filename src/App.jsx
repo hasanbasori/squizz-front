@@ -90,7 +90,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {!isAuthenticated &&
+          {isAuthenticated &&
             privateRoutes.map((el) => {
               console.log('private el', el)
               return (
