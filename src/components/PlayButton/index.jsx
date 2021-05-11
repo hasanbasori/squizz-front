@@ -5,7 +5,15 @@ import './PlayButton.postcss'
  * @return import('react').ReactElement | null | undefined
  */
 function PlayButton(props) {
-  const { type, htmlType, className, style, children, disabled } = props
+  const {
+    type,
+    htmlType,
+    className,
+    style,
+    children,
+    disabled,
+    onClick
+  } = props
 
   return (
     <button
@@ -16,6 +24,7 @@ function PlayButton(props) {
       } ${className ? className : ''}`}
       type={htmlType}
       {...{ disabled, type: htmlType, style: { ...style } }}
+      onClick={onClick ? onClick : null}
     >
       {children}
     </button>
