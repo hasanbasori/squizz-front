@@ -51,6 +51,7 @@ function ModalCreate() {
         borderColor="blue.800"
         _hover={{
           borderBottom: '2px',
+          height: '37px',
           borderColor: 'blue.800',
           bgColor: '#1260be'
         }}
@@ -161,7 +162,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
       style={{ ...style }}
     >
       <div className="w-3/6 flex flex-row items-center justify-between h-full">
-        <a href="/" className="text-3xl text-red-700 font-bold mr-2">
+        <a href={pathName === 'homepage' ? "#" : "/"} className="text-3xl text-red-700 font-bold mr-2 border-transparent border-b-4">
           Squizz!
         </a>
 
@@ -176,7 +177,8 @@ function HeaderCreateQuiz({ style, className, pathName }) {
           </a>
         ))}
       </div>
-      <div className="w-3/6 gap-4 flex flex-row items-center justify-end">
+      
+      <div className="w-3/6 gap-4 flex flex-row items-end justify-end">
         <Button
           variant="ghost"
           border="1px solid"

@@ -26,7 +26,7 @@ function CreateQuizPage() {
         <div className="flex w-full ">
           <div className="w-4/5 flex min-h-screen ">
             <div className="w-1/6 flex flex-col min-h-screen shadow-md bg-white">
-              <div className="bg-small-quiz flex flex-col py-3 pr-4 mb-4" >
+              <div className="bg-small-quiz flex flex-col py-3 pr-4 mb-4">
                 <p className="ml-8 mb-1 text-left text-xs font-bold">1 Quiz</p>
                 <div className="flex items-end">
                   <div className="flex flex-col">
