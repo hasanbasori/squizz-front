@@ -95,7 +95,7 @@ function Main() {
             <div className="banner-wraper4 shadow-md">
               <div className="banner-text4 p-8">
                 <div className="text-xl font-black">
-                  Reserve your spot at the Kahoot! EDU Summit!
+                  Reserve your spot at the Squizz! EDU Summit!
                 </div>
                 <div className="text-sm mt-2.5 font-medium">
                   Join us on June 16 and 17 for inspiring sessions on preparing
