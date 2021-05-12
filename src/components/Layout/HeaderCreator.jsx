@@ -119,7 +119,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
           : noSelectNavbar
     },
     {
-      href: '#',
+      href: '/discover',
       title: 'Discover',
       icon: FiCompass,
       className:

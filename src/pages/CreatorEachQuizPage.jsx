@@ -1,7 +1,72 @@
 import React from 'react'
 import Layout, { HeaderCreator, Content, Footer } from '../components/Layout'
 // import './CreatorEachQuizPage.postcss'
-import { Box, Button } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton
+} from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
+import computer from '../../pic/computer.jpg'
+import earth from '../../pic/earth.jpg'
+
+function PlayModal() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <Button onClick={onOpen} w="25%" mr={4}>
+        Play
+      </Button>
+
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Choose a way to play this squizz</ModalHeader>
+          <ModalBody>
+            <div className="flex mx-6 justify-between">
+              <div className="bg-gray-200 w-2/5 py-6 flex flex-col justify-between">
+                <img src={computer} alt=""/>
+                <a
+                  href="/select-game-mode"
+                  className="mx-auto w-2/3 py-2 text-center text-white bg-green-800 rounded"
+                >
+                  Host
+                </a>
+              </div>
+              <div className="bg-gray-200 w-2/5 py-6 flex flex-col justify-between">
+                <img src={earth} alt="" />
+                <a
+                  href="#"
+                  className="mx-auto w-2/3 py-2 text-center text-white bg-green-800 rounded"
+                >
+                  Challenge
+                </a>
+              </div>
+            </div>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              colorScheme="blue"
+              mx="auto"
+              bgColor="#f2f2f2"
+              color="black"
+              onClick={onClose}
+            >
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  )
+}
 
 function CreatorEachQuizPage() {
   return (
@@ -25,10 +90,15 @@ function CreatorEachQuizPage() {
                 </p>
               </div>
               <div className="flex mt-4 mb-6">
-                <Button w="25%" mr={4}>Play</Button>
-                <Button w="25%" >Edit</Button>
+                <PlayModal />
+                {/* <Button w="25%" mr={4}>
+                  Play
+                </Button> */}
+                <Button w="25%">Edit</Button>
               </div>
-              <p className="text-left font-bold text-lg mb-6">A private kahoot</p>
+              <p className="text-left font-bold text-lg mb-6">
+                A private kahoot
+              </p>
               <div className="flex items-start">
                 <div className="rounded-full w-1/6 h-full bg-gray-400 mr-2"></div>
                 <div className="flex flex-col text-left">
@@ -41,7 +111,9 @@ function CreatorEachQuizPage() {
 
           <div className="w-3/4 px-8 pt-6">
             <div className="flex justify-between mb-6">
-              <p className="text-lg font-bold">Questions <span>(1)</span></p>
+              <p className="text-lg font-bold">
+                Questions <span>(1)</span>
+              </p>
               <p className="underline text-lg font-bold">Show answers</p>
             </div>
             <div className="w-full bg-white h-1/6 rounded flex justify-between">
