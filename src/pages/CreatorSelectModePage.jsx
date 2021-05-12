@@ -63,9 +63,9 @@ function CreatorSelectModePage() {
           Creator Username
         </p>
       </div>
-      <Content className="background-select-page">
+      <Content className="background-select-page ">
         <div className="flex flex-col items-center">
-          <div className="px-40 -mt-12 flex flex-col">
+          <div className="px-40 -mt-12 flex flex-col items-center">
             <p className="text-6xl text-white font-bold mb-1">Squizz!</p>
             <em className="text-white font-bold">at home</em>
             <p className="px-4 mt-6 background-detail  rounded text-white text-lg">
@@ -74,24 +74,24 @@ function CreatorSelectModePage() {
           </div>
 
           <div className="mt-4 w-2/5 py-2 bg-white shadow-md border-b-4 rounded">
-            <p className="text-2xl font-bold">Quiz title</p>
+            <p className="text-2xl font-bold text-center">Quiz title</p>
           </div>
 
           <div className="w-2/5 mt-8 flex justify-between">
-            <div className="background-detail py-6 rounded">
-              <div className="flex flex-col px-20 mb-4 text-white">
+            <div className="background-detail py-6 rounded flex flex-col items-center">
+              <div className="flex flex-col items-center px-20 mb-4 text-white">
                 <p className="text-lg">Player vs Player</p>
                 <p className="text-lg">1:1 Devices</p>
               </div>
               <a
                 href="/creator-lobby"
-                className="px-24 py-2 rounded text-white border-b-4 border-gray-700 classic-button"
+                className=" px-24 py-2 rounded text-white border-b-4 border-gray-700 classic-button"
               >
                 Classic
               </a>
             </div>
-            <div className="background-detail py-6 rounded">
-              <div className="flex flex-col px-20 mb-4 text-white">
+            <div className="background-detail py-6 rounded flex flex-col items-center">
+              <div className="flex flex-col items-center px-20 mb-4 text-white">
                 <p className="text-lg">Team vs Team</p>
                 <p className="text-lg">Shared Devices</p>
               </div>
@@ -116,12 +116,12 @@ function CreatorSelectModePage() {
           </div>
 
           {isOpenGameOption ? (
-            <div className="mt-4 w-2/5">
+            <div className="mt-4 w-2/5 flex flex-col items-center">
               <p className="mb-1 text-white text-lg font-bold">General</p>
               {EachGeneralOption.map(({ firstLine, secondLine }, index) => (
                 <div
                   key={index}
-                  className="background-detail flex justify-between items-center text-white rounded py-3 px-4 mb-0.5"
+                  className="background-detail flex justify-between items-center text-white rounded w-full py-3 px-4 mb-0.5"
                 >
                   <div className="flex flex-col text-left">
                     <p className="text-xl font-bold">{firstLine}</p>
@@ -138,7 +138,7 @@ function CreatorSelectModePage() {
               {EachAdvancedOption.map(({ firstLine, secondLine }, index) => (
                 <div
                   key={index}
-                  className="background-detail flex justify-between items-center text-white rounded py-3 px-4 mb-0.5"
+                  className="background-detail flex justify-between items-center text-white rounded w-full py-3 px-4 mb-0.5"
                 >
                   <div className="flex flex-col text-left">
                     <p className="text-xl font-bold">{firstLine}</p>

@@ -11,7 +11,7 @@ function CreatorPlayQuizPage() {
       <Content>
         <div className="flex flex-col items-end">
           <div className="bg-white w-full py-8 shadow-md relative mb-2">
-            <p className="text-3xl font-bold">Question 1 title</p>
+            <p className="text-3xl font-bold text-center">Question 1 title</p>
           </div>
 
           <button className="bg-yellow-300 mb-2 mr-4 px-4 py-1.5 rounded border-b-4 border-yellow-600 text-white text-lg font-bold">
@@ -25,7 +25,7 @@ function CreatorPlayQuizPage() {
               10
             </p>
             <img src={question} alt="" className="w-1/3 rounded shadow-md" />
-            <div className="flex flex-col font-bold">
+            <div className="flex flex-col items-center font-bold">
               <p className="text-3xl">0</p>
               <p className="text-xl">Answers</p>
             </div>

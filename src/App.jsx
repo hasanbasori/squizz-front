@@ -31,17 +31,12 @@ const privateRoutes = [
     component: CreatorHomePage
   },
   {
-<<<<<<< HEAD
     path: "/discover",
     component: CreatorDiscoverPage,
   },
   {
     path: "/my-library/all",
     component: CreatorLibraryAllPage,
-=======
-    path: '/my-library/all',
-    component: CreatorLibraryAllPage
->>>>>>> 916fd72dbb3be9c7f8e67a8e4d73492ab0c6b47f
   },
   {
     path: '/reports',
@@ -56,7 +51,6 @@ const privateRoutes = [
     component: CreateQuizPage
   },
   {
-<<<<<<< HEAD
     path: "/each-quiz",
     component: CreatorEachQuizPage,
   },
@@ -76,11 +70,6 @@ const privateRoutes = [
     path: "/creator-play",
     component: CreatorPlayQuizPage,
   },
-=======
-    path: '/profiles',
-    component: CreatorProfilePage
-  }
->>>>>>> 916fd72dbb3be9c7f8e67a8e4d73492ab0c6b47f
 ]
 
 const publicRoutes = [
@@ -126,7 +115,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {isAuthenticated &&
+          {!isAuthenticated &&
             privateRoutes.map((el) => {
               console.log('private el', el)
               return (
@@ -139,7 +128,7 @@ function App() {
               )
             })}
 
-          {!isAuthenticated &&
+          {isAuthenticated &&
             publicRoutes.map((el) => {
               console.log('el', el)
               return (

@@ -141,7 +141,7 @@ function CreatorLibraryAllPage() {
                 </div>
               </div>
 
-              <div className="w-full p-32 border-dashed border-2 border-gray-400 rounded">
+              <div className="w-full p-32 border-dashed border-2 border-gray-400 rounded flex flex-col items-center">
                 <img src="" alt="" />
                 <p className="mb-4">
                   It looks very empty in here, go ahead and create a squizz.
@@ -199,7 +199,7 @@ function CreatorLibraryAllPage() {
                 </div>
               </div>
 
-              <div className="w-full p-32 border-dashed border-2 border-gray-400 rounded">
+              <div className="w-full p-32 border-dashed border-2 border-gray-400 rounded flex flex-col items-center">
                 <img src="" alt="" />
                 <p className="mb-4">
                   It looks very empty in here, go ahead and create a squizz.

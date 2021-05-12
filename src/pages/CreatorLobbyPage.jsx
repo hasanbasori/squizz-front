@@ -63,7 +63,7 @@ function CreatorLobbyPage() {
             <Icon as={FiUser} w={6} h={6} />
             <p className="ml-2 text-2xl font-bold">0</p>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center">
             <p className="text-4xl text-white font-bold mb-0.5">Squizz!</p>
             <p className="text-white text-lg font-bold">at home</p>
           </div>

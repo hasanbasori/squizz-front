@@ -25,7 +25,7 @@ function CreatorGroupsPage() {
               Create group
             </Button>
           </div>
-          <div className="mt-12 px-72 py-24 border-dashed border-2 border-gray-300">
+          <div className="mt-12 px-72 py-24 border-dashed border-2 border-gray-300 flex flex-col items-center">
             <img />
             <p className="mb-6">
               Welcome to Groups, a seamless and secure way to share content and

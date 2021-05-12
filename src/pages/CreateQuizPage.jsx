@@ -35,7 +35,7 @@ function ImgDropZone() {
     setFileNames(acceptedFiles.map((file) => file.name))
 
   return (
-    <div className="w-2/5 h-2/5 border-2 border-dashed border-gray-300 my-10">
+    <div className="w-2/5 h-2/5 border-2 border-dashed border-gray-300 my-10 flex flex-col items-center">
       
       <div className="pt-28 mb-12">
         <Icon as={FiImage} w={10} h={10} color="#b2b2b2" mr={4} />
@@ -43,7 +43,7 @@ function ImgDropZone() {
       </div>
       <Dropzone onDrop={handleDrop}>
         {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps({ className: 'dropzone' })}>
+          <div {...getRootProps({ className: 'dropzone flex flex-col items-center' })}>
             <Button bgColor="white" fontSize="xs" fontWeight="700">
               Add media
             </Button>
@@ -138,7 +138,7 @@ function CreateQuizPage() {
                   </div>
                 </div>
               </div>
-              <div>
+              <div className="flex flex-col items-center">
                 <Button mb={4} bgColor="#1368ce" color="white">
                   Add Question
                 </Button>
@@ -229,7 +229,7 @@ function CreateQuizPage() {
                   onChange={(e) => setQuestionName(e.target.value)}
                 ></Input>
 
-                <div className="w-2/5 h-2/5 border-2 border-dashed border-gray-300 my-10">
+                <div className="w-2/5 h-2/5 border-2 border-dashed border-gray-300 my-10 flex flex-col items-center">
                   <div className="pt-28 mb-12">
                     <Icon as={FiImage} w={10} h={10} color="#b2b2b2" mr={4} />
                     <Icon as={FiFilm} w={9} h={9} color="#b2b2b2" />
