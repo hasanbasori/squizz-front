@@ -9,7 +9,7 @@ const ContentStyled = styled.div`
 function Content({ style, className, children }) {
   return (
     <ContentStyled
-      className={`layout-content ${className ? className : ''}`}
+      className={`${className ? className : 'layout-content'}`}
       style={{ ...style }}
     >
       {children}
