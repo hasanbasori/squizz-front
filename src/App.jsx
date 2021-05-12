@@ -20,6 +20,8 @@ import RegisterPage from './pages/RegisterPage'
 import TeacherRegister from './pages/TeacherRegister'
 import StudentRegister from './pages/StudentRegister'
 import PersonalRegister from './pages/PersonalRegister'
+import RegisterFormPage from './pages/RegisterFormPage'
+import './App.css'
 import { useContext } from 'react'
 import { AuthContext } from './contexts/AuthContextProvider'
 
@@ -29,26 +31,32 @@ const privateRoutes = [
     component: CreatorHomePage
   },
   {
+<<<<<<< HEAD
     path: "/discover",
     component: CreatorDiscoverPage,
   },
   {
     path: "/my-library/all",
     component: CreatorLibraryAllPage,
+=======
+    path: '/my-library/all',
+    component: CreatorLibraryAllPage
+>>>>>>> 916fd72dbb3be9c7f8e67a8e4d73492ab0c6b47f
   },
   {
-    path: "/reports",
-    component: CreatorReportsPage,
+    path: '/reports',
+    component: CreatorReportsPage
   },
   {
-    path: "/groups",
-    component: CreatorGroupsPage,
+    path: '/groups',
+    component: CreatorGroupsPage
   },
   {
-    path: "/create-quiz",
-    component: CreateQuizPage,
+    path: '/create-quiz',
+    component: CreateQuizPage
   },
   {
+<<<<<<< HEAD
     path: "/each-quiz",
     component: CreatorEachQuizPage,
   },
@@ -68,6 +76,11 @@ const privateRoutes = [
     path: "/creator-play",
     component: CreatorPlayQuizPage,
   },
+=======
+    path: '/profiles',
+    component: CreatorProfilePage
+  }
+>>>>>>> 916fd72dbb3be9c7f8e67a8e4d73492ab0c6b47f
 ]
 
 const publicRoutes = [
@@ -97,7 +110,11 @@ const publicRoutes = [
     component: RegisterPage
   },
   {
-    path: '/',
+    path: '/auth/register/:userType/form',
+    component: RegisterFormPage
+  },
+  {
+    path: '/mainpage',
     component: Main
   }
 ]
@@ -109,8 +126,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {!isAuthenticated &&
+          {isAuthenticated &&
             privateRoutes.map((el) => {
+              console.log('private el', el)
               return (
                 <Route
                   exact
@@ -121,8 +139,9 @@ function App() {
               )
             })}
 
-          {isAuthenticated &&
+          {!isAuthenticated &&
             publicRoutes.map((el) => {
+              console.log('el', el)
               return (
                 <Route
                   exact

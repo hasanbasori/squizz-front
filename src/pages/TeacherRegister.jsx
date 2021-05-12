@@ -2,16 +2,24 @@ import React from 'react'
 import './TeacherRegister.postcss'
 import Layout, { Content, HeaderAuthentication } from '../components/Layout'
 import { Button } from '@chakra-ui/react'
+import { useHistory, useLocation, Link } from 'react-router-dom'
+import { BsBook } from 'react-icons/bs'
+import { VscHome } from 'react-icons/vsc'
+import { BsPeople, BsGraphUp } from 'react-icons/bs'
 
 function TeacherRegister() {
+  const history = useHistory()
+  const location = useLocation()
+
   return (
     <Layout>
       <HeaderAuthentication />
-      <div>
-        <button>Back</button>
-      </div>
 
-      <Content className="teacher-register-component">
+      <Content
+        style={{ height: 'calc(100vh - var(--header-height))' }}
+        className="teacher-register-component"
+      >
+        <button className="absolute top-5 left-5 bg-red-500">Back</button>
         <div>
           <h1 className="teacher-type-title">Describe your workplace</h1>
         </div>
@@ -19,33 +27,77 @@ function TeacherRegister() {
         <br />
 
         <div className="teacher-type-wrap">
-          <div className="teacher-type-box">
-            <div className="school">teacher icon</div>
+          <div
+            className="teacher-type-box hover:shadow-lg"
+            onClick={() =>
+              history.push('/auth/register/teacher/form', {
+                state: { ...location.state, workplace: 'SCHOOL' }
+              })
+            }
+          >
+            <div className="school">
+              {/* <div className="block"> */}
+              <div className="hovicon">
+                <BsBook />
+              </div>
+              {/* </div> */}
+            </div>
             <div className="type-user">School</div>
           </div>
 
-          <div className="teacher-type-box">
+          <div
+            className="teacher-type-box hover:shadow-lg"
+            onClick={() =>
+              history.push('/auth/register/teacher/form', {
+                state: { ...location.state, workplace: 'HIGHER_EDUCATION' }
+              })
+            }
+          >
             <div className="higher-education">
-              <div className="circle-box"></div>
+              <div className="hovicon effect-1 sub-a">
+                <VscHome />
+              </div>
             </div>
             <div className="type-user">Higher education</div>
           </div>
 
-          <div className="teacher-type-box">
-            <div className="school-adminstration"></div>
+          <div
+            className="teacher-type-box hover:shadow-lg"
+            onClick={() =>
+              history.push('/auth/register/teacher/form', {
+                state: { ...location.state, workplace: 'SCHOOL_ADMINSTRATION' }
+              })
+            }
+          >
+            <div className="school-adminstration">
+              <div className="hovicon effect-1 sub-a">
+                <BsPeople />
+              </div>
+            </div>
             <div className="type-user">
               School <br /> adminstration
             </div>
           </div>
 
-          <div className="teacher-type-box">
-            <div className="business"></div>
+          <div
+            className="teacher-type-box hover:shadow-lg"
+            onClick={() =>
+              history.push('/auth/register/teacher/form', {
+                state: { ...location.state, workplace: 'BUSINESS' }
+              })
+            }
+          >
+            <div className="business">
+              <div className="hovicon effect-1 sub-a">
+                <BsGraphUp />
+              </div>
+            </div>
             <div className="type-user">Business</div>
           </div>
         </div>
         <br />
         <div>
-          <Button>Other</Button>
+          <Button onClick={() => history.push('/auth/register')}>Other</Button>
         </div>
       </Content>
     </Layout>

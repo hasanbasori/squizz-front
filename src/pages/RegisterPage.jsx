@@ -1,11 +1,16 @@
 import React from 'react'
 import Layout, { Content, HeaderAuthentication } from '../components/Layout'
-import { Link } from '@chakra-ui/react'
+import { Link as LinkChakra } from '@chakra-ui/react'
 import './RegisterPage.postcss'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation, Link } from 'react-router-dom'
+import { BsGraphUp } from 'react-icons/bs'
+import { BsBook } from 'react-icons/bs'
+import { BsPerson } from 'react-icons/bs'
+import { BiCar } from 'react-icons/bi'
 
 function RegisterPage() {
   const history = useHistory()
+  const location = useLocation()
 
   return (
     <div>
@@ -23,59 +28,79 @@ function RegisterPage() {
 
           <div className="users-type-wrap">
             <div
-              className="users-type-box"
+              className="users-type-box hover:shadow-lg"
               onClick={() => {
                 return history.push(`/auth/register/teacher`, {
                   userType: 'TEACHER'
                 })
               }}
             >
-              <div className="teacher">teacher icon</div>
+              <div className="teacher">
+                <div className="teacher-hovicon">
+                  <BsBook />
+                </div>
+              </div>
               <div className="type-user">Teacher</div>
             </div>
 
             <div
-              className="users-type-box"
+              className="users-type-box hover:shadow-lg"
               onClick={() =>
                 history.push(`/auth/register/student`, {
                   userType: 'STUDENT'
                 })
               }
             >
-              <div className="student">
-                <div className="circle-box"></div>
+              <div className="students">
+                <div className="student-hovicon">
+                  <BsPerson />
+                </div>
               </div>
               <div className="type-user">Student</div>
             </div>
 
             <div
-              className="users-type-box"
+              className="users-type-box hover:shadow-lg"
               onClick={() =>
                 history.push(`/auth/register/personal`, {
                   userType: 'PERSONAL'
                 })
               }
             >
-              <div className="personal"></div>
+              <div className="personal">
+                {' '}
+                <div className="personal-hovicon">
+                  <BiCar />
+                </div>
+              </div>
               <div className="type-user">Personal</div>
             </div>
 
             <div
-              className="users-type-box"
+              className="users-type-box hover:shadow-lg"
               onClick={() =>
-                history.push(`/auth/register/professional`, {
-                  userType: 'PROFESSIONAL'
+                history.push('/auth/register/professional/form', {
+                  state: { ...location.state, workplace: 'PROFESSIONAL' }
                 })
               }
             >
-              <div className="professional"></div>
+              <div className="professional">
+                {' '}
+                <div className="professional-hovicon">
+                  <BsGraphUp />
+                </div>
+              </div>
               <div className="type-user">Professional</div>
             </div>
           </div>
           <br />
           <div>
             <p>
-              Already have an account? <Link>Log in</Link>
+              Already have an account?
+              <LinkChakra>
+                {' '}
+                <Link to="/auth/login">Log in </Link>
+              </LinkChakra>
             </p>
           </div>
         </Content>
