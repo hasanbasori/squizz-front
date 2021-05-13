@@ -19,6 +19,7 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import TeacherRegister from './pages/TeacherRegister'
 import StudentRegister from './pages/StudentRegister'
+import StudentRegisterUsername from './pages/StudentRegisterUsername'
 import PersonalRegister from './pages/PersonalRegister'
 import RegisterFormPage from './pages/RegisterFormPage'
 import './App.css'
@@ -31,12 +32,12 @@ const privateRoutes = [
     component: CreatorHomePage
   },
   {
-    path: "/discover",
-    component: CreatorDiscoverPage,
+    path: '/discover',
+    component: CreatorDiscoverPage
   },
   {
-    path: "/my-library/all",
-    component: CreatorLibraryAllPage,
+    path: '/my-library/all',
+    component: CreatorLibraryAllPage
   },
   {
     path: '/reports',
@@ -51,25 +52,25 @@ const privateRoutes = [
     component: CreateQuizPage
   },
   {
-    path: "/each-quiz",
-    component: CreatorEachQuizPage,
+    path: '/each-quiz',
+    component: CreatorEachQuizPage
   },
   {
-    path: "/profiles",
-    component: CreatorProfilePage,
+    path: '/profiles',
+    component: CreatorProfilePage
   },
   {
-    path: "/select-game-mode",
-    component: CreatorSelectModePage,
+    path: '/select-game-mode',
+    component: CreatorSelectModePage
   },
   {
-    path: "/creator-lobby",
-    component: CreatorLobbyPage,
+    path: '/creator-lobby',
+    component: CreatorLobbyPage
   },
   {
-    path: "/creator-play",
-    component: CreatorPlayQuizPage,
-  },
+    path: '/creator-play',
+    component: CreatorPlayQuizPage
+  }
 ]
 
 const publicRoutes = [
@@ -105,6 +106,10 @@ const publicRoutes = [
   {
     path: '/mainpage',
     component: Main
+  },
+  {
+    path: '/student-username',
+    component: StudentRegisterUsername
   }
 ]
 
@@ -115,7 +120,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {!isAuthenticated &&
+          {isAuthenticated &&
             privateRoutes.map((el) => {
               console.log('private el', el)
               return (
@@ -128,7 +133,7 @@ function App() {
               )
             })}
 
-          {isAuthenticated &&
+          {!isAuthenticated &&
             publicRoutes.map((el) => {
               console.log('el', el)
               return (
