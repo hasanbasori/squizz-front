@@ -2,11 +2,16 @@ import './App.css'
 import React, { useState } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import CreatorHomePage from './pages/CreatorHomePage'
+import CreatorDiscoverPage from './pages/CreatorDiscoverPage'
 import CreatorLibraryAllPage from './pages/CreatorLibraryAllPage'
 import CreatorReportsPage from './pages/CreatorReportsPage'
 import CreatorGroupsPage from './pages/CreatorGroupsPage'
 import CreateQuizPage from './pages/CreateQuizPage'
+import CreatorEachQuizPage from './pages/CreatorEachQuizPage'
 import CreatorProfilePage from './pages/CreatorProfilePage'
+import CreatorSelectModePage from './pages/CreatorSelectModePage'
+import CreatorPlayQuizPage from './pages/CreatorPlayQuizPage'
+import CreatorLobbyPage from './pages/CreatorLobbyPage'
 import HomePage from './pages/HomePage'
 import Auth from './pages/Auth'
 import Main from './pages/Main'
@@ -26,8 +31,12 @@ const privateRoutes = [
     component: CreatorHomePage
   },
   {
-    path: '/my-library/all',
-    component: CreatorLibraryAllPage
+    path: "/discover",
+    component: CreatorDiscoverPage,
+  },
+  {
+    path: "/my-library/all",
+    component: CreatorLibraryAllPage,
   },
   {
     path: '/reports',
@@ -42,9 +51,25 @@ const privateRoutes = [
     component: CreateQuizPage
   },
   {
-    path: '/profiles',
-    component: CreatorProfilePage
-  }
+    path: "/each-quiz",
+    component: CreatorEachQuizPage,
+  },
+  {
+    path: "/profiles",
+    component: CreatorProfilePage,
+  },
+  {
+    path: "/select-game-mode",
+    component: CreatorSelectModePage,
+  },
+  {
+    path: "/creator-lobby",
+    component: CreatorLobbyPage,
+  },
+  {
+    path: "/creator-play",
+    component: CreatorPlayQuizPage,
+  },
 ]
 
 const publicRoutes = [
@@ -90,7 +115,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {isAuthenticated &&
+          {!isAuthenticated &&
             privateRoutes.map((el) => {
               console.log('private el', el)
               return (
@@ -103,7 +128,7 @@ function App() {
               )
             })}
 
-          {!isAuthenticated &&
+          {isAuthenticated &&
             publicRoutes.map((el) => {
               console.log('el', el)
               return (

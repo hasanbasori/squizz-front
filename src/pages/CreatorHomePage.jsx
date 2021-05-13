@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout, { HeaderCreator, Content, Footer } from '../components/Layout'
 import './CreatorHomePage.postcss'
 import {
@@ -12,8 +12,11 @@ import {
   TabPanel,
   outline
 } from '@chakra-ui/react'
+import { useHistory } from 'react-router-dom'
 
 function CreatorHomePage() {
+  const [dataSquizz, setDataSquizz] = useState(true)
+  const history = useHistory()
   return (
     <Layout>
       <HeaderCreator pathName="homepage" />
@@ -153,21 +156,82 @@ function CreatorHomePage() {
                 </TabList>
 
                 <TabPanels>
+                  {dataSquizz ? (
+                    <TabPanel
+                      m={2}
+                      p={2}
+                      h={28}
+                      textAlign="center"
+                      alignItems="center"
+                    >
+                      <div
+                        className="text-sm text-gray-500 w-full h-4/5 bg-gray-400 flex mb-4 rounded shadow-md hover:cursor-pointer"
+                        onClick={() => history.push('/each-quiz')}
+                      >
+                        <div className="w-2/5 bg-gray-200 rounded-l flex items-end px-4 pb-2">
+                          <p className="py-0.5 w-full bg-gray-700 rounded text-white text-xs font-semibold">
+                            1 Questions
+                          </p>
+                        </div>
+                        <div className="w-3/5 flex flex-col justify-between bg-gray-50 border-l border-white ">
+                          <p className="mt-2 ml-2 text-left font-bold">
+                            Quiz title
+                          </p>
+                          <div className="flex bg-gray-200 justify-between px-2 py-0.5">
+                            <p className="text-xs">username</p>
+                            <p className="text-xs font-bold">0 plays</p>
+                          </div>
+                        </div>
+                      </div>
+                      <a
+                        href="/my-library/all"
+                        className="py-1 underline text-blue-600 text-xs font-bold"
+                      >
+                        See all (1)
+                      </a>
+                    </TabPanel>
+                  ) : (
+                    <TabPanel
+                      border="1px dashed"
+                      borderColor="gray.300"
+                      borderRadius="5px"
+                      m={4}
+                      p={6}
+                      h={32}
+                      bgColor="#f2f2f2"
+                      textAlign="center"
+                    >
+                      <p className="text-sm text-gray-500">
+                        Create your first squizz using
+                      </p>
+                      <p className="text-sm text-gray-500 mb-4">
+                        one of our templates.
+                      </p>
+                      <Button
+                        fontSize="sm"
+                        bgColor="#1368ce"
+                        color="white"
+                        py={1}
+                        h={7}
+                      >
+                        Create Squizz
+                      </Button>
+                    </TabPanel>
+                  )}
                   <TabPanel
                     border="1px dashed"
                     borderColor="gray.300"
                     borderRadius="5px"
                     m={4}
-                    p={6}
-                    h={32}
+                    py={6}
+                    px={12}
+                    h={44}
                     bgColor="#f2f2f2"
                     textAlign="center"
                   >
-                    <p className="text-sm text-gray-500">
-                      Create your first squizz using
-                    </p>
                     <p className="text-sm text-gray-500 mb-4">
-                      one of our templates.
+                      Upgrade and start collaborating with friends and family in
+                      a private team space.
                     </p>
                     <Button
                       fontSize="sm"
@@ -176,11 +240,8 @@ function CreatorHomePage() {
                       py={1}
                       h={7}
                     >
-                      Create Squizz
+                      Upgrade now
                     </Button>
-                  </TabPanel>
-                  <TabPanel>
-                    <p>two!</p>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
