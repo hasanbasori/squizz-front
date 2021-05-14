@@ -6,13 +6,14 @@ import { useHistory, useLocation, Link } from 'react-router-dom'
 import { BsBook } from 'react-icons/bs'
 import { VscHome } from 'react-icons/vsc'
 import { BsPeople, BsGraphUp } from 'react-icons/bs'
-
+import { workplace } from '../utils/constants'
 import { TEACHER_FORM_PATH } from '../utils/constants'
 
 function TeacherRegister() {
   const history = useHistory()
   const location = useLocation()
 
+  const { SCHOOL, HIGHER_EDUCATION, SCHOOL_ADMINSTRATION, BUSINESS } = workplace
   return (
     <Layout>
       <HeaderAuthentication />
@@ -33,7 +34,7 @@ function TeacherRegister() {
             className="teacher-type-box hover:shadow-lg"
             onClick={() =>
               history.push(TEACHER_FORM_PATH, {
-                state: { ...location.state, workplace: 'SCHOOL' }
+                state: { ...location.state, workplace: SCHOOL }
               })
             }
           >
@@ -51,7 +52,7 @@ function TeacherRegister() {
             className="teacher-type-box hover:shadow-lg"
             onClick={() =>
               history.push(TEACHER_FORM_PATH, {
-                state: { ...location.state, workplace: 'HIGHER_EDUCATION' }
+                state: { ...location.state, workplace: HIGHER_EDUCATION }
               })
             }
           >
@@ -67,7 +68,7 @@ function TeacherRegister() {
             className="teacher-type-box hover:shadow-lg"
             onClick={() =>
               history.push(TEACHER_FORM_PATH, {
-                state: { ...location.state, workplace: 'SCHOOL_ADMINSTRATION' }
+                state: { ...location.state, workplace: SCHOOL_ADMINSTRATION }
               })
             }
           >
@@ -77,7 +78,7 @@ function TeacherRegister() {
               </div>
             </div>
             <div className="type-user">
-              School <br /> adminstration
+              <div>School </div> <div> adminstration</div>
             </div>
           </div>
 
@@ -85,7 +86,7 @@ function TeacherRegister() {
             className="teacher-type-box hover:shadow-lg"
             onClick={() =>
               history.push(TEACHER_FORM_PATH, {
-                state: { ...location.state, workplace: 'BUSINESS' }
+                state: { ...location.state, workplace: BUSINESS }
               })
             }
           >

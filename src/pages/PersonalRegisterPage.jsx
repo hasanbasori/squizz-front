@@ -52,7 +52,8 @@ function PersonalRegister() {
               </div>
             </div>
             <div className="type-user">
-              Friends and <br /> family
+              <div> Friends and </div>
+              <div>family</div>
             </div>
           </div>
 
@@ -73,13 +74,12 @@ function PersonalRegister() {
             }
           >
             <div className="colleagues-or-client">
-              {' '}
               <div className="hovicon">
                 <BsGraphUp />
               </div>
             </div>
             <div className="type-user">
-              Colleagues or <br /> clients
+              <div>Colleagues or</div> <di>clients</di>
             </div>
           </div>
 
@@ -102,7 +102,7 @@ function PersonalRegister() {
                 <BsBook />
               </div>
             </div>
-            <div className="type-user">Student</div>
+            <div className="type-user">Students</div>
           </div>
 
           <div

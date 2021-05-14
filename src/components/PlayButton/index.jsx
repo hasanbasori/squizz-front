@@ -7,7 +7,7 @@ import './PlayButton.postcss'
 function PlayButton(props) {
   const {
     type,
-    htmlType,
+    htmlType = 'button',
     className,
     style,
     children,

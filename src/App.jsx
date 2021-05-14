@@ -79,8 +79,8 @@ const publicRoutes = [
     component: LoginPage
   },
   {
-  path: '/auth/register/teacher',
-  component: TeacherRegister
+    path: '/auth/register/teacher',
+    component: TeacherRegister
   },
   // {
   //   path: '/auth/register/:userType/form/1',
@@ -146,6 +146,8 @@ function App() {
                 />
               )
             })}
+
+          
         </Switch>
       </BrowserRouter>
     </div>

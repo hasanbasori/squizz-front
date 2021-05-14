@@ -37,9 +37,12 @@ import {
 } from 'react-icons/fi'
 import { useDisclosure } from '@chakra-ui/react'
 import quiz from '../../../pic/quiz.png'
+import * as localStorageService from '../../services/localStorageService'
+import { useHistory } from 'react-router-dom'
 
 function ModalCreate() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <>
       <Button
@@ -80,17 +83,25 @@ function ModalCreate() {
             </div>
             <div className="rounded pb-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
               <div className="mb-8 text-2xl font-bold h-2/3 w-full bg-gray-300 rounded-t">
-                <p className="ml-2 rounded-b-2xl border bg-white w-2/5 text-sm text-center">Template 1</p>
+                <p className="ml-2 rounded-b-2xl border bg-white w-2/5 text-sm text-center">
+                  Template 1
+                </p>
               </div>
               <img src="" alt="" />
-              <p className="ml-2 w-full text-lg text-left">Topic template quiz</p>
+              <p className="ml-2 w-full text-lg text-left">
+                Topic template quiz
+              </p>
             </div>
             <div className="rounded pb-4 w-1/3 bg-white shadow-md flex flex-col items-center">
               <div className="mb-8 text-2xl font-bold h-2/3 w-full bg-gray-300 rounded-t">
-                <p className="ml-2 rounded-b-2xl border bg-white w-2/5 text-sm text-center">Template 2</p>
+                <p className="ml-2 rounded-b-2xl border bg-white w-2/5 text-sm text-center">
+                  Template 2
+                </p>
               </div>
               <img src="" alt="" />
-              <p className="ml-2 w-full text-lg text-left">Topic template quiz</p>
+              <p className="ml-2 w-full text-lg text-left">
+                Topic template quiz
+              </p>
             </div>
           </ModalBody>
 
@@ -106,7 +117,9 @@ function ModalCreate() {
 }
 
 function HeaderCreateQuiz({ style, className, pathName }) {
-  const noSelectNavbar = 'border-transparent border-b-4 hover:border-b-4 hover:text-red-700 hover:border-red-700'
+  const history = useHistory()
+  const noSelectNavbar =
+    'border-transparent border-b-4 hover:border-b-4 hover:text-red-700 hover:border-red-700'
 
   const menusDetail = [
     {
@@ -114,45 +127,35 @@ function HeaderCreateQuiz({ style, className, pathName }) {
       title: 'Home',
       icon: FiHome,
       className:
-        pathName === 'homepage'
-          ? 'border-red-700 text-red-700'
-          : noSelectNavbar
+        pathName === 'homepage' ? 'border-red-700 text-red-700' : noSelectNavbar
     },
     {
       href: '/discover',
       title: 'Discover',
       icon: FiCompass,
       className:
-        pathName === 'discover'
-          ? 'border-red-700 text-red-700'
-          : noSelectNavbar
+        pathName === 'discover' ? 'border-red-700 text-red-700' : noSelectNavbar
     },
     {
       href: '/my-library/all',
       title: 'Library',
       icon: FiList,
       className:
-        pathName === 'library'
-          ? 'border-red-700 text-red-700'
-          : noSelectNavbar
+        pathName === 'library' ? 'border-red-700 text-red-700' : noSelectNavbar
     },
     {
       href: '/reports',
       title: 'Reports',
       icon: FiBarChart,
       className:
-        pathName === 'reports'
-          ? 'border-red-700 text-red-700'
-          : noSelectNavbar
+        pathName === 'reports' ? 'border-red-700 text-red-700' : noSelectNavbar
     },
     {
       href: '/groups',
       title: 'Groups',
       icon: FiUsers,
       className:
-        pathName === 'groups'
-          ? 'border-red-700 text-red-700'
-          : noSelectNavbar
+        pathName === 'groups' ? 'border-red-700 text-red-700' : noSelectNavbar
     }
   ]
 
@@ -162,7 +165,10 @@ function HeaderCreateQuiz({ style, className, pathName }) {
       style={{ ...style }}
     >
       <div className="w-3/6 flex flex-row items-center justify-between h-full">
-        <a href={pathName === 'homepage' ? "#" : "/"} className="text-3xl text-red-700 font-bold mr-2 border-transparent border-b-4">
+        <a
+          href={pathName === 'homepage' ? '#' : '/'}
+          className="text-3xl text-red-700 font-bold mr-2 border-transparent border-b-4"
+        >
           Squizz!
         </a>
 
@@ -177,7 +183,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
           </a>
         ))}
       </div>
-      
+
       <div className="w-3/6 gap-4 flex flex-row items-end justify-end">
         <Button
           variant="ghost"
@@ -207,7 +213,17 @@ function HeaderCreateQuiz({ style, className, pathName }) {
             <MenuItem icon={<FiSettings />}>Setting</MenuItem>
             <MenuItem>Profile Setting</MenuItem>
             <MenuItem icon={<FiHelpCircle />}>Support Center</MenuItem>
-            <MenuItem icon={<FiLogOut />}>Sign out</MenuItem>
+            <MenuItem
+              icon={<FiLogOut />}
+              onClick={() => {
+                setTimeout(() => {
+                  localStorageService.clearToken()
+                  history.push('/mainpage')
+                })
+              }}
+            >
+              Sign out
+            </MenuItem>
           </MenuList>
         </Menu>
       </div>

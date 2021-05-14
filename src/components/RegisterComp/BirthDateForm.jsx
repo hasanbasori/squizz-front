@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { useForm, Controller } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 
-function BirthDateForm({ setStep }) {
+function BirthDateForm({ setStep, setBirthDate }) {
   const { control, handleSubmit } = useForm()
   const history = useHistory()
 
@@ -25,8 +25,8 @@ function BirthDateForm({ setStep }) {
             control={control}
             render={({ field: { onChange, onBlur, value, ref } }) => (
               <DatePicker
-            placeholderText="Enter your Birthdate"
-                onChange={onChange}
+                placeholderText="Enter your Birthdate"
+                onChange={setBirthDate}
                 onBlur={onBlur}
                 selected={value}
               />

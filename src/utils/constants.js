@@ -3,7 +3,8 @@ export const TEACHER_FORM_PATH = '/auth/register/teacher/form'
 export const userType = {
   STUDENT: 'STUDENT',
   TEACHER: 'TEACHER',
-  PERSONAL: 'PERSONAL'
+  PERSONAL: 'PERSONAL',
+  PROFESSIONAL: 'PROFESSIONAL'
 }
 
 export const socialType = {
@@ -15,7 +16,7 @@ export const socialType = {
 
 export const workplace = {
   SCHOOL: 'SCHOOL',
-  HIGHER_EDUCATION:'HIGHER_EDUCATION',
+  HIGHER_EDUCATION: 'HIGHER_EDUCATION',
   SCHOOL_ADMINSTRATION: 'SCHOOL_ADMINSTRATION',
   BUSINESS: 'BUSINESS'
 }

@@ -24,16 +24,8 @@ import Separator from '../Separator'
 import { Link, useParams } from 'react-router-dom'
 import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 
-function SignupForm() {
+function SignupForm({ onSubmitRegister }) {
   const [isShowPwd, setIsShowPwd] = useState(false)
-  const { userType } = useParams()
-
-  const history = useHistory()
-  const [input, setInput] = useState({
-    email: '',
-    password: '',
-    position: ''
-  })
 
   const {
     control,
@@ -41,17 +33,11 @@ function SignupForm() {
     formState: { errors }
   } = useForm()
 
-  function handleSubmitRegister(formValues) {
-    console.log(formValues)
-  }
-
-  console.log('Register')
-
   return (
     <div className="form-container p-6 min-h-3/4 rounded-md bg-white">
       <h1 className="form-title">Sign up with your email</h1>
       <br />
-      <form onSubmit={handleSubmit(handleSubmitRegister)}>
+      <form onSubmit={handleSubmit(onSubmitRegister)}>
         <Controller
           name="email"
           control={control}

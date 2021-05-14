@@ -4,7 +4,7 @@ import Layout, { HeaderAuthentication, Content } from '../Layout'
 import { FormControl, FormLabel, Input } from '@chakra-ui/react'
 import PlayButton from '../PlayButton'
 
-function UserNameForm({ setStep }) {
+function UserNameForm({ setStep, setUserName }) {
   return (
     <div>
       <h1 style={{ margin: 24 }} className="text-2xl font-semibold">
@@ -27,7 +27,11 @@ function UserNameForm({ setStep }) {
           Do not use your real name{' '}
         </p>
         <FormControl className="p-1" id="username" isRequired>
-          <Input className="w=80%" placeholder="Username" />
+          <Input
+            className="w=80%"
+            placeholder="Username"
+            onChange={({ target }) => setUserName(target.value)}
+          />
         </FormControl>
 
         <div

@@ -1,13 +1,19 @@
 import Axios from 'axios'
 
-import localStorageService from '../services/localStorageService'
+import {
+  setToken,
+  getToken,
+  setAuthError,
+  getAuthError,
+  clearToken
+} from '../services/localStorageService'
 
-Axios.defaults.baseURL = 'http://localhost:8000'
+Axios.defaults.baseURL = 'http://localhost:8008'
 
 //intercept request ส่ง header ไปให้ back end
 Axios.interceptors.request.use(
   (config) => {
-    if (localStorageService.getToken())
+    if (getToken())
       config.headers.Authorization = `Bearer ${localStorageService.getToken()}`
     return config
   },
@@ -18,9 +24,9 @@ Axios.interceptors.response.use(
   (response) => response,
   (err) => {
     if (err.response.status === 401) {
-      localStorageService.clearToken()
+      clearToken()
       window.location.assign('/') // window = globalObject, location = redirect path
-      localStorageService.setAuthError('Unauthorize to see this page.')
+      setAuthError('Unauthorize to see this page.')
       return
     }
     return Promise.reject(err)
