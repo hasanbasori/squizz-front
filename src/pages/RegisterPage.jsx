@@ -7,7 +7,7 @@ import { BsGraphUp } from 'react-icons/bs'
 import { BsBook } from 'react-icons/bs'
 import { BsPerson } from 'react-icons/bs'
 import { BiCar } from 'react-icons/bi'
-import { userType } from '../utils/enums'
+import { userType } from '../utils/constants'
 
 function RegisterPage() {
   const { STUDENT, TEACHER, PERSONAL } = userType

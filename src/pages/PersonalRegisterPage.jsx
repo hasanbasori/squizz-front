@@ -7,7 +7,7 @@ import { BsBook } from 'react-icons/bs'
 import { VscGraph } from 'react-icons/vsc'
 
 import { convertConstantToUrl } from '../utils/functions'
-import { socialType } from '../utils/enums'
+import { socialType } from '../utils/constants'
 
 function PersonalRegister() {
   const history = useHistory()
@@ -41,7 +41,7 @@ function PersonalRegister() {
                   FRIENDS_AND_FAMILY
                 )}/form`,
                 {
-                  state: { ...location.state, userType: FRIENDS_AND_FAMILY }
+                  state: { ...location.state, socialType: FRIENDS_AND_FAMILY }
                 }
               )
             }
@@ -66,7 +66,7 @@ function PersonalRegister() {
                 {
                   state: {
                     ...location.state,
-                    userType: COLLEAGUES_OR_CLIENTS
+                    socialType: COLLEAGUES_OR_CLIENTS
                   }
                 }
               )
@@ -91,7 +91,7 @@ function PersonalRegister() {
                   STUDENTS
                 )}/form`,
                 {
-                  state: { ...location.state, userType: STUDENTS }
+                  state: { ...location.state, socialType: STUDENTS }
                 }
               )
             }
@@ -111,7 +111,7 @@ function PersonalRegister() {
               history.push(
                 `/auth/register/personal/${convertConstantToUrl(OTHER)}/form`,
                 {
-                  state: { ...location.state, userType: OTHER }
+                  state: { ...location.state, socialType: OTHER }
                 }
               )
             }

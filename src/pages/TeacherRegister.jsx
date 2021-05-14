@@ -7,6 +7,8 @@ import { BsBook } from 'react-icons/bs'
 import { VscHome } from 'react-icons/vsc'
 import { BsPeople, BsGraphUp } from 'react-icons/bs'
 
+import { TEACHER_FORM_PATH } from '../utils/constants'
+
 function TeacherRegister() {
   const history = useHistory()
   const location = useLocation()
@@ -30,7 +32,7 @@ function TeacherRegister() {
           <div
             className="teacher-type-box hover:shadow-lg"
             onClick={() =>
-              history.push('/auth/register/teacher/form', {
+              history.push(TEACHER_FORM_PATH, {
                 state: { ...location.state, workplace: 'SCHOOL' }
               })
             }
@@ -48,7 +50,7 @@ function TeacherRegister() {
           <div
             className="teacher-type-box hover:shadow-lg"
             onClick={() =>
-              history.push('/auth/register/teacher/form', {
+              history.push(TEACHER_FORM_PATH, {
                 state: { ...location.state, workplace: 'HIGHER_EDUCATION' }
               })
             }
@@ -64,7 +66,7 @@ function TeacherRegister() {
           <div
             className="teacher-type-box hover:shadow-lg"
             onClick={() =>
-              history.push('/auth/register/teacher/form', {
+              history.push(TEACHER_FORM_PATH, {
                 state: { ...location.state, workplace: 'SCHOOL_ADMINSTRATION' }
               })
             }
@@ -82,7 +84,7 @@ function TeacherRegister() {
           <div
             className="teacher-type-box hover:shadow-lg"
             onClick={() =>
-              history.push('/auth/register/teacher/form', {
+              history.push(TEACHER_FORM_PATH, {
                 state: { ...location.state, workplace: 'BUSINESS' }
               })
             }

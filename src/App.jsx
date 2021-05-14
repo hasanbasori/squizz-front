@@ -78,19 +78,18 @@ const publicRoutes = [
     path: '/auth/login',
     component: LoginPage
   },
-
   {
-    path: '/auth/register/teacher',
-    component: TeacherRegister
+  path: '/auth/register/teacher',
+  component: TeacherRegister
   },
-  {
-    path: '/auth/register/:userType/form/1',
-    component: StudentRegister
-  },
-  {
-    path: '/auth/register/:userType/form/2',
-    component: StudentRegisterUsername
-  },
+  // {
+  //   path: '/auth/register/:userType/form/1',
+  //   component: StudentRegister
+  // },
+  // {
+  //   path: '/auth/register/:userType/form/2',
+  //   component: StudentRegisterUsername
+  // },
   {
     path: '/auth/register/personal',
     component: PersonalRegisterPage
@@ -105,7 +104,7 @@ const publicRoutes = [
   },
   {
     path: '/auth/register/personal/:socialType/form',
-    component: PersonalRegisterPage
+    component: RegisterFormPage
   },
   {
     path: '/auth/register/:userType/form',

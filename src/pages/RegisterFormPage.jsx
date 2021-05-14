@@ -10,14 +10,16 @@ import {
   UserNameForm,
   BirthDateForm
 } from '../components/RegisterComp'
-import { userType as type } from '../utils/enums'
+import { userType as uType, socialType as sType } from '../utils/constants'
+import { convertConstantToUrl } from '../utils/functions'
 
 function RegisterFormPage() {
-  const { PERSONAL, TEACHER, STUDENT } = type
+  const { PERSONAL, TEACHER, STUDENT } = uType
+  const { FRIENDS_AND_FAMILY, COLLEAGUES_OR_CLIENTS, STUDENTS, OTHER } = sType
 
   const [isShowPwd, setIsShowPwd] = useState(false)
   const [step, setStep] = useState(1)
-  const { userType } = useParams()
+  const { userType, socialType } = useParams()
   const history = useHistory()
 
   return (
@@ -36,6 +38,10 @@ function RegisterFormPage() {
         ) : null}
         {userType === STUDENT.toLowerCase() && step === 3 ? (
           <SignupForm />
+        ) : null}
+        {socialType === convertConstantToUrl(FRIENDS_AND_FAMILY) &&
+        step === 1 ? (
+          <BirthDateForm setStep={setStep} />
         ) : null}
       </Content>
     </Layout>
