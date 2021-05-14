@@ -9,7 +9,7 @@ import CreatorGroupsPage from './pages/CreatorGroupsPage'
 import CreateQuizPage from './pages/CreateQuizPage'
 import CreatorEachQuizPage from './pages/CreatorEachQuizPage'
 import CreatorProfilePage from './pages/CreatorProfilePage'
-import CreatorSelectModePage from './pages/CreatorSelectModePage'
+import CreatorSelectModesPage from './pages/CreatorSelectModePage'
 import CreatorPlayQuizPage from './pages/CreatorPlayQuizPage'
 import CreatorLobbyPage from './pages/CreatorLobbyPage'
 import HomePage from './pages/HomePage'
@@ -20,7 +20,7 @@ import RegisterPage from './pages/RegisterPage'
 import TeacherRegister from './pages/TeacherRegister'
 import StudentRegister from './pages/StudentRegister'
 import StudentRegisterUsername from './pages/StudentRegisterUsername'
-import PersonalRegister from './pages/PersonalRegister'
+import PersonalRegisterPage from './pages/PersonalRegisterPage'
 import RegisterFormPage from './pages/RegisterFormPage'
 import './App.css'
 import { useContext } from 'react'
@@ -61,7 +61,7 @@ const privateRoutes = [
   },
   {
     path: '/select-game-mode',
-    component: CreatorSelectModePage
+    component: CreatorSelectModesPage
   },
   {
     path: '/creator-lobby',
@@ -84,12 +84,16 @@ const publicRoutes = [
     component: TeacherRegister
   },
   {
-    path: '/auth/register/student',
+    path: '/auth/register/:userType/form/1',
     component: StudentRegister
   },
   {
+    path: '/auth/register/:userType/form/2',
+    component: StudentRegisterUsername
+  },
+  {
     path: '/auth/register/personal',
-    component: PersonalRegister
+    component: PersonalRegisterPage
   },
   {
     path: '/auth/register/professional',
@@ -100,16 +104,16 @@ const publicRoutes = [
     component: RegisterPage
   },
   {
+    path: '/auth/register/personal/:socialType/form',
+    component: PersonalRegisterPage
+  },
+  {
     path: '/auth/register/:userType/form',
     component: RegisterFormPage
   },
   {
     path: '/mainpage',
     component: Main
-  },
-  {
-    path: '/student-username',
-    component: StudentRegisterUsername
   }
 ]
 
@@ -122,7 +126,6 @@ function App() {
         <Switch>
           {isAuthenticated &&
             privateRoutes.map((el) => {
-              console.log('private el', el)
               return (
                 <Route
                   exact
@@ -135,7 +138,6 @@ function App() {
 
           {!isAuthenticated &&
             publicRoutes.map((el) => {
-              console.log('el', el)
               return (
                 <Route
                   exact

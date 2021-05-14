@@ -1,16 +1,21 @@
 import React from 'react'
-import './PersonalRegister.postcss'
-import { useHistory, useLocation, Link } from 'react-router-dom'
+import './PersonalRegisterPage.postcss'
+import { useHistory, useLocation } from 'react-router-dom'
 import Layout, { Content, HeaderAuthentication } from '../components/Layout'
-import { Button } from '@chakra-ui/react'
-import { useForm, Controller } from 'react-hook-form'
 import { BsPeople, BsGraphUp } from 'react-icons/bs'
 import { BsBook } from 'react-icons/bs'
 import { VscGraph } from 'react-icons/vsc'
 
+import { convertConstantToUrl } from '../utils/functions'
+import { socialType } from '../utils/enums'
+
 function PersonalRegister() {
   const history = useHistory()
   const location = useLocation()
+
+  const { FRIENDS_AND_FAMILY, COLLEAGUES_OR_CLIENTS, STUDENTS, OTHER } =
+    socialType
+
   return (
     <Layout>
       <HeaderAuthentication />
@@ -31,13 +36,17 @@ function PersonalRegister() {
           <div
             className="personal-type-box hover:shadow-lg"
             onClick={() =>
-              history.push('/auth/register/personal/form', {
-                state: { ...location.state, workplace: 'FRIENDS_AND_FAMILY' }
-              })
+              history.push(
+                `/auth/register/personal/${convertConstantToUrl(
+                  FRIENDS_AND_FAMILY
+                )}/form`,
+                {
+                  state: { ...location.state, userType: FRIENDS_AND_FAMILY }
+                }
+              )
             }
           >
-            <div className="friends-and-family ">
-              {' '}
+            <div className="friends-and-family">
               <div className="hovicon">
                 <BsPeople />
               </div>
@@ -50,9 +59,17 @@ function PersonalRegister() {
           <div
             className="personal-type-box hover:shadow-lg"
             onClick={() =>
-              history.push('/auth/register/personal/form', {
-                state: { ...location.state, workplace: 'COLLEAGUES_OR_CLIENT' }
-              })
+              history.push(
+                `/auth/register/personal/${convertConstantToUrl(
+                  COLLEAGUES_OR_CLIENTS
+                )}/form`,
+                {
+                  state: {
+                    ...location.state,
+                    userType: COLLEAGUES_OR_CLIENTS
+                  }
+                }
+              )
             }
           >
             <div className="colleagues-or-client">
@@ -69,9 +86,14 @@ function PersonalRegister() {
           <div
             className="personal-type-box hover:shadow-lg"
             onClick={() =>
-              history.push('/auth/register/personal/form', {
-                state: { ...location.state, workplace: 'STUDENT' }
-              })
+              history.push(
+                `/auth/register/personal/${convertConstantToUrl(
+                  STUDENTS
+                )}/form`,
+                {
+                  state: { ...location.state, userType: STUDENTS }
+                }
+              )
             }
           >
             <div className="student">
@@ -86,9 +108,12 @@ function PersonalRegister() {
           <div
             className="personal-type-box hover:shadow-lg"
             onClick={() =>
-              history.push('/auth/register/personal/form', {
-                state: { ...location.state, workplace: 'OTHER' }
-              })
+              history.push(
+                `/auth/register/personal/${convertConstantToUrl(OTHER)}/form`,
+                {
+                  state: { ...location.state, userType: OTHER }
+                }
+              )
             }
           >
             <div className="other">

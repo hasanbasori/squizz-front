@@ -7,8 +7,10 @@ import { BsGraphUp } from 'react-icons/bs'
 import { BsBook } from 'react-icons/bs'
 import { BsPerson } from 'react-icons/bs'
 import { BiCar } from 'react-icons/bi'
+import { userType } from '../utils/enums'
 
 function RegisterPage() {
+  const { STUDENT, TEACHER, PERSONAL } = userType
   const history = useHistory()
   const location = useLocation()
 
@@ -23,15 +25,13 @@ function RegisterPage() {
           <div>
             <h1 className="users-type-title">Choose your account type</h1>
           </div>
-
           <br />
-
           <div className="users-type-wrap">
             <div
               className="users-type-box hover:shadow-lg"
               onClick={() => {
                 return history.push(`/auth/register/teacher`, {
-                  userType: 'TEACHER'
+                  userType: TEACHER
                 })
               }}
             >
@@ -46,8 +46,8 @@ function RegisterPage() {
             <div
               className="users-type-box hover:shadow-lg"
               onClick={() =>
-                history.push(`/auth/register/student`, {
-                  userType: 'STUDENT'
+                history.push(`/auth/register/student/form`, {
+                  userType: STUDENT
                 })
               }
             >
@@ -63,7 +63,7 @@ function RegisterPage() {
               className="users-type-box hover:shadow-lg"
               onClick={() =>
                 history.push(`/auth/register/personal`, {
-                  userType: 'PERSONAL'
+                  userType: PERSONAL
                 })
               }
             >

@@ -20,6 +20,7 @@ Axios.interceptors.response.use(
     if (err.response.status === 401) {
       localStorageService.clearToken()
       window.location.assign('/') // window = globalObject, location = redirect path
+      localStorageService.setAuthError('Unauthorize to see this page.')
       return
     }
     return Promise.reject(err)
