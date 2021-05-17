@@ -25,6 +25,7 @@ import { useHistory, Link } from 'react-router-dom'
 import axios from '../config/axios'
 import * as localStorageService from '../services/localStorageService'
 import { AuthContext } from '../contexts/AuthContextProvider'
+
 const loginSchema = yup.object().shape({
   email: yup.string().required(),
   password: yup.string().required()
@@ -33,6 +34,7 @@ const loginSchema = yup.object().shape({
 function LoginPage() {
   const [isShowPwd, setIsShowPwd] = useState(false)
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
+  const history = useHistory()
 
   const {
     control,
@@ -42,10 +44,15 @@ function LoginPage() {
     resolver: yupResolver(loginSchema)
   })
 
-  const handleSubmitLogin = async (formValues) => {
+  const handleSubmitLogin = async ({ emailOrUserName, password }) => {
+    console.log(emailOrUserName, password)
     try {
-      const res = await axios.post('/creator', { email, password })
-      localStorageService.setToken(res.data.token)
+      const { data } = await axios.post('/creator/login', {
+        username: emailOrUserName,
+        email: emailOrUserName,
+        password
+      })
+      localStorageService.setToken(data.token)
       setIsAuthenticated(true)
       history.push('/')
     } catch (err) {
@@ -66,14 +73,20 @@ function LoginPage() {
           <br />
           <form onSubmit={handleSubmit(handleSubmitLogin)}>
             <Controller
-              name="email"
+              name="emailOrUserName"
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <FormControl id="email" {...field} isInvalid={errors.email}>
-                  <FormLabel>Email</FormLabel>
+                <FormControl
+                  id="emailOrUserName"
+                  {...field}
+                  isInvalid={errors.emailOrUserName}
+                >
+                  <FormLabel>Email or Username</FormLabel>
                   <Input />
-                  <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+                  <FormErrorMessage>
+                    {errors.emailOrUserName?.message}
+                  </FormErrorMessage>
                 </FormControl>
               )}
             />
