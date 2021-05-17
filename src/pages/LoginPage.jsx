@@ -16,12 +16,12 @@ import {
   InputGroup,
   InputRightElement,
   Button,
-  Link,
+  Link as LinkChakra,
   Divider
 } from '@chakra-ui/react'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import Separator from '../components/Separator'
-
+import { useHistory, Link } from 'react-router-dom'
 const loginSchema = yup.object().shape({
   email: yup.string().required(),
   password: yup.string().required()
@@ -41,12 +41,15 @@ function LoginPage() {
   function handleSubmitLogin(formValues) {
     console.log(formValues)
   }
-  console.log(errors)
+  console.log('Loginnnnnn')
   return (
     <Layout>
       <HeaderAuthentication />
-      <Content className="login-page-content flex justify-center items-center">
-        <div className="form-container p-6 h-3/4 rounded-md bg-white">
+      <Content
+        style={{ height: 'calc(100vh - var(--header-height))' }}
+        className="login-page-content flex justify-center items-center"
+      >
+        <div className="form-container p-6 rounded-md bg-white">
           <h1 className="form-title">Log in</h1>
           <br />
           <form onSubmit={handleSubmit(handleSubmitLogin)}>
@@ -136,7 +139,9 @@ function LoginPage() {
           <br />
           <p>
             Don't have an account?{' '}
-            <Link className="text-primary-normal">Sign up</Link>
+            <LinkChakra className="text-primary-normal">
+              <Link to="/auth/register">Sign up</Link>
+            </LinkChakra>
           </p>
         </div>
       </Content>
