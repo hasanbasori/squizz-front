@@ -137,12 +137,16 @@ function LoginPage() {
             <div />
           </Button>
           <br />
-          <p>
-            Don't have an account?{' '}
-            <LinkChakra className="text-primary-normal">
-              <Link to="/auth/register">Sign up</Link>
-            </LinkChakra>
-          </p>
+          <div
+            style={{ display: 'flex', width: '100%', justifyContent: 'center' }}
+          >
+            <p>
+              Don't have an account?{' '}
+              <LinkChakra className="text-primary-normal">
+                <Link to="/auth/register">Sign up</Link>
+              </LinkChakra>
+            </p>
+          </div>{' '}
         </div>
       </Content>
     </Layout>
