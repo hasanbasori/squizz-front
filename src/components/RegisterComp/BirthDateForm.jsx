@@ -26,14 +26,30 @@ function BirthDateForm({ setStep, setBirthDate }) {
             render={({ field: { onChange, onBlur, value, ref } }) => (
               <DatePicker
                 placeholderText="Enter your Birthdate"
-                onChange={setBirthDate}
+                onChange={(val) => {
+                  setBirthDate(val)
+                  console.log(
+                    'date',
+                    val,
+                    val.toISOString(),
+                    new Date(val.toISOString())
+                  )
+                  localStorage.setItem('birthDate', val)
+                }}
                 onBlur={onBlur}
                 selected={value}
               />
             )}
           />
           <br />
-          <button onClick={() => setStep(2)}>Continue</button>
+          <button
+            onClick={() => {
+              setStep(2)
+              localStorage.setItem('registerStep', 2)
+            }}
+          >
+            Continue
+          </button>
         </form>
       </div>
 

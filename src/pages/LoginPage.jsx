@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import PlayButton from '../components/PlayButton'
 import './LoginPage.postcss'
 import { FcGoogle } from 'react-icons/fc'
@@ -22,6 +22,9 @@ import {
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import Separator from '../components/Separator'
 import { useHistory, Link } from 'react-router-dom'
+import axios from '../config/axios'
+import * as localStorageService from '../services/localStorageService'
+import { AuthContext } from '../contexts/AuthContextProvider'
 const loginSchema = yup.object().shape({
   email: yup.string().required(),
   password: yup.string().required()
@@ -29,6 +32,7 @@ const loginSchema = yup.object().shape({
 
 function LoginPage() {
   const [isShowPwd, setIsShowPwd] = useState(false)
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
 
   const {
     control,
@@ -38,9 +42,17 @@ function LoginPage() {
     resolver: yupResolver(loginSchema)
   })
 
-  function handleSubmitLogin(formValues) {
-    console.log(formValues)
+  const handleSubmitLogin = async (formValues) => {
+    try {
+      const res = await axios.post('/creator', { email, password })
+      localStorageService.setToken(res.data.token)
+      setIsAuthenticated(true)
+      history.push('/')
+    } catch (err) {
+      console.dir(err)
+    }
   }
+
   console.log('Loginnnnnn')
   return (
     <Layout>
@@ -137,16 +149,12 @@ function LoginPage() {
             <div />
           </Button>
           <br />
-          <div
-            style={{ display: 'flex', width: '100%', justifyContent: 'center' }}
-          >
-            <p>
-              Don't have an account?{' '}
-              <LinkChakra className="text-primary-normal">
-                <Link to="/auth/register">Sign up</Link>
-              </LinkChakra>
-            </p>
-          </div>{' '}
+          <p>
+            Don't have an account?{' '}
+            <LinkChakra className="text-primary-normal">
+              <Link to="/auth/register">Sign up</Link>
+            </LinkChakra>
+          </p>
         </div>
       </Content>
     </Layout>

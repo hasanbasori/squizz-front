@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import './HeaderCreator.postcss'
 import {
@@ -39,6 +39,7 @@ import { useDisclosure } from '@chakra-ui/react'
 import quiz from '../../../pic/quiz.png'
 import * as localStorageService from '../../services/localStorageService'
 import { useHistory } from 'react-router-dom'
+import { AuthContext } from '../../contexts/AuthContextProvider'
 
 function ModalCreate() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -117,6 +118,7 @@ function ModalCreate() {
 }
 
 function HeaderCreateQuiz({ style, className, pathName }) {
+  const { setIsAuthenticated } = useContext(AuthContext)
   const history = useHistory()
   const noSelectNavbar =
     'border-transparent border-b-4 hover:border-b-4 hover:text-red-700 hover:border-red-700'
@@ -218,6 +220,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
               onClick={() => {
                 setTimeout(() => {
                   localStorageService.clearToken()
+                  setIsAuthenticated(false)
                   history.push('/mainpage')
                 })
               }}
