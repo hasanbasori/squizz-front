@@ -17,7 +17,7 @@ import {
   convertDateStringToIso8601
 } from '../utils/functions'
 
-import axios from '../configs/axios.config'
+import axios from '../config/axios'
 import CreatorHomePage from './CreatorHomePage'
 import { AuthContext } from '../contexts/AuthContextProvider'
 

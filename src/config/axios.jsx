@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import localStorageService from '../services/localStorageService'
+import * as localStorageService from '../services/localStorageService'
 
 axios.defaults.baseURL = 'http://localhost:8008'
 

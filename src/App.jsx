@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import CreatorHomePage from './pages/CreatorHomePage'
 import CreatorDiscoverPage from './pages/CreatorDiscoverPage'
@@ -25,6 +25,7 @@ import RegisterFormPage from './pages/RegisterFormPage'
 import './App.css'
 import { useContext } from 'react'
 import { AuthContext } from './contexts/AuthContextProvider'
+import axios from './config/axios'
 
 const privateRoutes = [
   {
@@ -48,7 +49,7 @@ const privateRoutes = [
     component: CreatorGroupsPage
   },
   {
-    path: '/create-quiz',
+    path: '/create-quiz/:id',
     component: CreateQuizPage
   },
   {
@@ -111,7 +112,7 @@ const publicRoutes = [
     component: RegisterFormPage
   },
   {
-    path: '/mainpage',
+    path: '/',
     component: Main
   }
 ]
@@ -146,6 +147,8 @@ function App() {
                 />
               )
             })}
+
+          <Redirect to="/" />
         </Switch>
       </BrowserRouter>
     </div>

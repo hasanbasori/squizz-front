@@ -2,7 +2,6 @@ const TOKEN_NAME = 'token'
 const AUTH_ERROR = 'authError'
 
 export const setToken = (token) => {
-  console.log('kuy')
   localStorage.setItem(TOKEN_NAME, token)
 }
 
@@ -24,3 +23,15 @@ export const setAuthError = (errMessage) => {
 export const getAuthError = () => {
   return localStorage.getItem(AUTH_ERROR)
 }
+
+// export const setToken = (token) => localStorage.setItem(tokenName, token)
+
+// export const getToken = () => localStorage.getItem(tokenName)
+
+// export const clearToken = () => localStorage.removeItem(tokenName);
+
+// export default {
+//     setToken,
+//     getToken,
+//     clearToken
+// }

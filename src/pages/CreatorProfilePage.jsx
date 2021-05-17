@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Layout, { HeaderCreator, Content, Footer } from '../components/Layout'
 // import './CreatorProfilePage.postcss'
 import {
@@ -25,8 +25,10 @@ import {
   outline
 } from '@chakra-ui/react'
 import { FiUser, FiMoreVertical } from 'react-icons/fi'
+import { CreatorContext } from '../contexts/CreatorContextProvider'
 
 function CreatorProfilePage() {
+  const { creator, setCreator } = useContext(CreatorContext)
   return (
     <Layout>
       <HeaderCreator />
@@ -37,7 +39,13 @@ function CreatorProfilePage() {
               <div className="bg-gray-400 p-4 rounded-full mr-4">
                 <Icon as={FiUser} w={8} h={7} color="white" />
               </div>
-              <p className="font-bold text-lg">Creator Username</p>
+              <div>
+                <p className="font-semibold text-2xl">{creator.username}</p>
+
+                {creator.name ? (
+                  <p className="text-sm">{creator.name}</p>
+                ) : null}
+              </div>
             </div>
 
             <div className="flex w-1/3">
@@ -54,12 +62,8 @@ function CreatorProfilePage() {
                     bgColor="white"
                   />
                   <MenuList>
-                    <MenuItem>
-                      Copy profile link
-                    </MenuItem>
-                    <MenuItem>
-                      Flag user
-                    </MenuItem>
+                    <MenuItem>Copy profile link</MenuItem>
+                    <MenuItem>Flag user</MenuItem>
                   </MenuList>
                 </Menu>
               </div>
@@ -79,7 +83,7 @@ function CreatorProfilePage() {
           </div>
           <div className="mt-56 flex flex-col items-center">
             <p className="text-2xl font-bold">
-              No public squizzes created by al3atross
+              No public squizzes created by {creator.username}
             </p>
             <Button w="15%" mt="36px" bgColor="#1368ce" color="white">
               Go back

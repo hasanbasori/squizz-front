@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Layout, { HeaderCreator, Content, Footer } from '../components/Layout'
 import './CreatorHomePage.postcss'
 import {
@@ -13,10 +13,35 @@ import {
   outline
 } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
+import { CreatorContext } from '../contexts/CreatorContextProvider'
+import axios from '../config/axios'
 
 function CreatorHomePage() {
-  const [dataSquizz, setDataSquizz] = useState(true)
+  const { creator, setCreator } = useContext(CreatorContext)
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  const [dataSquizz, setDataSquizz] = useState([])
   const history = useHistory()
+
+  useEffect(() => {
+    const getSquizzes = async () => {
+      try {
+        const res = await axios.get(`/quiz`)
+        console.log(res)
+        if (res) setDataSquizz(res.data.quiz)
+        setIsLoading(false)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getSquizzes()
+  }, [])
+  // console.log(dataSquizz)
+
+  if (isLoading) {
+    return <p>Loading data</p>
+  }
+
   return (
     <Layout>
       <HeaderCreator pathName="homepage" />
@@ -25,9 +50,9 @@ function CreatorHomePage() {
           <div className="w-full sm:w-1/3 lg:w-3/12">
             <div className="content-box py-4 mb-4 ">
               <div className="px-6 mb-4">
-                <p className="text-md font-bold">Creator name</p>
+                <p className="text-lg font-bold">{creator.name}</p>
                 <p className="text-xs font-bold text-gray-500">
-                  Creator username
+                  {creator.username}
                 </p>
               </div>
 
@@ -129,7 +154,7 @@ function CreatorHomePage() {
                     fontWeight="600"
                     color="gray.500"
                   >
-                    My Squizzs
+                    My Squizzes
                   </Tab>
                   <Tab
                     _hover={{
@@ -156,7 +181,7 @@ function CreatorHomePage() {
                 </TabList>
 
                 <TabPanels>
-                  {dataSquizz ? (
+                  {dataSquizz[0] ? (
                     <TabPanel
                       m={2}
                       p={2}
@@ -166,19 +191,23 @@ function CreatorHomePage() {
                     >
                       <div
                         className="text-sm text-gray-500 w-full h-4/5 bg-gray-400 flex mb-4 rounded shadow-md hover:cursor-pointer"
-                        onClick={() => history.push('/each-quiz')}
+                        onClick={() =>
+                          history.push('/each-quiz', {
+                            params: dataSquizz[0].id
+                          })
+                        }
                       >
                         <div className="w-2/5 bg-gray-200 rounded-l flex items-end px-4 pb-2">
                           <p className="py-0.5 w-full bg-gray-700 rounded text-white text-xs font-semibold">
-                            1 Questions
+                            {dataSquizz[0].Questions.length} Questions
                           </p>
                         </div>
                         <div className="w-3/5 flex flex-col justify-between bg-gray-50 border-l border-white ">
                           <p className="mt-2 ml-2 text-left font-bold">
-                            Quiz title
+                            {dataSquizz[0].name}
                           </p>
                           <div className="flex bg-gray-200 justify-between px-2 py-0.5">
-                            <p className="text-xs">username</p>
+                            <p className="text-xs">{creator.username}</p>
                             <p className="text-xs font-bold">0 plays</p>
                           </div>
                         </div>
@@ -187,7 +216,7 @@ function CreatorHomePage() {
                         href="/my-library/all"
                         className="py-1 underline text-blue-600 text-xs font-bold"
                       >
-                        See all (1)
+                        See all ({dataSquizz.length})
                       </a>
                     </TabPanel>
                   ) : (
