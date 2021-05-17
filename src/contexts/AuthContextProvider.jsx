@@ -1,6 +1,6 @@
 import React from 'react'
 import { createContext, useState } from 'react'
-import localStorageService from '../services/localStorageService'
+import * as localStorageService from '../services/localStorageService'
 
 export const AuthContext = createContext()
 

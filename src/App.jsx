@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import CreatorHomePage from './pages/CreatorHomePage'
 import CreatorDiscoverPage from './pages/CreatorDiscoverPage'
@@ -24,6 +24,7 @@ import RegisterFormPage from './pages/RegisterFormPage'
 import './App.css'
 import { useContext } from 'react'
 import { AuthContext } from './contexts/AuthContextProvider'
+import axios from './config/axios'
 
 const privateRoutes = [
   {
@@ -47,7 +48,7 @@ const privateRoutes = [
     component: CreatorGroupsPage
   },
   {
-    path: '/create-quiz',
+    path: '/create-quiz/:id',
     component: CreateQuizPage
   },
   {
@@ -103,7 +104,7 @@ const publicRoutes = [
     component: RegisterFormPage
   },
   {
-    path: '/mainpage',
+    path: '/',
     component: Main
   }
 ]
@@ -115,22 +116,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {!isAuthenticated &&
-            privateRoutes.map((el) => {
-              console.log('private el', el)
-              return (
-                <Route
-                  exact
-                  key={el.path}
-                  path={el.path}
-                  component={el.component}
-                />
-              )
-            })}
-
           {isAuthenticated &&
-            publicRoutes.map((el) => {
-              console.log('el', el)
+            privateRoutes.map((el) => {
               return (
                 <Route
                   exact
@@ -141,7 +128,19 @@ function App() {
               )
             })}
 
-          {/* <Redirect to="/" /> */}
+          {!isAuthenticated &&
+            publicRoutes.map((el) => {
+              return (
+                <Route
+                  exact
+                  key={el.path}
+                  path={el.path}
+                  component={el.component}
+                />
+              )
+            })}
+
+          <Redirect to="/" />
         </Switch>
       </BrowserRouter>
     </div>

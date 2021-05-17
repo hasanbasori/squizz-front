@@ -1,13 +1,13 @@
 const tokenName = 'token'
 
-const setToken = (token) => localStorage.setItem(tokenName, token)
+export const setToken = (token) => localStorage.setItem(tokenName, token)
 
-const getToken = () => localStorage.getItem(tokenName)
+export const getToken = () => localStorage.getItem(tokenName)
 
-const clearToken = () => localStorage.removeItem(tokenName);
+export const clearToken = () => localStorage.removeItem(tokenName);
 
-export default {
-    setToken,
-    getToken,
-    clearToken
-}
+// export default {
+//     setToken,
+//     getToken,
+//     clearToken
+// }
