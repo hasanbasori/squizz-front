@@ -55,7 +55,7 @@ function SignupForm({ onSubmitRegister }) {
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <FormControl id="email" {...field} isInvalid={errors.password}>
+            <FormControl id="password" {...field} isInvalid={errors.password}>
               <FormLabel>Password</FormLabel>
               <InputGroup size="md">
                 <Input pr="4.5rem" type={isShowPwd ? 'text' : 'password'} />
@@ -120,12 +120,14 @@ function SignupForm({ onSubmitRegister }) {
       </Button>
       <br />
       <br />
-      <p>
-        Already have an account?
-        <Link style={{ marginLeft: 7, color: 'sienna' }} to="/auth/login">
-          Log in
-        </Link>
-      </p>
+      <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+        <p>
+          Already have an account?
+          <Link style={{ marginLeft: 7, color: 'sienna' }} to="/auth/login">
+            Log in
+          </Link>
+        </p>
+      </div>
     </div>
   )
 }

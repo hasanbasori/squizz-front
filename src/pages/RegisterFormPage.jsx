@@ -34,7 +34,7 @@ function RegisterFormPage() {
   const params = useParams()
   const history = useHistory()
 
-  const { isAuthenticated } = useContext(AuthContext)
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
 
   const isUserTypeEqualStudent =
     params.userType === convertConstantToUrl(STUDENT)
@@ -58,12 +58,11 @@ function RegisterFormPage() {
         password,
         name: userName || 'NO NAME TO SHOW'
       })
-      setToken(data.token)
-
-      history.push('/')
+      setIsAuthenticated(data.token)
     } catch (err) {
-      // console.error('❌ Error', err.data?.response.message)
+      console.error('❌ Error', err.data?.response.message)
       console.error('❌ Error', err)
+      history.push('/')
     } finally {
       console.log('completed')
     }

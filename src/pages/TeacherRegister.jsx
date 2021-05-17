@@ -1,12 +1,13 @@
 import React from 'react'
 import './TeacherRegister.postcss'
 import Layout, { Content, HeaderAuthentication } from '../components/Layout'
+import PlayButton from '../components/PlayButton'
 import { Button } from '@chakra-ui/react'
 import { useHistory, useLocation, Link } from 'react-router-dom'
 import { BsBook } from 'react-icons/bs'
 import { VscHome } from 'react-icons/vsc'
 import { BsPeople, BsGraphUp } from 'react-icons/bs'
-import { workplace } from '../utils/constants'
+import { workplace, socialType } from '../utils/constants'
 import { TEACHER_FORM_PATH } from '../utils/constants'
 
 function TeacherRegister() {
@@ -14,6 +15,7 @@ function TeacherRegister() {
   const location = useLocation()
 
   const { SCHOOL, HIGHER_EDUCATION, SCHOOL_ADMINSTRATION, BUSINESS } = workplace
+  const { OTHER } = socialType
   return (
     <Layout>
       <HeaderAuthentication />
@@ -22,7 +24,13 @@ function TeacherRegister() {
         style={{ height: 'calc(100vh - var(--header-height))' }}
         className="teacher-register-component"
       >
-        <button className="absolute top-5 left-5 bg-red-500">Back</button>
+        <PlayButton
+          htmlType="button"
+          type="secondary"
+          className="absolute top-5 left-5 bg-red-500"
+        >
+          Back
+        </PlayButton>
         <div>
           <h1 className="teacher-type-title">Describe your workplace</h1>
         </div>
@@ -99,9 +107,11 @@ function TeacherRegister() {
           </div>
         </div>
         <br />
-        <div>
-          <Button onClick={() => history.push('/auth/register')}>Other</Button>
-        </div>
+        {/* <div>
+          <Button onClick={() => history.push(`/auth/register/other/form`)}>
+            Other
+          </Button>
+        </div> */}
       </Content>
     </Layout>
   )
