@@ -192,9 +192,7 @@ function CreatorHomePage() {
                       <div
                         className="text-sm text-gray-500 w-full h-4/5 bg-gray-400 flex mb-4 rounded shadow-md hover:cursor-pointer"
                         onClick={() =>
-                          history.push('/each-quiz', {
-                            params: dataSquizz[0].id
-                          })
+                          history.push(`/each-quiz/${dataSquizz[0].id}`)
                         }
                       >
                         <div className="w-2/5 bg-gray-200 rounded-l flex items-end px-4 pb-2">

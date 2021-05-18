@@ -53,7 +53,7 @@ const privateRoutes = [
     component: CreateQuizPage
   },
   {
-    path: '/each-quiz',
+    path: '/each-quiz/:id',
     component: CreatorEachQuizPage
   },
   {

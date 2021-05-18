@@ -17,7 +17,7 @@ import { useDisclosure } from '@chakra-ui/react'
 import computer from '../../pic/computer.jpg'
 import earth from '../../pic/earth.jpg'
 import { CreatorContext } from '../contexts/CreatorContextProvider'
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import axios from '../config/axios'
 
 function PlayModal() {
@@ -77,14 +77,16 @@ function CreatorEachQuizPage() {
   const [ squizz, setSquizz ] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [ error, setError ] = useState('')
-  const location = useLocation();
-  const myParams = location.state.params;
-  console.log(myParams)
+  const { id } = useParams()
+  const history = useHistory()
+  // const location = useLocation();
+  // const myParams = location.state.params;
+  // console.log(myParams)
 
   useEffect(() => {
     const getSquizz = async () => {
       try {
-        const res = await axios.get(`/quiz/each-quiz/${myParams}`)
+        const res = await axios.get(`/quiz/each-quiz/${id}`)
         console.log(res)
         if (res) setSquizz(res.data.quiz)
         setIsLoading(false)
@@ -95,6 +97,10 @@ function CreatorEachQuizPage() {
     getSquizz()
   }, [])
   console.log(squizz)
+
+  const handleEditButton = () => {
+    history.push(`/create-quiz/${id}`)
+  }
 
   if (isLoading) {
     return <p>Loading data</p>
@@ -125,7 +131,7 @@ function CreatorEachQuizPage() {
                 {/* <Button w="25%" mr={4}>
                   Play
                 </Button> */}
-                <Button w="25%">Edit</Button>
+                <Button w="25%" onClick={handleEditButton}>Edit</Button>
               </div>
               <p className="text-left font-bold text-lg mb-6">
                 A private kahoot
@@ -153,8 +159,8 @@ function CreatorEachQuizPage() {
                 <p className="text-left text-lg">1 - {type}</p>
                 <p className="text-left text-lg font-bold">{title}</p>
               </div>
-              <div className="w-1/6 bg-gray-300">
-                <p className="text-right">{timeLimit} sec</p>
+              <div className="w-1/6 bg-gray-300 flex items-end">
+                <p className="px-1 py-0.5 border bg-gray-600 text-white rounded">{timeLimit} sec</p>
               </div>
             </div>
             )}
