@@ -26,6 +26,7 @@ import './App.css'
 import { useContext } from 'react'
 import { AuthContext } from './contexts/AuthContextProvider'
 import axios from './config/axios'
+import TestPlayerContent from './pages/TestPlayerContent'
 
 const privateRoutes = [
   {
@@ -114,7 +115,8 @@ const publicRoutes = [
   {
     path: '/',
     component: Main
-  }
+  },
+  { path: '/test', component: TestPlayerContent }
 ]
 
 function App() {
