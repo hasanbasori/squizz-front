@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom'
 import PlayButton from '../PlayButton'
 import './SignupForm.postcss'
 import { FaMicrosoft, FaApple, FaGoogle } from 'react-icons/fa'
-import Layout, { Content, HeaderAuthentication } from '../Layout'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -12,32 +11,60 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  FormHelperText,
   InputGroup,
   InputRightElement,
   Button,
-  Link as ChakraLink,
-  Divider
+  Checkbox
 } from '@chakra-ui/react'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import Separator from '../Separator'
-import { Link, useParams } from 'react-router-dom'
-import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
-function SignupForm({ onSubmitRegister }) {
+let registerSchema = yup.object().shape({
+  email: yup.string().required().email(),
+  password: yup
+    .string()
+    .required()
+    .matches(
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+      'Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters'
+    )
+})
+
+function SignupForm({ onSubmitRegister, username }) {
+
   const [isShowPwd, setIsShowPwd] = useState(false)
 
   const {
     control,
     handleSubmit,
     formState: { errors }
-  } = useForm()
+  } = useForm({
+    resolver: yupResolver(registerSchema)
+  })
 
   return (
     <div className="form-container p-6 min-h-3/4 rounded-md bg-white">
       <h1 className="form-title">Sign up with your email</h1>
       <br />
       <form onSubmit={handleSubmit(onSubmitRegister)}>
+        <Controller
+          name="username"
+          control={control}
+          defaultValue={username}
+          render={({ field }) => (
+            <FormControl
+              id="username"
+              {...field}
+              isInvalid={errors.username}
+              defaultValue={username}
+            >
+              <FormLabel>Username</FormLabel>
+              <Input disabled={username} defaultValue={username} />
+              <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
+            </FormControl>
+          )}
+        />
         <Controller
           name="email"
           control={control}
@@ -71,6 +98,7 @@ function SignupForm({ onSubmitRegister }) {
                   </Button>
                 </InputRightElement>
               </InputGroup>
+              <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
             </FormControl>
           )}
         />

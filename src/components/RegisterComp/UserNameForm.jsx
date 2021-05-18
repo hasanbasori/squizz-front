@@ -30,7 +30,10 @@ function UserNameForm({ setStep, setUserName }) {
           <Input
             className="w=80%"
             placeholder="Username"
-            onChange={({ target }) => setUserName(target.value)}
+            onChange={({ target }) => {
+              setUserName(target.value)
+              localStorage.setItem('userName', target.value)
+            }}
           />
         </FormControl>
 
@@ -52,7 +55,10 @@ function UserNameForm({ setStep, setUserName }) {
           }}
         >
           <PlayButton
-            onClick={() => setStep(3)}
+            onClick={() => {
+              setStep(3)
+              localStorage.setItem('registerStep', 3)
+            }}
             style={{ margin: 5 }}
             htmlType="button"
             type="primary"

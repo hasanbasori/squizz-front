@@ -128,6 +128,7 @@ function ModalCreate() {
 }
 
 function HeaderCreateQuiz({ style, className, pathName }) {
+  const { setIsAuthenticated } = useContext(AuthContext)
   const history = useHistory()
   const { creator, setCreator } = useContext(CreatorContext)
   const { setIsAuthenticated } = useContext(AuthContext)
@@ -232,7 +233,17 @@ function HeaderCreateQuiz({ style, className, pathName }) {
             <MenuItem icon={<FiHelpCircle />}>Support Center</MenuItem>
             <MenuItem
               icon={<FiLogOut />}
+<<<<<<< HEAD
               onClick={handleLogout}
+=======
+              onClick={() => {
+                setTimeout(() => {
+                  localStorageService.clearToken()
+                  setIsAuthenticated(false)
+                  history.push('/mainpage')
+                })
+              }}
+>>>>>>> d43cbda47e52dd6865ea20170221b21f48826327
             >
               Sign out
             </MenuItem>

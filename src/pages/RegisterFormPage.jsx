@@ -1,9 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import './RegisterFormPage.postcss'
 import Layout, { Content, HeaderAuthentication } from '../components/Layout'
 import { useParams } from 'react-router-dom'
-import { setToken } from '../services/localStorageService'
 
 import {
   SignupForm,
@@ -20,18 +19,38 @@ import {
 import axios from '../config/axios'
 import CreatorHomePage from './CreatorHomePage'
 import { AuthContext } from '../contexts/AuthContextProvider'
+import { setToken } from '../services/localStorageService'
+import { NumberInputStepper } from '@chakra-ui/number-input'
 
 function RegisterFormPage() {
   const { TEACHER, STUDENT, PROFESSIONAL } = uType
   const { FRIENDS_AND_FAMILY, COLLEAGUES_OR_CLIENTS, STUDENTS, OTHER } = sType
 
-  const [step, setStep] = useState(1)
-  const [userType, setUserType] = useState('')
-  const [socialType, setSocialType] = useState('')
-  const [birthDate, setBirthDate] = useState('')
-  const [userName, setUserName] = useState('')
-
   const params = useParams()
+
+  const [step, setStep] = useState(
+    Number(localStorage.getItem('registerStep')) || 1
+  )
+  const [userType, setUserType] = useState(params.userType)
+  const [socialType, setSocialType] = useState(
+    localStorage.getItem('socialType')
+  )
+  const [birthDate, setBirthDate] = useState(
+    new Date(localStorage.getItem('birthDate'))
+  )
+  const [userName, setUserName] = useState(localStorage.getItem('userName'))
+
+  useEffect(() => {
+    // localStorage.removeItem('birthDate')
+    // localStorage.removeItem('userName')
+    // localStorage.removeItem('socialType')
+    // localStorage.removeItem('registerStep')
+
+    return () => {
+      localStorage.setItem('registerStep', step)
+    }
+  }, [])
+
   const history = useHistory()
 
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
@@ -48,7 +67,6 @@ function RegisterFormPage() {
 
   async function handleSubmitRegister(formValues) {
     const birthDateISO = birthDate ? convertDateStringToIso8601(birthDate) : ''
-    console.log('Regis function', formValues, userName, birthDateISO)
     const { email, password } = formValues
     try {
       const { data, status } = await axios.post('/creator/register', {
@@ -58,11 +76,13 @@ function RegisterFormPage() {
         password,
         name: userName || 'NO NAME TO SHOW'
       })
+      localStorage.clear()
+      setToken(data.token)
       setIsAuthenticated(data.token)
+      history.push('/')
     } catch (err) {
       console.error('❌ Error', err.data?.response.message)
       console.error('❌ Error', err)
-      history.push('/')
     } finally {
       console.log('completed')
     }
@@ -75,7 +95,7 @@ function RegisterFormPage() {
     <UserNameForm {...{ setStep, setUserName }} />
   )
   const renderSignUpForm = () => (
-    <SignupForm onSubmitRegister={handleSubmitRegister} />
+    <SignupForm onSubmitRegister={handleSubmitRegister} username={userName} />
   )
 
   if (isAuthenticated) history.push('/')
