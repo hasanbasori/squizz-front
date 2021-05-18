@@ -5,13 +5,16 @@ import './index.css'
 import App from './App'
 import AuthContextProvider from './contexts/AuthContextProvider'
 import CreatorContextProvider from './contexts/CreatorContextProvider'
+import NotiContextProvider from './contexts/NotiContextProvider'
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
       <CreatorContextProvider>
         <ChakraProvider>
-          <App />
+          <NotiContextProvider>
+            <App />
+          </NotiContextProvider>
         </ChakraProvider>
       </CreatorContextProvider>
     </AuthContextProvider>

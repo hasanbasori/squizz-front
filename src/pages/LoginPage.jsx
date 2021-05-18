@@ -17,7 +17,7 @@ import {
   InputRightElement,
   Button,
   Link as LinkChakra,
-  Divider
+  useToast
 } from '@chakra-ui/react'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import Separator from '../components/Separator'
@@ -25,16 +25,21 @@ import { useHistory, Link } from 'react-router-dom'
 import axios from '../config/axios'
 import * as localStorageService from '../services/localStorageService'
 import { AuthContext } from '../contexts/AuthContextProvider'
+import { NotificationContext } from '../contexts/NotiContextProvider'
 
 const loginSchema = yup.object().shape({
-  email: yup.string().required(),
+  emailOrUserName: yup.string().required(),
   password: yup.string().required()
 })
 
 function LoginPage() {
   const [isShowPwd, setIsShowPwd] = useState(false)
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
+
+  const { showNotification } = useContext(NotificationContext)
+
   const history = useHistory()
+  const toast = useToast()
 
   const {
     control,
@@ -43,22 +48,30 @@ function LoginPage() {
   } = useForm({
     resolver: yupResolver(loginSchema)
   })
-
   const handleSubmitLogin = async ({ emailOrUserName, password }) => {
-    console.log(emailOrUserName, password)
     try {
-      const { data } = await axios.post('/creator/login', {
-        username: emailOrUserName,
+      const { data, status } = await axios.post('/creator/login', {
         email: emailOrUserName,
+        username: emailOrUserName,
         password
       })
       localStorageService.setToken(data.token)
-      setIsAuthenticated(true)
-      history.push('/')
+
+      if (status === 200) {
+        setIsAuthenticated(true)
+        showNotification('success', 'Logged in successfully!')
+        history.push('/')
+      }
     } catch (err) {
       console.dir(err)
+
+      const errorMessage = err.response
+        ? err.response.data.message
+        : err.message
+      showNotification('error', errorMessage + '!')
     }
   }
+
   console.log('errors', errors)
   return (
     <Layout>
@@ -72,7 +85,7 @@ function LoginPage() {
           <br />
           <form onSubmit={handleSubmit(handleSubmitLogin)}>
             <Controller
-              name="emailOrUsername"
+              name="emailOrUserName"
               control={control}
               defaultValue=""
               render={({ field }) => (

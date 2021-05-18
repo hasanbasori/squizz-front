@@ -74,7 +74,8 @@ function RegisterFormPage() {
         username: userName || 'NoUsernameToShow',
         email,
         password,
-        name: userName || 'NO NAME TO SHOW'
+        name: userName || 'NO NAME TO SHOW',
+        birthdate: birthDateISO
       })
       localStorage.clear()
       setToken(data.token)
