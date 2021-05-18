@@ -113,27 +113,27 @@ function CreateQuizPage() {
   }, [])
 
   console.log(eachQuiz)
-  console.log('quizName',quizName)
+  // console.log('quizName',quizName)
 
   const handleCreateQuiz = async () => {
     // if (inputQuestion.questionType === 'quiz') {
-      const resQuiz = await axios.put(`/quiz/update-quiz/${id}`, {
-        name: quizName ? quizName : eachQuiz.title,
-        description
-      })
+    const resQuiz = await axios.put(`/quiz/update-quiz/${id}`, {
+      name: quizName ? quizName : eachQuiz.title,
+      description
+    })
 
-      console.log(resQuiz)
+    console.log(resQuiz)
 
-      const responses = await Promise.all(
-        eachQuestion.map((question) => {
-          return  axios.put(`/question/${question.id}`, {
-            ...question
-          })
+    const responses = await Promise.all(
+      eachQuestion.map((question) => {
+        return axios.put(`/question/${question.id}`, {
+          ...question
         })
-      )
+      })
+    )
 
-      console.log('promiseAll', responses)
-      history.push('/my-library/all')
+    console.log('promiseAll', responses)
+    history.push('/my-library/all')
   }
 
   const handleInputQuestion = (e, index, option) => {
@@ -167,13 +167,19 @@ function CreateQuizPage() {
   }
 
   const addQuestion = async () => {
-    await axios.post(`/question/draft-create/${id}`)
-    fetchCreateData()
+    const res = await axios.post(`/question/draft-create/${id}`)
+    const newQuestion = res.data.question
+    setEachQuestion([...eachQuestion, newQuestion])
+    // fetchCreateData()
   }
+
+  console.log(eachQuestion)
 
   const deleteQuestion = async (questionId) => {
     await axios.delete(`/question/${questionId}`)
-    fetchCreateData()
+    const data = eachQuestion.filter((item, index) => item.id !== questionId)
+    setEachQuestion(data)
+    // fetchCreateData()
   }
 
   if (isLoading) {
@@ -196,76 +202,72 @@ function CreateQuizPage() {
         <div className="flex w-full">
           <div className="w-4/5 flex min-h-screen">
             <div className="w-1/6 flex flex-col min-h-screen shadow-md bg-white overflow-y-auto">
-              {eachQuiz
-                ? eachQuiz.Questions.map(
-                    ({ id, title, type, timeLimit }, index) => (
-                      <div
-                        className={`flex flex-col py-3 pr-4 ${
-                          questionIndex === index ? 'bg-small-quiz' : null
-                        }`}
-                        key={index}
-                        onClick={() => setQuestionIndex(index)}
-                      >
-                        <p className="ml-8 mb-1 text-left text-xs font-bold">
-                          {index + 1}
-                          <span className="ml-1">
-                            {type === 'trueOrFalse'
-                              ? 'True or fasle'
-                              : type === 'quiz'
-                              ? 'Quiz'
-                              : type}
-                          </span>
-                        </p>
-                        <div className="flex items-end">
-                          <div className="flex flex-col">
-                            <IconButton
-                              icon={<FiCopy />}
-                              variant="ghost"
-                              borderRadius="full"
-                              size="sm"
-                            ></IconButton>
-                            <IconButton
-                              icon={<FiTrash2 />}
-                              variant="ghost"
-                              borderRadius="full"
-                              size="sm"
-                              onClick={() => deleteQuestion(id)}
-                            ></IconButton>
+              {eachQuestion
+                ? eachQuestion.map(({ id, title, type, timeLimit }, index) => (
+                    <div
+                      className={`flex flex-col py-3 pr-4 ${
+                        questionIndex === index ? 'bg-small-quiz' : null
+                      }`}
+                      key={index}
+                      onClick={() => setQuestionIndex(index)}
+                    >
+                      <p className="ml-8 mb-1 text-left text-xs font-bold">
+                        {index + 1}
+                        <span className="ml-1">
+                          {type === 'trueOrFalse'
+                            ? 'True or fasle'
+                            : type === 'quiz'
+                            ? 'Quiz'
+                            : type}
+                        </span>
+                      </p>
+                      <div className="flex items-end">
+                        <div className="flex flex-col">
+                          <IconButton
+                            icon={<FiCopy />}
+                            variant="ghost"
+                            borderRadius="full"
+                            size="sm"
+                          ></IconButton>
+                          <IconButton
+                            icon={<FiTrash2 />}
+                            variant="ghost"
+                            borderRadius="full"
+                            size="sm"
+                            onClick={() => deleteQuestion(id)}
+                          ></IconButton>
+                        </div>
+                        <div
+                          className={`w-full ${
+                            questionIndex === index ? 'bg-white' : 'bg-gray-50'
+                          } rounded flex flex-col items-center`}
+                        >
+                          <div className="text-sm text-gray-400">
+                            {title && title !== 'draft' ? title : 'Question'}
                           </div>
-                          <div
-                            className={`w-full ${
-                              questionIndex === index
-                                ? 'bg-white'
-                                : 'bg-gray-50'
-                            } rounded flex flex-col items-center`}
-                          >
-                            <div className="text-sm text-gray-400">
-                              {title && title !== 'draft' ? title : 'Question'}
+                          <div className="flex w-full pl-4 my-3 items-center">
+                            <p className="h-1/3 mr-4 rounded-full border px-1.5 py-1 text-xs text-gray-400">
+                              {timeLimit}
+                            </p>
+                            <div className="border-dashed border px-1">
+                              <Icon
+                                as={FiImage}
+                                w={8}
+                                h={5}
+                                color="gray.400"
+                              ></Icon>
                             </div>
-                            <div className="flex w-full pl-4 my-3 items-center">
-                              <p className="h-1/3 mr-4 rounded-full border px-1.5 py-1 text-xs text-gray-400">
-                                {timeLimit}
-                              </p>
-                              <div className="border-dashed border px-1">
-                                <Icon
-                                  as={FiImage}
-                                  w={8}
-                                  h={5}
-                                  color="gray.400"
-                                ></Icon>
-                              </div>
-                            </div>
-                            <div className="flex flex-wrap pl-4">
-                              <div className="border px-7 py-0.5 mr-1.5 mb-1"></div>
-                              <div className="border px-7 py-0.5 mr-1.5 mb-1"></div>
-                              <div className="border px-7 py-0.5 mr-1.5 mb-1"></div>
-                              <div className="border px-7 py-0.5 mr-1.5 mb-1"></div>
-                            </div>
+                          </div>
+                          <div className="flex flex-wrap pl-4">
+                            <div className="border px-7 py-0.5 mr-1.5 mb-1"></div>
+                            <div className="border px-7 py-0.5 mr-1.5 mb-1"></div>
+                            <div className="border px-7 py-0.5 mr-1.5 mb-1"></div>
+                            <div className="border px-7 py-0.5 mr-1.5 mb-1"></div>
                           </div>
                         </div>
                       </div>
-                    )
-                  )
+                    </div>
+                  ))
                 : null}
 
               <div className="flex flex-col items-center mt-4">

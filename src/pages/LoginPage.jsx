@@ -27,7 +27,7 @@ import * as localStorageService from '../services/localStorageService'
 import { AuthContext } from '../contexts/AuthContextProvider'
 
 const loginSchema = yup.object().shape({
-  email: yup.string().required(),
+  emailOrUsername: yup.string().required(),
   password: yup.string().required()
 })
 
@@ -44,12 +44,13 @@ function LoginPage() {
     resolver: yupResolver(loginSchema)
   })
 
-  const handleSubmitLogin = async ({ emailOrUserName, password }) => {
-    console.log(emailOrUserName, password)
+  const handleSubmitLogin = async ({ emailOrUsername, password }) => {
+    console.log('hellooooo')
+    console.log(emailOrUsername, password)
+    console.log('email')
     try {
       const { data } = await axios.post('/creator/login', {
-        username: emailOrUserName,
-        email: emailOrUserName,
+        emailOrUsername,
         password
       })
       localStorageService.setToken(data.token)
@@ -60,7 +61,6 @@ function LoginPage() {
     }
   }
 
-  console.log('Loginnnnnn')
   return (
     <Layout>
       <HeaderAuthentication />
@@ -73,19 +73,19 @@ function LoginPage() {
           <br />
           <form onSubmit={handleSubmit(handleSubmitLogin)}>
             <Controller
-              name="emailOrUserName"
+              name="emailOrUsername"
               control={control}
               defaultValue=""
               render={({ field }) => (
                 <FormControl
-                  id="emailOrUserName"
+                  id="emailOrUsername"
                   {...field}
-                  isInvalid={errors.emailOrUserName}
+                  isInvalid={errors.emailOrUsername}
                 >
                   <FormLabel>Email or Username</FormLabel>
                   <Input />
                   <FormErrorMessage>
-                    {errors.emailOrUserName?.message}
+                    {errors.emailOrUsername?.message}
                   </FormErrorMessage>
                 </FormControl>
               )}
