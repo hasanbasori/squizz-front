@@ -59,8 +59,7 @@ function LoginPage() {
       console.dir(err)
     }
   }
-
-  console.log('Loginnnnnn')
+  console.log('errors', errors)
   return (
     <Layout>
       <HeaderAuthentication />
@@ -73,7 +72,7 @@ function LoginPage() {
           <br />
           <form onSubmit={handleSubmit(handleSubmitLogin)}>
             <Controller
-              name="emailOrUserName"
+              name="emailOrUsername"
               control={control}
               defaultValue=""
               render={({ field }) => (
@@ -95,7 +94,11 @@ function LoginPage() {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <FormControl id="email" {...field} isInvalid={errors.password}>
+                <FormControl
+                  id="password"
+                  {...field}
+                  isInvalid={errors.password}
+                >
                   <FormLabel>Password</FormLabel>
                   <InputGroup size="md">
                     <Input pr="4.5rem" type={isShowPwd ? 'text' : 'password'} />
@@ -163,10 +166,10 @@ function LoginPage() {
           </Button>
           <br />
           <p>
-            Don't have an account?{' '}
-            <LinkChakra className="text-primary-normal">
-              <Link to="/auth/register">Sign up</Link>
-            </LinkChakra>
+            Don't have an account?
+            <Link to="/auth/register">
+              <LinkChakra className="text-primary-normal">Sign up</LinkChakra>
+            </Link>
           </p>
         </div>
       </Content>
