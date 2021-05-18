@@ -115,7 +115,6 @@ function CreatorLibraryAllPage() {
   const getSquizzes = async () => {
     try {
       const res = await axios.get(`/quiz`)
-      console.log('get res quiz', res)
       setDataSquizz(res.data.quiz)
       setIsLoading(false)
     } catch (err) {
@@ -174,9 +173,9 @@ function CreatorLibraryAllPage() {
   }
 
   const handleDeleteButton = async (e, id) => {
+    e.stopPropagation()
     await axios.delete(`/quiz/${id}`)
     getSquizzes()
-    e.stopPropagation()
   }
 
   if (isLoading) {
