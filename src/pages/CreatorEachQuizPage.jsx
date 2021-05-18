@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Layout, { HeaderCreator, Content, Footer } from '../components/Layout'
 // import './CreatorEachQuizPage.postcss'
 import {
@@ -10,11 +10,15 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton
+  ModalCloseButton,
+  Avatar
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import computer from '../../pic/computer.jpg'
 import earth from '../../pic/earth.jpg'
+import { CreatorContext } from '../contexts/CreatorContextProvider'
+import { useLocation } from "react-router-dom";
+import axios from '../config/axios'
 
 function PlayModal() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -69,6 +73,33 @@ function PlayModal() {
 }
 
 function CreatorEachQuizPage() {
+  const { creator, setCreator } = useContext(CreatorContext);
+  const [ squizz, setSquizz ] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  const [ error, setError ] = useState('')
+  const location = useLocation();
+  const myParams = location.state.params;
+  console.log(myParams)
+
+  useEffect(() => {
+    const getSquizz = async () => {
+      try {
+        const res = await axios.get(`/quiz/each-quiz/${myParams}`)
+        console.log(res)
+        if (res) setSquizz(res.data.quiz)
+        setIsLoading(false)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getSquizz()
+  }, [])
+  console.log(squizz)
+
+  if (isLoading) {
+    return <p>Loading data</p>
+  }
+
   return (
     <Layout>
       <HeaderCreator pathName="eachQuiz" />
@@ -77,7 +108,7 @@ function CreatorEachQuizPage() {
           <div className="w-1/4 min-h-screen flex flex-col bg-white shadow-md">
             <div className="h-2/5 bg-gray-200"></div>
             <div className="ml-4 flex flex-col mt-4">
-              <p className="text-left text-2xl font-bold">Quiz title</p>
+              <p className="text-left text-2xl font-bold">{squizz.name}</p>
               <div className="mt-4 flex">
                 <p className="mr-6">
                   <span className="font-bold">0</span> favorites
@@ -100,10 +131,10 @@ function CreatorEachQuizPage() {
                 A private kahoot
               </p>
               <div className="flex items-start">
-                <div className="rounded-full w-1/6 h-full bg-gray-400 mr-2"></div>
+                <Avatar mr={2}></Avatar>
                 <div className="flex flex-col text-left">
-                  <p>Username Creator</p>
-                  <p>Created At</p>
+                  <p>{creator.username}</p>
+                  <p>{creator.createdAt}</p>
                 </div>
               </div>
             </div>
@@ -112,19 +143,21 @@ function CreatorEachQuizPage() {
           <div className="w-3/4 px-8 pt-6">
             <div className="flex justify-between mb-6">
               <p className="text-lg font-bold">
-                Questions <span>(1)</span>
+                Questions <span>({squizz.Questions.length})</span>
               </p>
               <p className="underline text-lg font-bold">Show answers</p>
             </div>
-            <div className="w-full bg-white h-1/6 rounded flex justify-between">
+            {squizz.Questions.map(( {title, type, timeLimit} ) => 
+            <div className="w-full bg-white h-1/6 rounded flex justify-between mb-4">
               <div className="flex flex-col pl-2 pt-3">
-                <p className="text-left text-lg">1 - Quiz</p>
-                <p className="text-left text-lg font-bold">test</p>
+                <p className="text-left text-lg">1 - {type}</p>
+                <p className="text-left text-lg font-bold">{title}</p>
               </div>
               <div className="w-1/6 bg-gray-300">
-                <p className="text-right">20 sec</p>
+                <p className="text-right">{timeLimit} sec</p>
               </div>
             </div>
+            )}
           </div>
         </div>
       </Content>

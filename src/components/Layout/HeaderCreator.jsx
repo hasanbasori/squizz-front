@@ -22,7 +22,8 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton
+  ModalCloseButton,
+  Avatar
 } from '@chakra-ui/react'
 import {
   FiUser,
@@ -38,11 +39,19 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import quiz from '../../../pic/quiz.png'
 import * as localStorageService from '../../services/localStorageService'
+import { CreatorContext } from '../../contexts/CreatorContextProvider'
+import axios from '../../config/axios'
 import { useHistory } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContextProvider'
 
 function ModalCreate() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const history = useHistory()
+
+  const handleCreateDraftQuiz = async () => {
+    const res = await axios.post('/quiz/create')
+    history.push(`/create-quiz/${res.data.quiz.id}`)
+  }
 
   return (
     <>
@@ -74,12 +83,13 @@ function ModalCreate() {
             <div className="rounded py-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
               <p className="mb-8 text-2xl font-bold">New squizz</p>
               <img src={quiz} alt="" className="w-2/3 mb-4" />
-              <a
+              <button
+                onClick={handleCreateDraftQuiz}
                 href="/create-quiz"
                 className="h-full px-6 py-1 bg-green-500 text-white rounded"
               >
                 Create
-              </a>
+              </button>
               {/* h="100%" px={6} py={1.5} bgColor="#26890c" color="white" */}
             </div>
             <div className="rounded pb-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
@@ -120,8 +130,8 @@ function ModalCreate() {
 function HeaderCreateQuiz({ style, className, pathName }) {
   const { setIsAuthenticated } = useContext(AuthContext)
   const history = useHistory()
-  const noSelectNavbar =
-    'border-transparent border-b-4 hover:border-b-4 hover:text-red-700 hover:border-red-700'
+  const { creator, setCreator } = useContext(CreatorContext);
+  const noSelectNavbar = 'border-transparent border-b-4 hover:border-b-4 hover:text-red-700 hover:border-red-700'
 
   const menusDetail = [
     {
@@ -185,8 +195,8 @@ function HeaderCreateQuiz({ style, className, pathName }) {
           </a>
         ))}
       </div>
-
-      <div className="w-3/6 gap-4 flex flex-row items-end justify-end">
+      
+      <div className="w-3/6 gap-4 flex flex-row items-center justify-end">
         <Button
           variant="ghost"
           border="1px solid"
@@ -200,17 +210,15 @@ function HeaderCreateQuiz({ style, className, pathName }) {
 
         <Menu>
           <MenuButton
-            as={IconButton}
+            as={Avatar}
             aria-label="Options"
-            icon={<FiUser />}
-            variant="ghost"
             bgColor="#1368ce"
             color="white"
-            borderRadius="full"
+            size="sm"
           />
           <MenuList py={0}>
             <MenuItem bgColor="#f2f2f2">
-              <a href="/profiles">Creator Username</a>
+              <a href="/profiles">{creator.username}</a>
             </MenuItem>
             <MenuItem icon={<FiSettings />}>Setting</MenuItem>
             <MenuItem>Profile Setting</MenuItem>

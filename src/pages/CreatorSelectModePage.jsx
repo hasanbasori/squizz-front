@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Layout, { HeaderCreator, Content, Footer } from '../components/Layout'
 import './CreatorSelectModePage.postcss'
 import { Button, Icon, Switch } from '@chakra-ui/react'
 import { FiGlobe, FiChevronsLeft, FiChevronsDown } from 'react-icons/fi'
+import { CreatorContext } from '../contexts/CreatorContextProvider'
 
 function CreatorSelectModePage() {
+  const { creator, setCreator } = useContext(CreatorContext);
   const [isOpenGameOption, setIsOpenGameOption] = useState(true)
   const toggleGameOption = () => {
     setIsOpenGameOption((prev) => !prev)
@@ -60,7 +62,7 @@ function CreatorSelectModePage() {
           <p className="ml-1 font-bold">EN</p>
         </div>
         <p className="rounded-full bg-white font-bold py-1.5 px-1.5">
-          Creator Username
+          {creator.username}
         </p>
       </div>
       <Content className="background-select-page ">

@@ -33,3 +33,15 @@ export const setAuthError = (errMessage) => {
 export const getAuthError = () => {
   return localStorage.getItem(AUTH_ERROR)
 }
+
+// export const setToken = (token) => localStorage.setItem(tokenName, token)
+
+// export const getToken = () => localStorage.getItem(tokenName)
+
+// export const clearToken = () => localStorage.removeItem(tokenName);
+
+// export default {
+//     setToken,
+//     getToken,
+//     clearToken
+// }

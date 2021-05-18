@@ -1,13 +1,61 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Layout, { HeaderCreator, Content, Footer } from '../components/Layout'
-import { Input, Button, IconButton, Select } from '@chakra-ui/react'
-import { FiMenu, FiLayers, FiFolder, FiPlus, FiFolderPlus, FiShare2 } from 'react-icons/fi'
+import { Input, Button, IconButton, Select, Checkbox } from '@chakra-ui/react'
+import {
+  FiMenu,
+  FiLayers,
+  FiFolder,
+  FiPlus,
+  FiFolderPlus,
+  FiShare2,
+  FiStar,
+  FiMoreVertical
+} from 'react-icons/fi'
 import { VscGrabber, VscMenu } from 'react-icons/vsc'
 import { borderColor } from 'styled-system'
+import { CreatorContext } from '../contexts/CreatorContextProvider'
+import axios from '../config/axios'
+import { useHistory } from 'react-router-dom'
 
 function CreatorLibraryAllPage() {
   const [isCollections, setIsCollections] = useState(false)
   const [isUsernameFolder, setIsUsernameFolder] = useState(false)
+  const { creator, setCreator } = useContext(CreatorContext)
+  const [dataSquizz, setDataSquizz] = useState([])
+  const [error, setError] = useState('')
+  const history = useHistory()
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const getSquizzes = async () => {
+      try {
+        const res = await axios.get(`/quiz`)
+        console.log(res)
+        setDataSquizz(res.data.quiz)
+        setIsLoading(false)
+      } catch (err) {
+        setError(err.response.data.message)
+      }
+    }
+    getSquizzes()
+  }, [])
+  // console.log(dataSquizz)
+
+  // const quizCreatedAt = new Date(dataSquizz.quiz[0].createdAt)
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ]
 
   const handleOpenCollections = () => {
     setIsCollections(true)
@@ -24,9 +72,23 @@ function CreatorLibraryAllPage() {
     setIsUsernameFolder(true)
   }
 
+  const handleEditButton = (e) => {
+    alert('edit')
+    e.stopPropagation()
+  }
+
+  const handlePlayButton = (e) => {
+    alert('play')
+    e.stopPropagation()
+  }
+
+  if (isLoading) {
+    return <p>data is loading</p>
+  }
+
   return (
     <Layout>
-      <HeaderCreator pathName="library"/>
+      <HeaderCreator pathName="library" />
       <Content>
         <div className="flex">
           <div className="shadow-md bg-gray-50 pt-8 pb-40 min-h-screen">
@@ -77,28 +139,32 @@ function CreatorLibraryAllPage() {
             {isCollections === false && isUsernameFolder === true ? (
               <a
                 href="#"
-                className="text-left flex items-center pl-6 py-2 my-1 bg-gray-200 text-red-700 hover:bg-gray-200 hover:text-red-700"
+                className="text-left flex items-center justify-between pl-6 pr-2 py-2 my-1 bg-gray-200 text-red-700 hover:bg-gray-200 hover:text-red-700"
                 onClick={handleOpenFolder}
               >
-                <FiFolder />
-                <p className="pl-2 pr-6 font-bold">Creator Username</p>
+                <div className="pr-6 flex items-center">
+                  <FiFolder />
+                  <p className="font-bold ml-2">{creator.name}</p>
+                </div>
                 <FiPlus />
               </a>
             ) : (
               <a
                 href="#"
-                className="text-left flex items-center pl-6 py-2 my-1 hover:bg-gray-200 hover:text-red-700"
+                className="text-left flex items-center justify-between pl-6 pr-2 py-2 my-1 hover:bg-gray-200 hover:text-red-700"
                 onClick={handleOpenFolder}
               >
-                <FiFolder />
-                <p className="pl-2 pr-6 font-bold">Creator Username</p>
+                <div className="pr-6 flex items-center">
+                  <FiFolder />
+                  <p className="font-bold ml-2">{creator.name}</p>
+                </div>
                 <FiPlus />
               </a>
             )}
           </div>
 
           {!isCollections && !isUsernameFolder && (
-            <div className="w-full px-8 pt-8 flex flex-col">
+            <div className="w-full px-8 pt-8 pb-4 flex flex-col">
               <div className="flex justify-between items-center mb-6">
                 <div className="flex w-4/6">
                   <a
@@ -140,20 +206,83 @@ function CreatorLibraryAllPage() {
                   <IconButton icon={<VscMenu />} variant="ghost" />
                 </div>
               </div>
-
-              <div className="w-full p-32 border-dashed border-2 border-gray-400 rounded flex flex-col items-center">
-                <img src="" alt="" />
-                <p className="mb-4">
-                  It looks very empty in here, go ahead and create a squizz.
-                </p>
-                <Button
-                  bgColor="#1368ce"
-                  color="white"
-                  _hover={{ bgColor: '#135bb0' }}
-                >
-                  Create Squizz
-                </Button>
-              </div>
+              {dataSquizz ? (
+                dataSquizz.map(
+                  ({ id, name, createdDate, Questions }, index) => (
+                    <div
+                      className="flex w-full h-1/6 border-2 shadow-md bg-white mb-2"
+                      onClick={() => history.push('/each-quiz', { params: id })}
+                      key={index}
+                    >
+                      <div className="w-2/12 h-full flex items-end p-0.5">
+                        {/* <p className="h-1/2 ml-2 mr-4">CB</p> */}
+                        <Checkbox h="100%" ml={2} mr={4}></Checkbox>
+                        <div className="bg-gray-300 w-full h-full flex items-end">
+                          <p className="text-right ml-16 mb-2 p-1 bg-gray-500 rounded text-white">
+                            {Questions.length} Questions
+                          </p>
+                        </div>
+                      </div>
+                      <div className="w-10/12 flex flex-col justify-between pt-3 pb-0.5 ">
+                        <div className="flex justify-between pl-3 pr-2">
+                          <p className="font-bold text-xl">{name}</p>
+                          <div className="flex items-center">
+                            <IconButton
+                              icon={<FiStar />}
+                              variant="ghost"
+                              _hover={{ outline: 'none' }}
+                              size="lg"
+                              mr={2}
+                            />
+                            <IconButton
+                              icon={<FiMoreVertical />}
+                              variant="ghost"
+                              _hover={{ outline: 'none' }}
+                            />
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center w-full bg-gray-100 h-2/5">
+                          <p className="ml-2">{creator.username}</p>
+                          <div className="flex items-center justify-evenly w-1/3 py-1.5">
+                            <p>
+                              Created {createdDate}
+                              {/* {`${
+                            months[createdAt.getMonth()]
+                          } ${createdAt.getDate()}, ${createdAt.getFullYear()}`} */}
+                            </p>
+                            <button
+                              className="px-4 py-1 border bg-blue-600 rounded text-white text-sm font-bold"
+                              onClick={handleEditButton}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="px-4 py-1 border bg-green-600 rounded text-white text-sm font-bold"
+                              onClick={handlePlayButton}
+                            >
+                              Play
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                )
+              ) : (
+                <div className="w-full p-32 border-dashed border-2 border-gray-400 rounded flex flex-col items-center">
+                  <img src="" alt="" />
+                  <p className="mb-4">
+                    It looks very empty in here, go ahead and create a squizz.
+                  </p>
+                  <Button
+                    bgColor="#1368ce"
+                    color="white"
+                    _hover={{ bgColor: '#135bb0' }}
+                  >
+                    Create Squizz
+                  </Button>
+                </div>
+              )}
             </div>
           )}
 
@@ -173,20 +302,19 @@ function CreatorLibraryAllPage() {
           )}
 
           {!isCollections && isUsernameFolder && (
-            <div className="w-full px-8 pt-8 flex flex-col">
+            <div className="w-full px-8 pt-8 flex flex-col pb-4">
               <div className="flex justify-between items-center mb-6">
                 <div className="flex w-4/6">
                   <a
                     href="#"
                     className="py-1 text-sm font-bold text-gray-700 hover:underline"
                   >
-                    Creator Username
+                    {creator.name}
                   </a>
-                  
                 </div>
 
-                <div className='flex'>
-                  <Select bgColor='white'>
+                <div className="flex">
+                  <Select bgColor="white">
                     <option value="mostRecent">Most Recent</option>
                     <option value="oldest">Oldest</option>
                     <option value="nameA-Z">Name (a-z)</option>
@@ -199,19 +327,78 @@ function CreatorLibraryAllPage() {
                 </div>
               </div>
 
-              <div className="w-full p-32 border-dashed border-2 border-gray-400 rounded flex flex-col items-center">
-                <img src="" alt="" />
-                <p className="mb-4">
-                  It looks very empty in here, go ahead and create a squizz.
-                </p>
-                <Button
-                  bgColor="#1368ce"
-                  color="white"
-                  _hover={{ bgColor: '#135bb0' }}
-                >
-                  Create Squizz
-                </Button>
-              </div>
+              {dataSquizz ? (
+                dataSquizz.map(
+                  ({ id, name, createdDate, Questions }, index) => (
+                    <div
+                      className="flex w-full h-1/6 border-2 shadow-md bg-white mb-2"
+                      onClick={() => history.push('/each-quiz', { params: id })}
+                      key={index}
+                    >
+                      <div className="w-2/12 h-full flex items-end p-0.5">
+                        {/* <p className="h-1/2 ml-2 mr-4">CB</p> */}
+                        <Checkbox h="100%" ml={2} mr={4}></Checkbox>
+                        <div className="bg-gray-300 w-full h-full flex items-end">
+                          <p className="text-right ml-16 mb-2 p-1 bg-gray-500 rounded text-white">
+                            {Questions.length} Questions
+                          </p>
+                        </div>
+                      </div>
+                      <div className="w-10/12 flex flex-col justify-between pt-3 pb-0.5 ">
+                        <div className="flex justify-between pl-3 pr-2">
+                          <p className="font-bold text-xl">{name}</p>
+                          <div className="flex items-center">
+                            <IconButton
+                              icon={<FiStar />}
+                              variant="ghost"
+                              _hover={{ outline: 'none' }}
+                              size="lg"
+                              mr={2}
+                            />
+                            <IconButton
+                              icon={<FiMoreVertical />}
+                              variant="ghost"
+                              _hover={{ outline: 'none' }}
+                            />
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center w-full bg-gray-100 h-2/5">
+                          <p className="ml-2">{creator.username}</p>
+                          <div className="flex items-center justify-evenly w-1/3 py-1.5">
+                            <p>Created {createdDate}</p>
+                            <button
+                              className="px-4 py-1 border bg-blue-600 rounded text-white text-sm font-bold"
+                              onClick={handleEditButton}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="px-4 py-1 border bg-green-600 rounded text-white text-sm font-bold"
+                              onClick={handlePlayButton}
+                            >
+                              Play
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                )
+              ) : (
+                <div className="w-full p-32 border-dashed border-2 border-gray-400 rounded flex flex-col items-center">
+                  <img src="" alt="" />
+                  <p className="mb-4">
+                    It looks very empty in here, go ahead and create a squizz.
+                  </p>
+                  <Button
+                    bgColor="#1368ce"
+                    color="white"
+                    _hover={{ bgColor: '#135bb0' }}
+                  >
+                    Create Squizz
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </div>
