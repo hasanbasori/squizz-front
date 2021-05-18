@@ -1,6 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Layout, { HeaderCreator, Content, Footer } from '../components/Layout'
-import { Input, Button, IconButton, Select, Checkbox } from '@chakra-ui/react'
+import {
+  Input,
+  Button,
+  IconButton,
+  Select,
+  Checkbox,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  MenuCommand,
+  MenuDivider,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton
+} from '@chakra-ui/react'
 import {
   FiMenu,
   FiLayers,
@@ -9,13 +32,76 @@ import {
   FiFolderPlus,
   FiShare2,
   FiStar,
-  FiMoreVertical
+  FiMoreVertical,
+  FiTrash2,
+  FiEdit3
 } from 'react-icons/fi'
 import { VscGrabber, VscMenu } from 'react-icons/vsc'
 import { borderColor } from 'styled-system'
 import { CreatorContext } from '../contexts/CreatorContextProvider'
 import axios from '../config/axios'
 import { useHistory } from 'react-router-dom'
+import { useDisclosure } from '@chakra-ui/react'
+import computer from '../../pic/computer.jpg'
+import earth from '../../pic/earth.jpg'
+
+function PlayModal() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <button
+        onClick={(e) => {
+          onOpen()
+          e.stopPropagation()
+        }}
+        className="px-4 py-1 border bg-green-600 rounded text-white text-sm font-bold"
+      >
+        Play
+      </button>
+
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Choose a way to play this squizz</ModalHeader>
+          <ModalBody>
+            <div className="flex mx-6 justify-between">
+              <div className="bg-gray-200 w-2/5 py-6 flex flex-col justify-between">
+                <img src={computer} alt="" />
+                <a
+                  href="/select-game-mode"
+                  className="mx-auto w-2/3 py-2 text-center text-white bg-green-800 rounded"
+                >
+                  Host
+                </a>
+              </div>
+              <div className="bg-gray-200 w-2/5 py-6 flex flex-col justify-between">
+                <img src={earth} alt="" />
+                <a
+                  href="#"
+                  className="mx-auto w-2/3 py-2 text-center text-white bg-green-800 rounded"
+                >
+                  Challenge
+                </a>
+              </div>
+            </div>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              colorScheme="blue"
+              mx="auto"
+              bgColor="#f2f2f2"
+              color="black"
+              onClick={onClose}
+            >
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  )
+}
 
 function CreatorLibraryAllPage() {
   const [isCollections, setIsCollections] = useState(false)
@@ -26,17 +112,17 @@ function CreatorLibraryAllPage() {
   const history = useHistory()
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    const getSquizzes = async () => {
-      try {
-        const res = await axios.get(`/quiz`)
-        console.log(res)
-        setDataSquizz(res.data.quiz)
-        setIsLoading(false)
-      } catch (err) {
-        setError(err.response.data.message)
-      }
+  const getSquizzes = async () => {
+    try {
+      const res = await axios.get(`/quiz`)
+      setDataSquizz(res.data.quiz)
+      setIsLoading(false)
+    } catch (err) {
+      setError(err.response.data.message)
     }
+  }
+
+  useEffect(() => {
     getSquizzes()
   }, [])
   // console.log(dataSquizz)
@@ -72,14 +158,24 @@ function CreatorLibraryAllPage() {
     setIsUsernameFolder(true)
   }
 
-  const handleEditButton = (e) => {
-    alert('edit')
+  const handleEditButton = (e, id) => {
+    history.push(`/create-quiz/${id}`)
     e.stopPropagation()
   }
 
   const handlePlayButton = (e) => {
     alert('play')
     e.stopPropagation()
+  }
+
+  const handleMoreButton = (e) => {
+    e.stopPropagation()
+  }
+
+  const handleDeleteButton = async (e, id) => {
+    e.stopPropagation()
+    await axios.delete(`/quiz/${id}`)
+    getSquizzes()
   }
 
   if (isLoading) {
@@ -211,7 +307,7 @@ function CreatorLibraryAllPage() {
                   ({ id, name, createdDate, Questions }, index) => (
                     <div
                       className="flex w-full h-1/6 border-2 shadow-md bg-white mb-2"
-                      onClick={() => history.push('/each-quiz', { params: id })}
+                      onClick={() => history.push(`/each-quiz/${id}`)}
                       key={index}
                     >
                       <div className="w-2/12 h-full flex items-end p-0.5">
@@ -234,11 +330,30 @@ function CreatorLibraryAllPage() {
                               size="lg"
                               mr={2}
                             />
-                            <IconButton
-                              icon={<FiMoreVertical />}
-                              variant="ghost"
-                              _hover={{ outline: 'none' }}
-                            />
+                            <Menu>
+                              <MenuButton
+                                as={IconButton}
+                                aria-label="Options"
+                                icon={<FiMoreVertical />}
+                                variant="ghost"
+                                _hover={{ outline: 'none' }}
+                                onClick={handleMoreButton}
+                              />
+                              <MenuList>
+                                <MenuItem
+                                  icon={<FiEdit3 />}
+                                  onClick={(e) => handleEditButton(e, id)}
+                                >
+                                  Edit
+                                </MenuItem>
+                                <MenuItem
+                                  icon={<FiTrash2 />}
+                                  onClick={(e) => handleDeleteButton(e, id)}
+                                >
+                                  Delete
+                                </MenuItem>
+                              </MenuList>
+                            </Menu>
                           </div>
                         </div>
                         <div className="flex justify-between items-center w-full bg-gray-100 h-2/5">
@@ -252,16 +367,18 @@ function CreatorLibraryAllPage() {
                             </p>
                             <button
                               className="px-4 py-1 border bg-blue-600 rounded text-white text-sm font-bold"
-                              onClick={handleEditButton}
+                              onClick={(e) => handleEditButton(e, id)}
                             >
                               Edit
                             </button>
-                            <button
+
+                            <PlayModal />
+                            {/* <button
                               className="px-4 py-1 border bg-green-600 rounded text-white text-sm font-bold"
                               onClick={handlePlayButton}
                             >
                               Play
-                            </button>
+                            </button> */}
                           </div>
                         </div>
                       </div>
@@ -332,7 +449,7 @@ function CreatorLibraryAllPage() {
                   ({ id, name, createdDate, Questions }, index) => (
                     <div
                       className="flex w-full h-1/6 border-2 shadow-md bg-white mb-2"
-                      onClick={() => history.push('/each-quiz', { params: id })}
+                      onClick={() => history.push(`/each-quiz/${id}`)}
                       key={index}
                     >
                       <div className="w-2/12 h-full flex items-end p-0.5">
@@ -355,11 +472,35 @@ function CreatorLibraryAllPage() {
                               size="lg"
                               mr={2}
                             />
-                            <IconButton
+                            {/* <IconButton
                               icon={<FiMoreVertical />}
                               variant="ghost"
                               _hover={{ outline: 'none' }}
-                            />
+                            /> */}
+                            <Menu>
+                              <MenuButton
+                                as={IconButton}
+                                aria-label="Options"
+                                icon={<FiMoreVertical />}
+                                variant="ghost"
+                                _hover={{ outline: 'none' }}
+                                onClick={handleMoreButton}
+                              />
+                              <MenuList>
+                                <MenuItem
+                                  icon={<FiEdit3 />}
+                                  onClick={(e) => handleEditButton(e, id)}
+                                >
+                                  Edit
+                                </MenuItem>
+                                <MenuItem
+                                  icon={<FiTrash2 />}
+                                  onClick={(e) => handleDeleteButton(e, id)}
+                                >
+                                  Delete
+                                </MenuItem>
+                              </MenuList>
+                            </Menu>
                           </div>
                         </div>
                         <div className="flex justify-between items-center w-full bg-gray-100 h-2/5">
@@ -368,16 +509,17 @@ function CreatorLibraryAllPage() {
                             <p>Created {createdDate}</p>
                             <button
                               className="px-4 py-1 border bg-blue-600 rounded text-white text-sm font-bold"
-                              onClick={handleEditButton}
+                              onClick={(e) => handleEditButton(e, id)}
                             >
                               Edit
                             </button>
-                            <button
+                            <PlayModal />
+                            {/* <button
                               className="px-4 py-1 border bg-green-600 rounded text-white text-sm font-bold"
                               onClick={handlePlayButton}
                             >
                               Play
-                            </button>
+                            </button> */}
                           </div>
                         </div>
                       </div>

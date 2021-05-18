@@ -50,7 +50,8 @@ function LoginPage() {
   })
   const handleSubmitLogin = async ({ emailOrUserName, password }) => {
     try {
-      const { data, status } = await axios.post('/creator/login', {
+      const { data } = await axios.post('/creator/login', {
+        emailOrUsername,
         email: emailOrUserName,
         username: emailOrUserName,
         password
@@ -72,7 +73,6 @@ function LoginPage() {
     }
   }
 
-  console.log('errors', errors)
   return (
     <Layout>
       <HeaderAuthentication />
@@ -85,19 +85,19 @@ function LoginPage() {
           <br />
           <form onSubmit={handleSubmit(handleSubmitLogin)}>
             <Controller
-              name="emailOrUserName"
+              name="emailOrUsername"
               control={control}
               defaultValue=""
               render={({ field }) => (
                 <FormControl
-                  id="emailOrUserName"
+                  id="emailOrUsername"
                   {...field}
-                  isInvalid={errors.emailOrUserName}
+                  isInvalid={errors.emailOrUsername}
                 >
                   <FormLabel>Email or Username</FormLabel>
                   <Input />
                   <FormErrorMessage>
-                    {errors.emailOrUserName?.message}
+                    {errors.emailOrUsername?.message}
                   </FormErrorMessage>
                 </FormControl>
               )}

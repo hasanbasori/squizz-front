@@ -5,38 +5,209 @@ import {
   Box,
   Button,
   Text,
+  Icon,
+  Input,
   Tabs,
   TabList,
   TabPanels,
   Tab,
   TabPanel,
-  outline
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton
 } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
 import { CreatorContext } from '../contexts/CreatorContextProvider'
 import axios from '../config/axios'
+import { useDisclosure } from '@chakra-ui/react'
+import { FiPlus } from 'react-icons/fi'
+import quiz from '../../pic/quiz.png'
+
+function ChangeNameModal({ creatorName, setCreatorName, handleChangeName }) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <div
+        onClick={onOpen}
+        className="w-1/3 flex items-center px-1 py-1 border bg-gray-50 rounded font-bold"
+      >
+        <Icon as={FiPlus} />
+        <p className="text-xs">Add name</p>
+      </div>
+
+      <Modal isOpen={isOpen} onClose={onClose} size="xs">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Name</ModalHeader>
+          <ModalBody>
+            <div className="flex mx-6 justify-between">
+              <Input
+                value={creatorName}
+                onChange={(e) => setCreatorName(e.target.value)}
+              ></Input>
+            </div>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              colorScheme="blue"
+              mx="auto"
+              bgColor="#f2f2f2"
+              color="black"
+              onClick={onClose}
+            >
+              Close
+            </Button>
+            <Button
+              colorScheme="blue"
+              mx="auto"
+              bgColor="#f2f2f2"
+              color="black"
+              onClick={() => {
+                handleChangeName()
+                onClose()
+              }}
+            >
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  )
+}
+
+function ModalCreate() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const history = useHistory()
+
+  const handleCreateDraftQuiz = async () => {
+    const res = await axios.post('/quiz/create')
+    history.push(`/create-quiz/${res.data.quiz.id}`)
+  }
+
+  return (
+    <>
+      <Button
+        onClick={onOpen}
+        py={1}
+        px={4}
+        h={8}
+        bgColor="#1368ce"
+        color="white"
+        borderBottom="4px"
+        borderColor="blue.800"
+        _hover={{
+          borderColor: 'blue.800',
+          bgColor: '#1260be'
+        }}
+      >
+        Create
+      </Button>
+
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader fontSize="2xl" fontWeight="700">
+            Create a new squizz
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody bgColor="#f2f2f2" pt={8} pb={60} px={6} display="flex">
+            <div className="rounded py-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
+              <p className="mb-8 text-2xl font-bold">New squizz</p>
+              <img src={quiz} alt="" className="w-2/3 mb-4" />
+              <button
+                onClick={handleCreateDraftQuiz}
+                href="/create-quiz"
+                className="h-full px-6 py-1 bg-green-500 text-white rounded"
+              >
+                Create
+              </button>
+              {/* h="100%" px={6} py={1.5} bgColor="#26890c" color="white" */}
+            </div>
+            <div className="rounded pb-4 w-1/3 bg-white shadow-md mr-3 flex flex-col items-center">
+              <div className="mb-8 text-2xl font-bold h-2/3 w-full bg-gray-300 rounded-t">
+                <p className="ml-2 rounded-b-2xl border bg-white w-2/5 text-sm text-center">
+                  Template 1
+                </p>
+              </div>
+              <img src="" alt="" />
+              <p className="ml-2 w-full text-lg text-left">
+                Topic template quiz
+              </p>
+            </div>
+            <div className="rounded pb-4 w-1/3 bg-white shadow-md flex flex-col items-center">
+              <div className="mb-8 text-2xl font-bold h-2/3 w-full bg-gray-300 rounded-t">
+                <p className="ml-2 rounded-b-2xl border bg-white w-2/5 text-sm text-center">
+                  Template 2
+                </p>
+              </div>
+              <img src="" alt="" />
+              <p className="ml-2 w-full text-lg text-left">
+                Topic template quiz
+              </p>
+            </div>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button bgColor="#f2f2f2" mx="auto" onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  )
+}
 
 function CreatorHomePage() {
   const { creator, setCreator } = useContext(CreatorContext)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [dataCreator, setDataCreator] = useState('')
   const [dataSquizz, setDataSquizz] = useState([])
+  const [creatorName, setCreatorName] = useState('')
   const history = useHistory()
 
-  useEffect(() => {
-    const getSquizzes = async () => {
-      try {
-        const res = await axios.get(`/quiz`)
-        console.log(res)
-        if (res) setDataSquizz(res.data.quiz)
-        setIsLoading(false)
-      } catch (err) {
-        console.log(err)
-      }
+  const fetchSquizzes = async () => {
+    try {
+      const res = await axios.get(`/quiz`)
+      console.log(res)
+      if (res) setDataSquizz(res.data.quiz)
+      setIsLoading(false)
+    } catch (err) {
+      console.log(err)
     }
-    getSquizzes()
+  }
+  console.log(creatorName)
+  console.log(creator)
+
+  const fetchCreator = async () => {
+    try {
+      const res = await axios.get(`/creator`)
+      console.log(res.data)
+      setDataCreator(res.data.creators)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  console.log(dataCreator.name)
+
+  useEffect(() => {
+    fetchSquizzes()
+    fetchCreator()
   }, [])
   // console.log(dataSquizz)
+
+  const handleChangeName = async () => {
+    await axios.put(`/creator/${creator.id}`, { name: creatorName })
+    fetchCreator()
+  }
 
   if (isLoading) {
     return <p>Loading data</p>
@@ -50,8 +221,16 @@ function CreatorHomePage() {
           <div className="w-full sm:w-1/3 lg:w-3/12">
             <div className="content-box py-4 mb-4 ">
               <div className="px-6 mb-4">
-                <p className="text-lg font-bold">{creator.name}</p>
-                <p className="text-xs font-bold text-gray-500">
+                {dataCreator.name ? (
+                  <p className="text-lg font-bold">{dataCreator.name}</p>
+                ) : (
+                  <ChangeNameModal
+                    creatorName={creatorName}
+                    setCreatorName={setCreatorName}
+                    handleChangeName={handleChangeName}
+                  />
+                )}
+                <p className="text-xs font-bold text-gray-500 mt-1">
                   {creator.username}
                 </p>
               </div>
@@ -192,9 +371,7 @@ function CreatorHomePage() {
                       <div
                         className="text-sm text-gray-500 w-full h-4/5 bg-gray-400 flex mb-4 rounded shadow-md hover:cursor-pointer"
                         onClick={() =>
-                          history.push('/each-quiz', {
-                            params: dataSquizz[0].id
-                          })
+                          history.push(`/each-quiz/${dataSquizz[0].id}`)
                         }
                       >
                         <div className="w-2/5 bg-gray-200 rounded-l flex items-end px-4 pb-2">
@@ -236,7 +413,7 @@ function CreatorHomePage() {
                       <p className="text-sm text-gray-500 mb-4">
                         one of our templates.
                       </p>
-                      <Button
+                      {/* <Button
                         fontSize="sm"
                         bgColor="#1368ce"
                         color="white"
@@ -244,7 +421,8 @@ function CreatorHomePage() {
                         h={7}
                       >
                         Create Squizz
-                      </Button>
+                      </Button> */}
+                      <ModalCreate />
                     </TabPanel>
                   )}
                   <TabPanel

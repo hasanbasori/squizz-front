@@ -72,7 +72,13 @@ function ChangeFolderModal() {
   )
 }
 
-function SettingModal({ quizName, setQuizName, description, setDescription }) {
+function SettingModal({
+  eachQuiz,
+  quizName,
+  setQuizName,
+  description,
+  setDescription
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleCancel = () => {
     onClose()
@@ -85,7 +91,13 @@ function SettingModal({ quizName, setQuizName, description, setDescription }) {
         className="flex items-center justify-between p-1 border-2 rounded w-2/5 ml-6"
         onClick={onOpen}
       >
-        <p className="pl-1">{quizName ? quizName : 'Enter squiz title...'}</p>
+        <p className="pl-1">
+          {quizName
+            ? quizName
+            : eachQuiz && eachQuiz.name !== 'titleDraft'
+            ? eachQuiz.name
+            : 'Enter squiz title...'}
+        </p>
         <Button
           size="sm"
           w={28}
@@ -145,7 +157,7 @@ function SettingModal({ quizName, setQuizName, description, setDescription }) {
             <Button bgColor="#f2f2f2" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="green">Done</Button>
+            <Button colorScheme="green" onClick={onClose}>Done</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -157,6 +169,7 @@ function HeaderCreator({
   style,
   className,
   pathName,
+  eachQuiz,
   quizName,
   setQuizName,
   description,
@@ -165,6 +178,7 @@ function HeaderCreator({
 }) {
   const history = useHistory()
 
+  console.log(eachQuiz)
   return (
     <div
       className="header-creator w-full flex flex-row justify-between items-center bg-gray-50 px-6 shadow-md relative"
@@ -175,6 +189,7 @@ function HeaderCreator({
           Squizz!
         </a>
         <SettingModal
+          eachQuiz={eachQuiz}
           quizName={quizName}
           setQuizName={setQuizName}
           description={description}
@@ -191,32 +206,31 @@ function HeaderCreator({
         >
           Preview
         </Button>
-        <a href="/" className="mr-2">
           <Button
             variant="ghost"
             border="1px solid"
             borderColor="black"
             w="100px"
+            mr={2}
             _hover={{ color: 'gray.500', borderColor: 'gray.500' }}
+            onClick={() => history.push('/')}
           >
             Exit
           </Button>
-        </a>
 
-        <a href="/my-library/all">
-        <Button
-          variant="ghost"
-          border="1px solid"
-          borderColor="#ccc"
-          bgColor="#ccc"
-          color="white"
-          w="100px"
-          _hover={{ color: 'gray.500', borderColor: 'gray.500' }}
-          onClick={handleCreateQuiz}
-        >
-          Done
-        </Button>
-        </a>
+        {/* <a href="/my-library/all"  onClick={handleCreateQuiz}> */}
+          <Button
+            variant="ghost"
+            border="1px solid"
+            borderColor="#ccc"
+            bgColor="#ccc"
+            color="white"
+            w="100px"
+            _hover={{ color: 'gray.500', borderColor: 'gray.500' }}
+            onClick={handleCreateQuiz}
+          >
+            Done
+          </Button>
       </div>
     </div>
   )

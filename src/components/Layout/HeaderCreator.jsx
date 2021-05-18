@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import './HeaderCreator.postcss'
 import {
@@ -130,8 +130,9 @@ function ModalCreate() {
 function HeaderCreateQuiz({ style, className, pathName }) {
   const { setIsAuthenticated } = useContext(AuthContext)
   const history = useHistory()
-  const { creator, setCreator } = useContext(CreatorContext);
-  const noSelectNavbar = 'border-transparent border-b-4 hover:border-b-4 hover:text-red-700 hover:border-red-700'
+  const { creator, setCreator } = useContext(CreatorContext)
+  const noSelectNavbar =
+    'border-transparent border-b-4 hover:border-b-4 hover:text-red-700 hover:border-red-700'
 
   const menusDetail = [
     {
@@ -171,6 +172,12 @@ function HeaderCreateQuiz({ style, className, pathName }) {
     }
   ]
 
+  const handleLogout = (e) => {
+    localStorageService.clearToken()
+    setIsAuthenticated(false)
+    history.push('/')
+  }
+
   return (
     <div
       className="header-creator w-full flex flex-row justify-between items-center bg-gray-50 px-6 shadow-md relative"
@@ -195,7 +202,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
           </a>
         ))}
       </div>
-      
+
       <div className="w-3/6 gap-4 flex flex-row items-center justify-end">
         <Button
           variant="ghost"
@@ -225,13 +232,7 @@ function HeaderCreateQuiz({ style, className, pathName }) {
             <MenuItem icon={<FiHelpCircle />}>Support Center</MenuItem>
             <MenuItem
               icon={<FiLogOut />}
-              onClick={() => {
-                setTimeout(() => {
-                  localStorageService.clearToken()
-                  setIsAuthenticated(false)
-                  history.push('/mainpage')
-                })
-              }}
+              onClick={handleLogout}
             >
               Sign out
             </MenuItem>
