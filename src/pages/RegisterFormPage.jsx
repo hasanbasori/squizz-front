@@ -17,8 +17,8 @@ import {
 } from '../utils/functions'
 
 import axios from '../config/axios'
-import CreatorHomePage from './CreatorHomePage'
 import { AuthContext } from '../contexts/AuthContextProvider'
+import { NotificationContext } from '../contexts/NotiContextProvider'
 import { setToken } from '../services/localStorageService'
 import { NumberInputStepper } from '@chakra-ui/number-input'
 
@@ -54,6 +54,7 @@ function RegisterFormPage() {
   const history = useHistory()
 
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
+  const { showNotification } = useContext(NotificationContext)
 
   const isUserTypeEqualStudent =
     params.userType === convertConstantToUrl(STUDENT)
@@ -71,19 +72,26 @@ function RegisterFormPage() {
     try {
       const { data, status } = await axios.post('/creator/register', {
         role: convertUrlToConstant(userType),
-        username: userName || 'NoUsernameToShow',
+        username: userName || formValues.username || 'NoUsernameToShow',
         email,
         password,
         name: userName || 'NO NAME TO SHOW',
         birthdate: birthDateISO
       })
-      localStorage.clear()
-      setToken(data.token)
-      setIsAuthenticated(data.token)
-      history.push('/')
+      if (status === 200) {
+        showNotification('success', 'Register successfully!')
+        localStorage.clear()
+        setToken(data.token)
+        setIsAuthenticated(data.token)
+        history.push('/')
+      }
     } catch (err) {
-      console.error('❌ Error', err.data?.response.message)
-      console.error('❌ Error', err)
+      const errorMessage = err.response
+        ? err.response.data.message
+        : err.message
+      console.error('❌ Error', errorMessage)
+      console.dir(err)
+      showNotification('error', errorMessage)
     } finally {
       console.log('completed')
     }
