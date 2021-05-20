@@ -1,15 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const FooterStyled = styled.div`
+  height: var(--footer-height);
+`
 
-const FooterStyled = styled.div``
-
-function Footer() {
-  return (
-    <FooterStyled>
-      <h2 className="Footer">Footer COMPONENT</h2>
-    </FooterStyled>
-  )
+function Footer({ children }) {
+  return <FooterStyled className="layout-footer">{children}</FooterStyled>
 }
 
 export default Footer

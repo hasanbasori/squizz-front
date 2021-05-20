@@ -16,8 +16,7 @@ import {
   InputGroup,
   InputRightElement,
   Button,
-  Link as LinkChakra,
-  useToast
+  Link as LinkChakra
 } from '@chakra-ui/react'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import Separator from '../components/Separator'
@@ -28,18 +27,17 @@ import { AuthContext } from '../contexts/AuthContextProvider'
 import { NotificationContext } from '../contexts/NotiContextProvider'
 
 const loginSchema = yup.object().shape({
-  emailOrUserName: yup.string().required(),
+  emailOrUsername: yup.string().required(),
   password: yup.string().required()
 })
 
 function LoginPage() {
-  const [isShowPwd, setIsShowPwd] = useState(false)
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
-
   const { showNotification } = useContext(NotificationContext)
 
+  const [isShowPwd, setIsShowPwd] = useState(false)
+
   const history = useHistory()
-  const toast = useToast()
 
   const {
     control,
@@ -48,17 +46,19 @@ function LoginPage() {
   } = useForm({
     resolver: yupResolver(loginSchema)
   })
-  const handleSubmitLogin = async ({ emailOrUserName, password }) => {
+
+  const handleSubmitLogin = async ({ emailOrUsername, password }) => {
     try {
-      const { data } = await axios.post('/creator/login', {
+      const { data, status } = await axios.post('/creator/login', {
         emailOrUsername,
-        email: emailOrUserName,
-        username: emailOrUserName,
+        email: emailOrUsername,
+        username: emailOrUsername,
         password
       })
-      localStorageService.setToken(data.token)
 
+      console.log(typeof status, status)
       if (status === 200) {
+        localStorageService.setToken(data.token)
         setIsAuthenticated(true)
         showNotification('success', 'Logged in successfully!')
         history.push('/')
