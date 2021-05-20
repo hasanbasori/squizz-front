@@ -11,7 +11,13 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Textarea
+  Textarea,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay
 } from '@chakra-ui/react'
 import {
   FiUser,
@@ -157,10 +163,61 @@ function SettingModal({
             <Button bgColor="#f2f2f2" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="green" onClick={onClose}>Done</Button>
+            <Button colorScheme="green" onClick={onClose}>
+              Done
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
+    </>
+  )
+}
+
+function ExitAlertDialog({ history }) {
+  const [isOpen, setIsOpen] = React.useState(false)
+  const onClose = () => setIsOpen(false)
+  const cancelRef = React.useRef()
+
+  return (
+    <>
+      <Button
+        onClick={() => setIsOpen(true)}
+        variant="ghost"
+        border="1px solid"
+        borderColor="black"
+        w="100px"
+        mr={2}
+        _hover={{ color: 'gray.500', borderColor: 'gray.500' }}
+      >
+        Exit
+      </Button>
+
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold" fontSize="2xl">
+              Leave this quiz ?
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Are you sure? Your quiz isn't save.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <div className="w-full flex items-center justify-around">
+                <Button ref={cancelRef} onClick={onClose}>
+                  Cancel
+                </Button>
+                <Button onClick={() => history.push('/')}>Exit</Button>
+              </div>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </>
   )
 }
@@ -206,31 +263,37 @@ function HeaderCreator({
         >
           Preview
         </Button>
-          <Button
-            variant="ghost"
-            border="1px solid"
-            borderColor="black"
-            w="100px"
-            mr={2}
-            _hover={{ color: 'gray.500', borderColor: 'gray.500' }}
-            onClick={() => history.push('/')}
-          >
-            Exit
-          </Button>
+        <ExitAlertDialog history={history} />
+        {/* <Button
+          variant="ghost"
+          border="1px solid"
+          borderColor="black"
+          w="100px"
+          mr={2}
+          _hover={{ color: 'gray.500', borderColor: 'gray.500' }}
+          onClick={() => history.push('/')}
+        >
+          Exit
+        </Button> */}
 
         {/* <a href="/my-library/all"  onClick={handleCreateQuiz}> */}
-          <Button
-            variant="ghost"
-            border="1px solid"
-            borderColor="#ccc"
-            bgColor="#ccc"
-            color="white"
-            w="100px"
-            _hover={{ color: 'gray.500', borderColor: 'gray.500' }}
-            onClick={handleCreateQuiz}
-          >
-            Done
-          </Button>
+        <Button
+          bgColor="#26890c"
+          color="white"
+          w="100px"
+          borderBottom="4px"
+          borderColor="gray.800"
+          _hover={{
+            borderBottom: '2px',
+            marginTop: '2px',
+            height: '38px',
+            borderColor: 'gray.800',
+            bgColor: '#26890c'
+          }}
+          onClick={handleCreateQuiz}
+        >
+          Done
+        </Button>
       </div>
     </div>
   )

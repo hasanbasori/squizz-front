@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Layout, { HeaderCreator, Content, Footer } from '../components/Layout'
 // import './CreatorProfilePage.postcss'
 import {
@@ -26,9 +26,26 @@ import {
 } from '@chakra-ui/react'
 import { FiUser, FiMoreVertical } from 'react-icons/fi'
 import { CreatorContext } from '../contexts/CreatorContextProvider'
+import axios from '../config/axios'
 
 function CreatorProfilePage() {
   const { creator, setCreator } = useContext(CreatorContext)
+  const [dataCreator, setDataCreator] = useState('')
+
+  const fetchCreator = async () => {
+    try {
+      const res = await axios.get(`/creator`)
+      console.log(res.data)
+      setDataCreator(res.data.creators)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    fetchCreator()
+  }, [])
+
   return (
     <Layout>
       <HeaderCreator />
@@ -40,7 +57,11 @@ function CreatorProfilePage() {
                 <Icon as={FiUser} w={8} h={7} color="white" />
               </div>
               <div>
-                <p className="font-semibold text-2xl">{creator.username}</p>
+                <p className="font-semibold text-2xl">
+                  {dataCreator.username
+                    ? dataCreator.username
+                    : creator.username}
+                </p>
 
                 {creator.name ? (
                   <p className="text-sm">{creator.name}</p>
@@ -83,7 +104,8 @@ function CreatorProfilePage() {
           </div>
           <div className="mt-56 flex flex-col items-center">
             <p className="text-2xl font-bold">
-              No public squizzes created by {creator.username}
+              No public squizzes created by{' '}
+              {dataCreator.username ? dataCreator.username : creator.username}
             </p>
             <Button w="15%" mt="36px" bgColor="#1368ce" color="white">
               Go back

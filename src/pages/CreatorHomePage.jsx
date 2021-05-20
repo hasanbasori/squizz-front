@@ -231,7 +231,9 @@ function CreatorHomePage() {
                   />
                 )}
                 <p className="text-xs font-bold text-gray-500 mt-1">
-                  {creator.username}
+                  {dataCreator.username
+                    ? dataCreator.username
+                    : creator.username}
                 </p>
               </div>
 
@@ -384,7 +386,11 @@ function CreatorHomePage() {
                             {dataSquizz[0].name}
                           </p>
                           <div className="flex bg-gray-200 justify-between px-2 py-0.5">
-                            <p className="text-xs">{creator.username}</p>
+                            <p className="text-xs">
+                              {dataCreator.username
+                                ? dataCreator.username
+                                : creator.username}
+                            </p>
                             <p className="text-xs font-bold">0 plays</p>
                           </div>
                         </div>

@@ -9,6 +9,7 @@ import CreatorGroupsPage from './pages/CreatorGroupsPage'
 import CreateQuizPage from './pages/CreateQuizPage'
 import CreatorEachQuizPage from './pages/CreatorEachQuizPage'
 import CreatorProfilePage from './pages/CreatorProfilePage'
+import CreatorEditProfile from './pages/CreatorEditProfile'
 import CreatorSelectModesPage from './pages/CreatorSelectModePage'
 import CreatorPlayQuizPage from './pages/CreatorPlayQuizPage'
 import CreatorLobbyPage from './pages/CreatorLobbyPage'
@@ -61,15 +62,19 @@ const privateRoutes = [
     component: CreatorProfilePage
   },
   {
-    path: '/select-game-mode',
+    path: '/edit-profile',
+    component: CreatorEditProfile
+  },
+  {
+    path: '/select-game-mode/:id',
     component: CreatorSelectModesPage
   },
   {
-    path: '/creator-lobby',
+    path: '/creator-lobby/:id',
     component: CreatorLobbyPage
   },
   {
-    path: '/creator-play',
+    path: '/creator-play/:id',
     component: CreatorPlayQuizPage
   }
 ]
