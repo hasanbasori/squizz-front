@@ -1,14 +1,14 @@
 import React from 'react'
 import Layout, { Content, Footer } from '../../components/Layout'
-import './Result.postcss'
+import './RankingPage.postcss'
 import { Text } from '@chakra-ui/react'
-import CorrectAnswer from '../../components/resultComp/CorrectAnswer'
-import InCorrectAnswer from '../../components/resultComp/InCorrectAnswer'
-import TimesUp from '../../components/resultComp/TimesUp'
+import FirstPlace from '../../components/rankingComp/FirstPlace'
+import SecondPlace from '../../components/rankingComp/SecondPlace'
+import ThirdPlace from '../../components/rankingComp/ThirdPlace'
 
 const contentHeight = 'calc(100vh - var(--footer-height))'
 
-function Result() {
+function RankingPage() {
   return (
     <Layout>
       <Content
@@ -17,11 +17,11 @@ function Result() {
 
           minHeight: contentHeight
         }}
-        className="user-player-result-wrapper"
+        className="user-player-ranking-wrapper"
       >
-        {/* <CorrectAnswer /> */}
-        <InCorrectAnswer />
-        {/* <TimesUp /> */}
+        {/* <FirstPlace /> */}
+        {/* <SecondPlace /> */}
+        <ThirdPlace />
       </Content>
       <Footer>
         <div className="footer-bar">
@@ -49,4 +49,4 @@ function Result() {
   )
 }
 
-export default Result
+export default RankingPage

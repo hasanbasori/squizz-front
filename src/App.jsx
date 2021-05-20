@@ -27,6 +27,7 @@ import UserPlayerInstruction from './pages/play/UserPlayerInstruction'
 import UserPlayerGetReady from './pages/play/UserPlayerGetReady'
 import UserPlayerNextQueition from './pages/play/UserPlayerNextQueition'
 import Result from './pages/play/Result'
+import RankingPage from './pages/play/RankingPage'
 import StudentRegisterUsername from './pages/StudentRegisterUsername'
 import UserPlayerPin from './pages/play/UserPlayerPin'
 import PersonalRegisterPage from './pages/PersonalRegisterPage'
@@ -179,6 +180,7 @@ function App() {
             component={UserPlayerNextQueition}
           />
           <Route exact path="/play/result" component={Result} />
+          <Route exact path="/play/ranking" component={RankingPage} />
 
           <Redirect to="/" />
         </Switch>

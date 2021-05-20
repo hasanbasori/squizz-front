@@ -1,9 +1,9 @@
 import React from 'react'
-import { Heading, Text } from '@chakra-ui/react'
+import { Flex, Heading, Text } from '@chakra-ui/react'
 
 function CorrectAnswer() {
   return (
-    <div>
+    <Flex flexDirection="column" alignItems="center">
       <Heading mb="5px" color="white">
         Correct
       </Heading>
@@ -33,7 +33,7 @@ function CorrectAnswer() {
           marginTop: 10
         }}
       ></div>
-    </div>
+    </Flex>
   )
 }
 

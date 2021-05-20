@@ -1,9 +1,9 @@
 import React from 'react'
-import { Heading, Text } from '@chakra-ui/react'
+import { Flex, Heading, Text } from '@chakra-ui/react'
 
 function InCorrectAnswer() {
   return (
-    <div>
+    <Flex flexDirection="column" alignItems="center">
       <Heading mb="5px" color="white">
         Incorrect
       </Heading>
@@ -32,7 +32,7 @@ function InCorrectAnswer() {
           marginTop: 10
         }}
       > Dig deep on the next one!</div> */}
-    </div>
+    </Flex>
   )
 }
 
