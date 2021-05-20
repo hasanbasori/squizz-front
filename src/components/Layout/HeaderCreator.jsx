@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import './HeaderCreator.postcss'
 import {
+  Box,
   Button,
   IconButton,
   Text,
@@ -131,6 +132,21 @@ function HeaderCreateQuiz({ style, className, pathName }) {
   const { setIsAuthenticated } = useContext(AuthContext)
   const history = useHistory()
   const { creator, setCreator } = useContext(CreatorContext)
+  const [dataCreator, setDataCreator] = useState('')
+
+  const fetchCreator = async () => {
+    try {
+      const res = await axios.get(`/creator`)
+      console.log(res.data)
+      setDataCreator(res.data.creators)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  useEffect(() => {
+    fetchCreator()
+  }, [])
+
   const noSelectNavbar =
     'border-transparent border-b-4 hover:border-b-4 hover:text-red-700 hover:border-red-700'
 
@@ -171,6 +187,14 @@ function HeaderCreateQuiz({ style, className, pathName }) {
         pathName === 'groups' ? 'border-red-700 text-red-700' : noSelectNavbar
     }
   ]
+
+  const handleProfile = () => {
+    history.push(`/profiles`)
+  }
+
+  const handleEditProfile = () => {
+    history.push(`/edit-profile`)
+  }
 
   const handleLogout = (e) => {
     localStorageService.clearToken()
@@ -224,16 +248,16 @@ function HeaderCreateQuiz({ style, className, pathName }) {
             size="sm"
           />
           <MenuList py={0}>
-            <MenuItem bgColor="#f2f2f2">
-              <a href="/profiles">{creator.username}</a>
+            <MenuItem bgColor="#f2f2f2" onClick={handleProfile}>
+              {dataCreator.username ? dataCreator.username : creator.username}
             </MenuItem>
             <MenuItem icon={<FiSettings />}>Setting</MenuItem>
-            <MenuItem>Profile Setting</MenuItem>
+            <MenuItem icon={<FiUser />} onClick={handleEditProfile}>
+              Profile Setting
+            </MenuItem>
             <MenuItem icon={<FiHelpCircle />}>Support Center</MenuItem>
-            <MenuItem
-              icon={<FiLogOut />}
-              onClick={handleLogout}
-            >
+
+            <MenuItem icon={<FiLogOut />} onClick={handleLogout}>
               Sign out
             </MenuItem>
           </MenuList>

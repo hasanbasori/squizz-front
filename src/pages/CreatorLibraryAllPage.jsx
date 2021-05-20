@@ -45,8 +45,13 @@ import { useDisclosure } from '@chakra-ui/react'
 import computer from '../../pic/computer.jpg'
 import earth from '../../pic/earth.jpg'
 
-function PlayModal() {
+function PlayModal({ history, id }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const handleHostButton = () => {
+    history.push(`/select-game-mode/${id}`)
+  }
+
   return (
     <>
       <button
@@ -67,21 +72,18 @@ function PlayModal() {
             <div className="flex mx-6 justify-between">
               <div className="bg-gray-200 w-2/5 py-6 flex flex-col justify-between">
                 <img src={computer} alt="" />
-                <a
-                  href="/select-game-mode"
+                <button
+                  onClick={handleHostButton}
                   className="mx-auto w-2/3 py-2 text-center text-white bg-green-800 rounded"
                 >
                   Host
-                </a>
+                </button>
               </div>
               <div className="bg-gray-200 w-2/5 py-6 flex flex-col justify-between">
                 <img src={earth} alt="" />
-                <a
-                  href="#"
-                  className="mx-auto w-2/3 py-2 text-center text-white bg-green-800 rounded"
-                >
+                <button className="mx-auto w-2/3 py-2 text-center text-white bg-green-800 rounded">
                   Challenge
-                </a>
+                </button>
               </div>
             </div>
           </ModalBody>
@@ -108,6 +110,7 @@ function CreatorLibraryAllPage() {
   const [isUsernameFolder, setIsUsernameFolder] = useState(false)
   const { creator, setCreator } = useContext(CreatorContext)
   const [dataSquizz, setDataSquizz] = useState([])
+  const [dataCreator, setDataCreator] = useState('')
   const [error, setError] = useState('')
   const history = useHistory()
   const [isLoading, setIsLoading] = useState(true)
@@ -122,8 +125,19 @@ function CreatorLibraryAllPage() {
     }
   }
 
+  const fetchCreator = async () => {
+    try {
+      const res = await axios.get(`/creator`)
+      console.log(res.data)
+      setDataCreator(res.data.creators)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
     getSquizzes()
+    fetchCreator()
   }, [])
   // console.log(dataSquizz)
 
@@ -240,7 +254,7 @@ function CreatorLibraryAllPage() {
               >
                 <div className="pr-6 flex items-center">
                   <FiFolder />
-                  <p className="font-bold ml-2">{creator.name}</p>
+                  <p className="font-bold ml-2">{dataCreator.name}</p>
                 </div>
                 <FiPlus />
               </a>
@@ -252,7 +266,7 @@ function CreatorLibraryAllPage() {
               >
                 <div className="pr-6 flex items-center">
                   <FiFolder />
-                  <p className="font-bold ml-2">{creator.name}</p>
+                  <p className="font-bold ml-2">{dataCreator.name}</p>
                 </div>
                 <FiPlus />
               </a>
@@ -357,7 +371,11 @@ function CreatorLibraryAllPage() {
                           </div>
                         </div>
                         <div className="flex justify-between items-center w-full bg-gray-100 h-2/5">
-                          <p className="ml-2">{creator.username}</p>
+                          <p className="ml-2">
+                            {dataCreator.username
+                              ? dataCreator.username
+                              : creator.username}
+                          </p>
                           <div className="flex items-center justify-evenly w-1/3 py-1.5">
                             <p>
                               Created {createdDate}
@@ -372,7 +390,7 @@ function CreatorLibraryAllPage() {
                               Edit
                             </button>
 
-                            <PlayModal />
+                            <PlayModal history={history} id={id} />
                             {/* <button
                               className="px-4 py-1 border bg-green-600 rounded text-white text-sm font-bold"
                               onClick={handlePlayButton}

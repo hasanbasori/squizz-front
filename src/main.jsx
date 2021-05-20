@@ -6,18 +6,22 @@ import App from './App'
 import AuthContextProvider from './contexts/AuthContextProvider'
 import CreatorContextProvider from './contexts/CreatorContextProvider'
 import NotiContextProvider from './contexts/NotiContextProvider'
+import SocketContextProvider from './contexts/SocketContextProvider'
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <CreatorContextProvider>
-        <ChakraProvider>
-          <NotiContextProvider>
-            <App />
-          </NotiContextProvider>
-        </ChakraProvider>
-      </CreatorContextProvider>
+      <SocketContextProvider>
+        <CreatorContextProvider>
+          <ChakraProvider>
+            <NotiContextProvider>
+              <App />
+            </NotiContextProvider>
+          </ChakraProvider>
+        </CreatorContextProvider>
+      </SocketContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
+
   document.getElementById('root')
 )

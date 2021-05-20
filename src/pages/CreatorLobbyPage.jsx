@@ -1,13 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout, { HeaderCreator, Content, Footer } from '../components/Layout'
 import './CreatorLobbyPage.postcss'
 import { Box, Icon } from '@chakra-ui/react'
 import { FiChevronRight, FiUser } from 'react-icons/fi'
+import { useHistory, useParams } from 'react-router-dom'
+import axios from '../config/axios'
 
 function CreatorLobbyPage() {
+  const { id } = useParams()
+  const history = useHistory()
+  const [squizz, setSquizz] = useState('')
   const [isLoading, setIsLoading] = useState(true)
 
-  if (!isLoading) {
+  const getSquizz = async () => {
+    try {
+      const res = await axios.get(`/quiz/each-quiz/${id}`)
+      console.log(res)
+      if (res) setSquizz(res.data.quiz)
+      setIsLoading(false)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    getSquizz()
+  }, [])
+
+  const handleStartButton = () => {
+    history.push(`/creator-play/${id}`)
+  }
+
+  if (isLoading) {
     return (
       <div className="min-h-screen background-loading flex flex-col items-center">
         <p className="text-4xl font-extrabold mt-28 text-white">
@@ -43,17 +67,17 @@ function CreatorLobbyPage() {
         </p>
         <div className="px-3 py-2 bg-white w-2/5 rounded flex items-center justify-between text-left">
           <div>
-            <p className="text-2xl">
+            <p className="text-xl">
               Join at <span className="font-bold">www.squizz.it</span>
             </p>
-            <p className="text-2xl">
+            <p className="text-xl">
               or with the <span className="font-bold">Squizz! app</span>
             </p>
           </div>
 
           <Icon as={FiChevronRight} color="#25076b" w={12} h={12} />
           <div className="py-2 px-4">
-            <p className="font-extrabold text-6xl">123 456</p>
+            <p className="font-extrabold text-6xl">{squizz.pin}</p>
           </div>
         </div>
       </div>
@@ -67,9 +91,12 @@ function CreatorLobbyPage() {
             <p className="text-4xl text-white font-bold mb-0.5">Squizz!</p>
             <p className="text-white text-lg font-bold">at home</p>
           </div>
-          <a href="/creator-play" className="px-4 py-1 h-full bg-gray-300 rounded border-b-4 border-gray-400 font-semibold text-xl">
+          <button
+            onClick={handleStartButton}
+            className="px-4 py-1 h-full bg-gray-300 rounded border-b-4 border-gray-400 font-semibold text-xl"
+          >
             Start
-          </a>
+          </button>
         </div>
 
         <div className="background-detail px-6 py-1 rounded mt-40">
