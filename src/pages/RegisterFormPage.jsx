@@ -17,8 +17,8 @@ import {
 } from '../utils/functions'
 
 import axios from '../config/axios'
-import CreatorHomePage from './CreatorHomePage'
 import { AuthContext } from '../contexts/AuthContextProvider'
+import { NotificationContext } from '../contexts/NotiContextProvider'
 import { setToken } from '../services/localStorageService'
 import { NumberInputStepper } from '@chakra-ui/number-input'
 
@@ -54,6 +54,7 @@ function RegisterFormPage() {
   const history = useHistory()
 
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
+  const { showNotification } = useContext(NotificationContext)
 
   const isUserTypeEqualStudent =
     params.userType === convertConstantToUrl(STUDENT)

@@ -5,6 +5,8 @@
 :root {
   --header-height: 56px;
   --bg-header-color: #F2F2F2;
+  --footer-height: 56px;
+  --bg-header-color: #fff;
 }
 
 @layer base {

@@ -1,0 +1,52 @@
+import React from 'react'
+import Layout, { Content, Footer } from '../../components/Layout'
+import './Result.postcss'
+import { Text } from '@chakra-ui/react'
+import CorrectAnswer from '../../components/resultComp/CorrectAnswer'
+import InCorrectAnswer from '../../components/resultComp/InCorrectAnswer'
+import TimesUp from '../../components/resultComp/TimesUp'
+
+const contentHeight = 'calc(100vh - var(--footer-height))'
+
+function Result() {
+  return (
+    <Layout>
+      <Content
+        style={{
+          height: contentHeight,
+
+          minHeight: contentHeight
+        }}
+        className="user-player-result-wrapper"
+      >
+        {/* <CorrectAnswer /> */}
+        <InCorrectAnswer />
+        {/* <TimesUp /> */}
+      </Content>
+      <Footer>
+        <div className="footer-bar">
+          <Text m="10px" fontWeight="bold" fontSize="20px">
+            Nickname
+          </Text>
+          <div
+            style={{
+              width: 60,
+              height: 35,
+              backgroundColor: 'black',
+              borderRadius: 5,
+              marginRight: 10,
+              color: 'white',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            10
+          </div>
+        </div>
+      </Footer>
+    </Layout>
+  )
+}
+
+export default Result

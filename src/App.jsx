@@ -20,7 +20,16 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import TeacherRegister from './pages/TeacherRegister'
 import StudentRegister from './pages/StudentRegister'
+import GameBlock from './pages/GameBlock'
+import PlayerLobbyPage from './pages/PlayerLobbyPage'
+import UserPlayerNickname from './pages/play/UserPlayerNickname'
+import UserPlayerInstruction from './pages/play/UserPlayerInstruction'
+import UserPlayerGetReady from './pages/play/UserPlayerGetReady'
+import UserPlayerNextQueition from './pages/play/UserPlayerNextQueition'
+import Result from './pages/play/Result'
+import RankingPage from './pages/play/RankingPage'
 import StudentRegisterUsername from './pages/StudentRegisterUsername'
+import UserPlayerPin from './pages/play/UserPlayerPin'
 import PersonalRegisterPage from './pages/PersonalRegisterPage'
 import RegisterFormPage from './pages/RegisterFormPage'
 import './App.css'
@@ -76,6 +85,10 @@ const privateRoutes = [
   {
     path: '/creator-play/:id',
     component: CreatorPlayQuizPage
+  },
+  {
+    path: '/player-lobby',
+    component: PlayerLobbyPage
   }
 ]
 
@@ -152,6 +165,22 @@ function App() {
                 />
               )
             })}
+          <Route exact path="/play/game-block" component={GameBlock} />
+          <Route exact path="/play" component={UserPlayerPin} />
+          <Route exact path="/play/join" component={UserPlayerNickname} />
+          <Route
+            exact
+            path="/play/instuction"
+            component={UserPlayerInstruction}
+          />
+          <Route exact path="/play/start" component={UserPlayerGetReady} />
+          <Route
+            exact
+            path="/play/next-quietion"
+            component={UserPlayerNextQueition}
+          />
+          <Route exact path="/play/result" component={Result} />
+          <Route exact path="/play/ranking" component={RankingPage} />
 
           <Redirect to="/" />
         </Switch>

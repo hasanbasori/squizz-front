@@ -16,8 +16,7 @@ import {
   InputGroup,
   InputRightElement,
   Button,
-  Link as LinkChakra,
-  Divider
+  Link as LinkChakra
 } from '@chakra-ui/react'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import Separator from '../components/Separator'
@@ -25,6 +24,7 @@ import { useHistory, Link } from 'react-router-dom'
 import axios from '../config/axios'
 import * as localStorageService from '../services/localStorageService'
 import { AuthContext } from '../contexts/AuthContextProvider'
+import { NotificationContext } from '../contexts/NotiContextProvider'
 
 const loginSchema = yup.object().shape({
   emailOrUsername: yup.string().required(),
@@ -32,8 +32,11 @@ const loginSchema = yup.object().shape({
 })
 
 function LoginPage() {
-  const [isShowPwd, setIsShowPwd] = useState(false)
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
+  const { showNotification } = useContext(NotificationContext)
+
+  const [isShowPwd, setIsShowPwd] = useState(false)
+
   const history = useHistory()
 
   const {
@@ -45,19 +48,28 @@ function LoginPage() {
   })
 
   const handleSubmitLogin = async ({ emailOrUsername, password }) => {
-    console.log('hellooooo')
-    console.log(emailOrUsername, password)
-    console.log('email')
     try {
-      const { data } = await axios.post('/creator/login', {
+      const { data, status } = await axios.post('/creator/login', {
         emailOrUsername,
+        email: emailOrUsername,
+        username: emailOrUsername,
         password
       })
-      localStorageService.setToken(data.token)
-      setIsAuthenticated(true)
-      history.push('/')
+
+      console.log(typeof status, status)
+      if (status === 200) {
+        localStorageService.setToken(data.token)
+        setIsAuthenticated(true)
+        showNotification('success', 'Logged in successfully!')
+        history.push('/')
+      }
     } catch (err) {
       console.dir(err)
+
+      const errorMessage = err.response
+        ? err.response.data.message
+        : err.message
+      showNotification('error', errorMessage + '!')
     }
   }
 
@@ -95,7 +107,11 @@ function LoginPage() {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <FormControl id="email" {...field} isInvalid={errors.password}>
+                <FormControl
+                  id="password"
+                  {...field}
+                  isInvalid={errors.password}
+                >
                   <FormLabel>Password</FormLabel>
                   <InputGroup size="md">
                     <Input pr="4.5rem" type={isShowPwd ? 'text' : 'password'} />
@@ -163,10 +179,10 @@ function LoginPage() {
           </Button>
           <br />
           <p>
-            Don't have an account?{' '}
-            <LinkChakra className="text-primary-normal">
-              <Link to="/auth/register">Sign up</Link>
-            </LinkChakra>
+            Don't have an account?
+            <Link to="/auth/register">
+              <LinkChakra className="text-primary-normal">Sign up</LinkChakra>
+            </Link>
           </p>
         </div>
       </Content>

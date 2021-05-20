@@ -5,19 +5,23 @@ import './index.css'
 import App from './App'
 import AuthContextProvider from './contexts/AuthContextProvider'
 import CreatorContextProvider from './contexts/CreatorContextProvider'
+import NotiContextProvider from './contexts/NotiContextProvider'
 import SocketContextProvider from './contexts/SocketContextProvider'
 
 ReactDOM.render(
   <React.StrictMode>
-    <SocketContextProvider>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <SocketContextProvider>
         <CreatorContextProvider>
           <ChakraProvider>
-            <App />
+            <NotiContextProvider>
+              <App />
+            </NotiContextProvider>
           </ChakraProvider>
         </CreatorContextProvider>
-      </AuthContextProvider>
-    </SocketContextProvider>
+      </SocketContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>,
+
   document.getElementById('root')
 )
