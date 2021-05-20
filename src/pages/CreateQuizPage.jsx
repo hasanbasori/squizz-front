@@ -2,17 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Layout, { HeaderCreateQuiz, Content, Footer } from '../components/Layout'
 import './CreateQuizPage.postcss'
 import Dropzone from 'react-dropzone'
-import {
-  Box,
-  Button,
-  IconButton,
-  Icon,
-  Input,
-  Select,
-  Radio,
-  RadioGroup,
-  Stack
-} from '@chakra-ui/react'
+import { Box, Button, IconButton, Icon, Input, Select } from '@chakra-ui/react'
 import {
   FiTrash2,
   FiCopy,
@@ -37,7 +27,6 @@ function ImgDropZone() {
   const handleDrop = (acceptedFiles) =>
     setFile(acceptedFiles.map((file) => file.name))
 
-  // console.log(file)
   // if (!file) return (
   //   <div className="w-2/5 h-2/5 border-2 border-gray-300 my-10 flex flex-col items-center">
   //     <img src={file} alt="" />
@@ -73,7 +62,7 @@ function ImgDropZone() {
         <ul>
           {file.map((file) => (
             <li key={file}>{file}</li>
-            ))}
+          ))}
         </ul>
       </div> */}
     </div>
@@ -126,8 +115,11 @@ function CreateQuizPage() {
 
     const responses = await Promise.all(
       eachQuestion.map((question) => {
+        const isQuizType = question.type === 'quiz'
         return axios.put(`/question/${question.id}`, {
-          ...question
+          ...question,
+          option1: isQuizType ? question.option1 : 'True',
+          option2: isQuizType ? question.option2 : 'False'
         })
       })
     )
@@ -148,22 +140,6 @@ function CreateQuizPage() {
     console.log(data)
     setEachQuestion(data)
     // setInputQuestion((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleAddQuestion = () => {
-    const question = {
-      // questionName: ,
-      // questionType: ,
-      // points:,
-      // timeLimit: ,
-      // answerOptions:,
-      // option1: ,
-      // option2: ,
-      // option3: ,
-      // option4: ,
-      // answer
-    }
-    setQuestions([...questions, question])
   }
 
   const addQuestion = async () => {
@@ -374,7 +350,7 @@ function CreateQuizPage() {
                             <button
                               className="p-5 border-4 border-gray-200 bg-white-600 rounded-full"
                               onClick={
-                                item.option1
+                                item.option1 && item.option1 !== 'draft'
                                   ? (e) =>
                                       handleInputQuestion(e, index, 'option1')
                                   : null
@@ -415,7 +391,7 @@ function CreateQuizPage() {
                             <button
                               className="p-5 border-4 border-gray-200 bg-white-600 rounded-full"
                               onClick={
-                                item.option2
+                                item.option2 && item.option2 !== 'draft'
                                   ? (e) =>
                                       handleInputQuestion(e, index, 'option2')
                                   : null
