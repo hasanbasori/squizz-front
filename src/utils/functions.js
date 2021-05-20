@@ -11,6 +11,7 @@ export function convertConstantToUrl(keyword) {
  * @return { string }
  */
 export function convertUrlToConstant(keyword) {
+  console.log('convertUrlToConstant', keyword)
   return keyword.toUpperCase().replaceAll('-', '_')
 }
 
