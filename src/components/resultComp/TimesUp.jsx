@@ -16,13 +16,14 @@ function TimesUp() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          fontSize: 36
+          fontSize: 36,
+          margin: 10
         }}
       >
         ❌
       </div>
       <Text mt="10px" color="white">
-        Dust yourself off.Greatness awaits!
+        Dust yourself off. Greatness awaits!
       </Text>
       {/* <div
         style={{

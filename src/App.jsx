@@ -25,7 +25,7 @@ import PlayerLobbyPage from './pages/PlayerLobbyPage'
 import UserPlayerNickname from './pages/play/UserPlayerNickname'
 import UserPlayerInstruction from './pages/play/UserPlayerInstruction'
 import UserPlayerGetReady from './pages/play/UserPlayerGetReady'
-import UserPlayerNextQueition from './pages/play/UserPlayerNextQueition'
+import UserPlayerNextQuestion from './pages/play/UserPlayerNextQueition'
 import Result from './pages/play/Result'
 import RankingPage from './pages/play/RankingPage'
 import StudentRegisterUsername from './pages/StudentRegisterUsername'
@@ -170,14 +170,14 @@ function App() {
           <Route exact path="/play/join" component={UserPlayerNickname} />
           <Route
             exact
-            path="/play/instuction"
+            path="/play/instruction"
             component={UserPlayerInstruction}
           />
           <Route exact path="/play/start" component={UserPlayerGetReady} />
           <Route
             exact
-            path="/play/next-quietion"
-            component={UserPlayerNextQueition}
+            path="/play/next-queition"
+            component={UserPlayerNextQuestion}
           />
           <Route exact path="/play/result" component={Result} />
           <Route exact path="/play/ranking" component={RankingPage} />
