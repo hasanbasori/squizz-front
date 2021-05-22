@@ -20,10 +20,10 @@ function RankingPage() {
         }}
         className="user-player-ranking-wrapper"
       >
-        {/* <FirstPlace /> */}
+        <FirstPlace />
         {/* <SecondPlace /> */}
         {/* <ThirdPlace /> */}
-        <OtherPlace />
+        {/* <OtherPlace /> */}
       </Content>
       <Footer>
         <div className="footer-bar">

@@ -16,7 +16,8 @@ function InCorrectAnswer() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          fontSize: 36
+          fontSize: 36,
+          margin: 10
         }}
       >
         ❌

@@ -28,8 +28,8 @@ function Result() {
         className="user-player-result-wrapper"
       >
         {/* <CorrectAnswer /> */}
-        <InCorrectAnswer />
-        {/* <TimesUp /> */}
+        {/* <InCorrectAnswer /> */}
+        <TimesUp />
       </Content>
       <Footer>
         <div className="footer-bar">

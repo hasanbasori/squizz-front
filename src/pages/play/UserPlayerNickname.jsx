@@ -32,6 +32,7 @@ function UserPlayerNickname() {
             <div>
               <FormControl>
                 <Input
+                
                   display="flex"
                   alignItems="center"
                   h="48px"

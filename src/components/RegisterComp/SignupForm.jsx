@@ -60,7 +60,7 @@ function SignupForm({ onSubmitRegister, username }) {
               defaultValue={username}
             >
               <FormLabel>Username</FormLabel>
-              <Input disabled={username} defaultValue={username} />
+              <Input autoComplete disabled={username} defaultValue={username} />
               <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
             </FormControl>
           )}

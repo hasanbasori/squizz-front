@@ -95,7 +95,7 @@ function LoginPage() {
                   isInvalid={errors.emailOrUsername}
                 >
                   <FormLabel>Email or Username</FormLabel>
-                  <Input />
+                  <Input autoComplete />
                   <FormErrorMessage>
                     {errors.emailOrUsername?.message}
                   </FormErrorMessage>

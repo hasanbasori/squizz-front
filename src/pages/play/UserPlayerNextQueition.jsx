@@ -16,6 +16,7 @@ function UserPlayerNextQuestion() {
   })
   return (
     <Layout>
+
       <Content
         style={{
           height: contentHeight,
@@ -24,7 +25,7 @@ function UserPlayerNextQuestion() {
         }}
         className="user-player-next-quietion-wrapper"
       >
-        <Heading color="white">Quietion 1</Heading> <br />
+        <Heading color="white">Question 2</Heading> <br />
         <Spinner
           thickness="15px"
           speed="0.80s"
