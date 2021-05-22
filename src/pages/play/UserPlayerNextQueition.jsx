@@ -5,9 +5,10 @@ import { Heading, Text, Spinner } from '@chakra-ui/react'
 
 const contentHeight = 'calc(100vh - var(--footer-height))'
 
-function UserPlayerNextQueition() {
+function UserPlayerNextQuestion() {
   return (
     <Layout>
+
       <Content
         style={{
           height: contentHeight,
@@ -16,7 +17,7 @@ function UserPlayerNextQueition() {
         }}
         className="user-player-next-quietion-wrapper"
       >
-        <Heading color="white">Quietion 1</Heading> <br />
+        <Heading color="white">Question 2</Heading> <br />
         <Spinner
           thickness="15px"
           speed="0.80s"
@@ -25,7 +26,7 @@ function UserPlayerNextQueition() {
           size="xl"
         />
         <Text mt="1rem" color="white">
-          Ready ... 
+          Ready ...
         </Text>
       </Content>
       <Footer>
@@ -54,4 +55,4 @@ function UserPlayerNextQueition() {
   )
 }
 
-export default UserPlayerNextQueition
+export default UserPlayerNextQuestion
