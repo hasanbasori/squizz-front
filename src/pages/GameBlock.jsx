@@ -5,10 +5,11 @@ import PlayButton from '../components/PlayButton'
 import { FaCircle } from 'react-icons/fa'
 import { BsFillTriangleFill, BsSquareFill } from 'react-icons/bs'
 import { FaStar } from 'react-icons/fa'
-
+import { useHistory } from 'react-router-dom'
 import { Flex, Text, Grid } from '@chakra-ui/react'
 
 function Play() {
+  const history = useHistory()
   return (
     <Layout>
       <Content className="play-page">
@@ -27,10 +28,20 @@ function Play() {
           <div style={{ width: 100 }}></div>
         </Flex>
         <Grid ml="5px" mr="5px" templateColumns="repeat(2, 1fr)" gap={2}>
-          <PlayButton htmlType="button" type="danger" className="choice-button">
+          <PlayButton
+            onClick={() => {
+              history.push('/play/result')
+            }}
+            htmlType="button"
+            type="danger"
+            className="choice-button"
+          >
             <BsFillTriangleFill className="icon-size" />
           </PlayButton>
           <PlayButton
+            onClick={() => {
+              history.push('/play/result')
+            }}
             htmlType="button"
             type="primary"
             className="choice-button"
@@ -38,6 +49,9 @@ function Play() {
             <FaStar size="60px" />
           </PlayButton>
           <PlayButton
+            onClick={() => {
+              history.push('/play/result')
+            }}
             htmlType="button"
             type="warning"
             className="choice-button"
@@ -45,6 +59,9 @@ function Play() {
             <FaCircle size="70px" />
           </PlayButton>
           <PlayButton
+            onClick={() => {
+              history.push('/play/result')
+            }}
             htmlType="button"
             type="success"
             className="choice-button"

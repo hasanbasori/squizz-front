@@ -1,11 +1,19 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Layout, { Content, Footer } from '../../components/Layout'
 import './UserPlayerInstruction.postcss'
 import { Heading, Text } from '@chakra-ui/react'
+import {useHistory} from 'react-router-dom'
 
 const contentHeight = 'calc(100vh - var(--footer-height))'
 
 function UserPlayerInstruction() {
+  const history = useHistory()
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      history.push('/play/start')
+    }, 5000)
+  })
   return (
     <Layout>
       <Content

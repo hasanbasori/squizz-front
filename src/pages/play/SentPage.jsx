@@ -1,40 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout, { Content, Footer } from '../../components/Layout'
-import './UserPlayerNextQueition.postcss'
+import './SentPage.postcss'
 import { Heading, Text, Spinner } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
 
 const contentHeight = 'calc(100vh - var(--footer-height))'
 
-function UserPlayerNextQuestion() {
+function SentPage() {
   const history = useHistory()
 
   useEffect(() => {
     setTimeout(() => {
-      history.push('/play/game-block')
+      history.push('/play/instruction')
     }, 5000)
   })
   return (
     <Layout>
-
-      <Content
-        style={{
-          height: contentHeight,
-
-          minHeight: contentHeight
-        }}
-        className="user-player-next-quietion-wrapper"
-      >
-        <Heading color="white">Question 2</Heading> <br />
+      <Content className="user-player-loading-wrapper">
         <Spinner
           thickness="15px"
           speed="0.80s"
           emptyColor="gray.200"
           color="white.500"
           size="xl"
-        />
+        />{' '}
         <Text mt="1rem" color="white">
-          Ready ...
+          Loading ...
         </Text>
       </Content>
       <Footer>
@@ -63,4 +54,4 @@ function UserPlayerNextQuestion() {
   )
 }
 
-export default UserPlayerNextQuestion
+export default SentPage

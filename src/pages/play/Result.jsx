@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout, { Content, Footer } from '../../components/Layout'
 import './Result.postcss'
 import { Text } from '@chakra-ui/react'
 import CorrectAnswer from '../../components/resultComp/CorrectAnswer'
 import InCorrectAnswer from '../../components/resultComp/InCorrectAnswer'
 import TimesUp from '../../components/resultComp/TimesUp'
+import { useHistory } from 'react-router-dom'
 
 const contentHeight = 'calc(100vh - var(--footer-height))'
 
 function Result() {
+  const history = useHistory()
+
+  useEffect(() => {
+    setTimeout(() => {
+      history.push('/play/ranking')
+    }, 5000)
+  })
   return (
     <Layout>
       <Content
