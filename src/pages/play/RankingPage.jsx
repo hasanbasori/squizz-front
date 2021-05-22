@@ -5,6 +5,7 @@ import { Text } from '@chakra-ui/react'
 import FirstPlace from '../../components/rankingComp/FirstPlace'
 import SecondPlace from '../../components/rankingComp/SecondPlace'
 import ThirdPlace from '../../components/rankingComp/ThirdPlace'
+import OtherPlace from '../../components/rankingComp/OtherPlace'
 
 const contentHeight = 'calc(100vh - var(--footer-height))'
 
@@ -21,7 +22,8 @@ function RankingPage() {
       >
         {/* <FirstPlace /> */}
         {/* <SecondPlace /> */}
-        <ThirdPlace />
+        {/* <ThirdPlace /> */}
+        <OtherPlace />
       </Content>
       <Footer>
         <div className="footer-bar">

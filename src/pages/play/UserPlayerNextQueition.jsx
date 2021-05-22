@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout, { Content, Footer } from '../../components/Layout'
 import './UserPlayerNextQueition.postcss'
 import { Heading, Text, Spinner } from '@chakra-ui/react'
+import { useHistory } from 'react-router-dom'
 
 const contentHeight = 'calc(100vh - var(--footer-height))'
 
-function UserPlayerNextQueition() {
+function UserPlayerNextQuestion() {
+  const history = useHistory()
+
+  useEffect(() => {
+    setTimeout(() => {
+      history.push('/play/game-block')
+    }, 5000)
+  })
   return (
     <Layout>
       <Content
@@ -25,7 +33,7 @@ function UserPlayerNextQueition() {
           size="xl"
         />
         <Text mt="1rem" color="white">
-          Ready ... 
+          Ready ...
         </Text>
       </Content>
       <Footer>
@@ -54,4 +62,4 @@ function UserPlayerNextQueition() {
   )
 }
 
-export default UserPlayerNextQueition
+export default UserPlayerNextQuestion

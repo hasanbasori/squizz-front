@@ -2,8 +2,10 @@ import React from 'react'
 import Layout, { Content } from '../../components/Layout'
 import './UserPlayerNickname.postcss'
 import { Input, FormControl, Button, Text } from '@chakra-ui/react'
+import { useHistory } from 'react-router-dom'
 
 function UserPlayerNickname() {
+  const history = useHistory()
   return (
     <Layout>
       <Content className="user-player-nickname">
@@ -39,7 +41,12 @@ function UserPlayerNickname() {
                   mb="10px"
                 />
                 <div>
-                  <Button w="281px" h="40px" colorScheme="blackAlpha">
+                  <Button
+                    onClick={() => history.push('/play/instruction')}
+                    w="281px"
+                    h="40px"
+                    colorScheme="blackAlpha"
+                  >
                     Ok,go!
                   </Button>
                 </div>

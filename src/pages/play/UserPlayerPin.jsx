@@ -2,9 +2,10 @@ import React from 'react'
 import Layout, { Content } from '../../components/Layout'
 import './UserPlayerPin.postcss'
 import { Input, FormControl, Button, Text, Link } from '@chakra-ui/react'
-import { flex } from 'styled-system'
+import { useHistory } from 'react-router-dom'
 
 function UserPlayer() {
+  const history = useHistory()
   return (
     <Layout>
       <Content className="user-player-wrapper">
@@ -39,7 +40,12 @@ function UserPlayer() {
                   mb="10px"
                 />
                 <div>
-                  <Button w="281px" h="40px" colorScheme="blackAlpha">
+                  <Button
+                    onClick={() => history.push('/play/join')}
+                    w="281px"
+                    h="40px"
+                    colorScheme="blackAlpha"
+                  >
                     Enter
                   </Button>
                 </div>

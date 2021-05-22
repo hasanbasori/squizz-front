@@ -1,30 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout, { Content, Footer } from '../../components/Layout'
-import './UserPlayerGetReady.postcss'
+import './SentPage.postcss'
 import { Heading, Text, Spinner } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
 
 const contentHeight = 'calc(100vh - var(--footer-height))'
 
-function UserPlayerGetReady() {
+function SentPage() {
   const history = useHistory()
+
   useEffect(() => {
-    setTimeout(function () {
-      history.push('/play/next-question')
+    setTimeout(() => {
+      history.push('/play/instruction')
     }, 5000)
   })
-
   return (
     <Layout>
-      <Content
-        style={{
-          height: contentHeight,
-
-          minHeight: contentHeight
-        }}
-        className="user-player-getready-wrapper"
-      >
-        <Heading color="white">Get Ready!</Heading> <br />
+      <Content className="user-player-loading-wrapper">
         <Spinner
           thickness="15px"
           speed="0.80s"
@@ -62,4 +54,4 @@ function UserPlayerGetReady() {
   )
 }
 
-export default UserPlayerGetReady
+export default SentPage
