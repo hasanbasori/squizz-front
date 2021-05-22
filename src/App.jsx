@@ -26,6 +26,7 @@ import UserPlayerNickname from './pages/play/UserPlayerNickname'
 import UserPlayerInstruction from './pages/play/UserPlayerInstruction'
 import UserPlayerGetReady from './pages/play/UserPlayerGetReady'
 import UserPlayerNextQuestion from './pages/play/UserPlayerNextQueition'
+import CreatorShowResult from './pages/CreatorShowResult'
 import Result from './pages/play/Result'
 import RankingPage from './pages/play/RankingPage'
 import SentPage from './pages/play/SentPage'
@@ -90,6 +91,10 @@ const privateRoutes = [
   {
     path: '/player-lobby',
     component: PlayerLobbyPage
+  },
+  {
+    path: '/show-result',
+    component: CreatorShowResult
   }
 ]
 
