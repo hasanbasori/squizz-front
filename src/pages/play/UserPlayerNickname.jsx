@@ -4,6 +4,23 @@ import './UserPlayerNickname.postcss'
 import { Input, FormControl, Button, Text } from '@chakra-ui/react'
 
 function UserPlayerNickname() {
+  const handleSkipButton = () => {
+    // if (questions.length - 1 > index) {
+    //   setIndex((prev) => prev + 1)
+    // } else {
+    //   setIndex((prev) => prev)
+    // }
+    // console.log()
+
+    const test = { name: 'leo' }
+
+    // socket.on('hello', (arg) => {
+    //   console.log(arg) // world
+    // })
+
+    socket.emit('hello', test.name)
+  }
+
   return (
     <Layout>
       <Content className="user-player-nickname">
@@ -30,7 +47,6 @@ function UserPlayerNickname() {
             <div>
               <FormControl>
                 <Input
-                
                   display="flex"
                   alignItems="center"
                   h="48px"

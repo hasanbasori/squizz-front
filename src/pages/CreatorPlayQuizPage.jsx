@@ -32,20 +32,20 @@ function CreatorPlayQuizPage() {
   console.log(questions)
 
   const handleSkipButton = () => {
-    if (questions.length - 1 > index) {
-      setIndex((prev) => prev + 1)
-    } else {
-      setIndex((prev) => prev)
-    }
-    console.log()
+    // if (questions.length - 1 > index) {
+    //   setIndex((prev) => prev + 1)
+    // } else {
+    //   setIndex((prev) => prev)
+    // }
+    // console.log()
 
-    const test = 1
+    const test = { name: 'leo' }
 
     // socket.on('hello', (arg) => {
     //   console.log(arg) // world
     // })
 
-    socket.emit('hello', test)
+    socket.emit('hello', test.name)
   }
 
   console.log(index)

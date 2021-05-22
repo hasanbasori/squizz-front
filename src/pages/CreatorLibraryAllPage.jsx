@@ -111,6 +111,8 @@ function CreatorLibraryAllPage() {
   const { creator, setCreator } = useContext(CreatorContext)
   const [dataSquizz, setDataSquizz] = useState([])
   const [dataCreator, setDataCreator] = useState('')
+  const [inputSearch, setInputSearch] = useState('')
+  const [search, setSearch] = useState('')
   const [error, setError] = useState('')
   const history = useHistory()
   const [isLoading, setIsLoading] = useState(true)
@@ -142,6 +144,30 @@ function CreatorLibraryAllPage() {
   // console.log(dataSquizz)
 
   // const quizCreatedAt = new Date(dataSquizz.quiz[0].createdAt)
+
+  const handleSearch = () => {
+    // try {
+    //   if (inputSearch) {
+    //     const res = await axios.post('/quiz/search', {
+    //       searchData: inputSearch
+    //     })
+    //     console.log(res)
+    //     setSearch(res.data.search)
+    //   } else {
+    //     setSearch('')
+    //   }
+    // } catch (err) {}
+
+    if (inputSearch) {
+      const data = dataSquizz.filter((item, index) => item.name === inputSearch)
+      setSearch(data)
+    } else {
+      setSearch('')
+    }
+  }
+  console.log(search)
+  console.log(inputSearch)
+
   const months = [
     'Jan',
     'Feb',
@@ -301,13 +327,19 @@ function CreatorLibraryAllPage() {
                   >
                     Shared with me
                   </a>
-                  <div className="w-2/6">
+                  <div className="w-2/6 flex">
                     <Input
                       placeholder="Search"
                       size="sm"
                       borderColor="gray.300"
                       bgColor="white"
+                      value={inputSearch}
+                      onChange={(e) => setInputSearch(e.target.value)}
+                      // onKeyPress={(e) => handleSearch(e)}
                     ></Input>
+                    <button onClick={handleSearch} className="ml-2">
+                      Search
+                    </button>
                   </div>
                 </div>
 
@@ -316,7 +348,92 @@ function CreatorLibraryAllPage() {
                   <IconButton icon={<VscMenu />} variant="ghost" />
                 </div>
               </div>
-              {dataSquizz ? (
+              {search ? (
+                search.map(({ id, name, createdDate, Questions }, index) => (
+                  <div
+                    className="flex w-full h-1/6 border-2 shadow-md bg-white mb-2"
+                    onClick={() => history.push(`/each-quiz/${id}`)}
+                    key={index}
+                  >
+                    <div className="w-2/12 h-full flex items-end p-0.5">
+                      {/* <p className="h-1/2 ml-2 mr-4">CB</p> */}
+                      <Checkbox h="100%" ml={2} mr={4}></Checkbox>
+                      <div className="bg-gray-300 w-full h-full flex items-end">
+                        <p className="text-right ml-16 mb-2 p-1 bg-gray-500 rounded text-white">
+                          {Questions.length} Questions
+                        </p>
+                      </div>
+                    </div>
+                    <div className="w-10/12 flex flex-col justify-between pt-3 pb-0.5 ">
+                      <div className="flex justify-between pl-3 pr-2">
+                        <p className="font-bold text-xl">{name}</p>
+                        <div className="flex items-center">
+                          <IconButton
+                            icon={<FiStar />}
+                            variant="ghost"
+                            _hover={{ outline: 'none' }}
+                            size="lg"
+                            mr={2}
+                          />
+                          <Menu>
+                            <MenuButton
+                              as={IconButton}
+                              aria-label="Options"
+                              icon={<FiMoreVertical />}
+                              variant="ghost"
+                              _hover={{ outline: 'none' }}
+                              onClick={handleMoreButton}
+                            />
+                            <MenuList>
+                              <MenuItem
+                                icon={<FiEdit3 />}
+                                onClick={(e) => handleEditButton(e, id)}
+                              >
+                                Edit
+                              </MenuItem>
+                              <MenuItem
+                                icon={<FiTrash2 />}
+                                onClick={(e) => handleDeleteButton(e, id)}
+                              >
+                                Delete
+                              </MenuItem>
+                            </MenuList>
+                          </Menu>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center w-full bg-gray-100 h-2/5">
+                        <p className="ml-2">
+                          {dataCreator.username
+                            ? dataCreator.username
+                            : creator.username}
+                        </p>
+                        <div className="flex items-center justify-evenly w-1/3 py-1.5">
+                          <p>
+                            Created {createdDate}
+                            {/* {`${
+                            months[createdAt.getMonth()]
+                          } ${createdAt.getDate()}, ${createdAt.getFullYear()}`} */}
+                          </p>
+                          <button
+                            className="px-4 py-1 border bg-blue-600 rounded text-white text-sm font-bold"
+                            onClick={(e) => handleEditButton(e, id)}
+                          >
+                            Edit
+                          </button>
+
+                          <PlayModal history={history} id={id} />
+                          {/* <button
+                              className="px-4 py-1 border bg-green-600 rounded text-white text-sm font-bold"
+                              onClick={handlePlayButton}
+                            >
+                              Play
+                            </button> */}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : dataSquizz ? (
                 dataSquizz.map(
                   ({ id, name, createdDate, Questions }, index) => (
                     <div
