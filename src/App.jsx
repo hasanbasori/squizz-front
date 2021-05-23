@@ -26,8 +26,10 @@ import UserPlayerNickname from './pages/play/UserPlayerNickname'
 import UserPlayerInstruction from './pages/play/UserPlayerInstruction'
 import UserPlayerGetReady from './pages/play/UserPlayerGetReady'
 import UserPlayerNextQuestion from './pages/play/UserPlayerNextQueition'
+import CreatorShowResult from './pages/CreatorShowResult'
 import Result from './pages/play/Result'
 import RankingPage from './pages/play/RankingPage'
+import SentPage from './pages/play/SentPage'
 import StudentRegisterUsername from './pages/StudentRegisterUsername'
 import UserPlayerPin from './pages/play/UserPlayerPin'
 import PersonalRegisterPage from './pages/PersonalRegisterPage'
@@ -89,6 +91,10 @@ const privateRoutes = [
   {
     path: '/player-lobby',
     component: PlayerLobbyPage
+  },
+  {
+    path: '/show-result',
+    component: CreatorShowResult
   }
 ]
 
@@ -176,11 +182,12 @@ function App() {
           <Route exact path="/play/start" component={UserPlayerGetReady} />
           <Route
             exact
-            path="/play/next-queition"
+            path="/play/next-question"
             component={UserPlayerNextQuestion}
           />
           <Route exact path="/play/result" component={Result} />
           <Route exact path="/play/ranking" component={RankingPage} />
+          <Route exact path="/play/sent" component={SentPage} />
 
           <Redirect to="/" />
         </Switch>

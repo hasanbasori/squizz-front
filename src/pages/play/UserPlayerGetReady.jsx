@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout, { Content, Footer } from '../../components/Layout'
 import './UserPlayerGetReady.postcss'
 import { Heading, Text, Spinner } from '@chakra-ui/react'
+import { useHistory } from 'react-router-dom'
 
 const contentHeight = 'calc(100vh - var(--footer-height))'
 
 function UserPlayerGetReady() {
+  const history = useHistory()
+  useEffect(() => {
+    setTimeout(function () {
+      history.push('/play/next-question')
+    }, 5000)
+  })
+
   return (
     <Layout>
       <Content
@@ -25,7 +33,7 @@ function UserPlayerGetReady() {
           size="xl"
         />{' '}
         <Text mt="1rem" color="white">
-          Loading ... 
+          Loading ...
         </Text>
       </Content>
       <Footer>

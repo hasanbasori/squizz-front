@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Layout, { Content } from '../../components/Layout'
 import './UserPlayerPin.postcss'
 import { Input, FormControl, Button, Text, Link } from '@chakra-ui/react'
+<<<<<<< HEAD
 import { flex } from 'styled-system'
 import { useHistory } from 'react-router-dom'
 import { io } from 'socket.io-client'
@@ -14,6 +15,12 @@ function UserPlayer() {
     history.push(`/play/join/${pin}`)
   }
 
+=======
+import { useHistory } from 'react-router-dom'
+
+function UserPlayer() {
+  const history = useHistory()
+>>>>>>> eb100b0d602e98dd1d122ba52ff2ff011b5c805b
   return (
     <Layout>
       <Content className="user-player-wrapper">
@@ -51,10 +58,17 @@ function UserPlayer() {
                 />
                 <div>
                   <Button
+<<<<<<< HEAD
                     w="281px"
                     h="40px"
                     colorScheme="blackAlpha"
                     onClick={handleEnterButton}
+=======
+                    onClick={() => history.push('/play/join')}
+                    w="281px"
+                    h="40px"
+                    colorScheme="blackAlpha"
+>>>>>>> eb100b0d602e98dd1d122ba52ff2ff011b5c805b
                   >
                     Enter
                   </Button>
