@@ -7,6 +7,7 @@ import question from '../../pic/question.jpg'
 import { useParams } from 'react-router-dom'
 import axios from '../config/axios'
 import { socket } from '../contexts/SocketContextProvider'
+import ShowResultComp from '../components/resultComp/ShowResultComp'
 
 function CreatorPlayQuizPage() {
   const { id } = useParams()

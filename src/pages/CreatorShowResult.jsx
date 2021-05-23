@@ -51,9 +51,10 @@ function CreatorShowResult() {
               height: 350,
               position: 'absolute',
               bottom: 0,
-              right: 355,
+              right: 360,
               display: 'flex',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              borderRadius: ' 5px 5px 0px 0px'
             }}
           >
             <div>
@@ -79,13 +80,14 @@ function CreatorShowResult() {
             style={{
               backgroundColor: '#864cbf',
               width: 160,
-              height: 400,
+              height: 420,
               position: 'absolute',
               bottom: 0,
               border: '1px solid grey',
               boxShadow: '10px 10px 10px 10px grey;',
               display: 'flex',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              borderRadius: ' 5px 5px 0px 0px'
             }}
           >
             <div
@@ -112,9 +114,10 @@ function CreatorShowResult() {
               height: 310,
               position: 'absolute',
               bottom: 0,
-              left: 355,
+              left: 360,
               display: 'flex',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              borderRadius: ' 5px 5px 0px 0px'
             }}
           >
             <div>

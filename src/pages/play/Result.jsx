@@ -12,11 +12,11 @@ const contentHeight = 'calc(100vh - var(--footer-height))'
 function Result() {
   const history = useHistory()
 
-  useEffect(() => {
-    setTimeout(() => {
-      history.push('/play/ranking')
-    }, 5000)
-  })
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     history.push('/play/ranking')
+  //   }, 5000)
+  // })
   return (
     <Layout>
       <Content
@@ -29,7 +29,7 @@ function Result() {
       >
         {/* <CorrectAnswer /> */}
         {/* <InCorrectAnswer /> */}
-        <TimesUp />
+        {/* <TimesUp /> */}
       </Content>
       <Footer>
         <div className="footer-bar">
