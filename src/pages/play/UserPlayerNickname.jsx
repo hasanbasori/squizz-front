@@ -1,24 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout, { Content } from '../../components/Layout'
 import './UserPlayerNickname.postcss'
 import { Input, FormControl, Button, Text } from '@chakra-ui/react'
+import { socket } from '../../contexts/SocketContextProvider'
+import { useHistory, useParams } from 'react-router-dom'
 
 function UserPlayerNickname() {
-  const handleSkipButton = () => {
-    // if (questions.length - 1 > index) {
-    //   setIndex((prev) => prev + 1)
-    // } else {
-    //   setIndex((prev) => prev)
-    // }
-    // console.log()
-
-    const test = { name: 'leo' }
-
-    // socket.on('hello', (arg) => {
-    //   console.log(arg) // world
-    // })
-
-    socket.emit('hello', test.name)
+  const { id } = useParams()
+  const history = useHistory()
+  const [name, setName] = useState('')
+  const handleOkButton = () => {
+    const input = {
+      name,
+      pin: id
+    }
+    console.log(id)
+    socket.emit('player_joined', input)
+    history.push(`/play/instruction/${name}/${id}`)
   }
 
   return (
@@ -54,9 +52,16 @@ function UserPlayerNickname() {
                   placeholder="Nickname"
                   fontWeight="bold"
                   mb="10px"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
                 <div>
-                  <Button w="281px" h="40px" colorScheme="blackAlpha">
+                  <Button
+                    w="281px"
+                    h="40px"
+                    colorScheme="blackAlpha"
+                    onClick={handleOkButton}
+                  >
                     Ok,go!
                   </Button>
                 </div>

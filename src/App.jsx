@@ -167,10 +167,10 @@ function App() {
             })}
           <Route exact path="/play/game-block" component={GameBlock} />
           <Route exact path="/play" component={UserPlayerPin} />
-          <Route exact path="/play/join" component={UserPlayerNickname} />
+          <Route exact path="/play/join/:id" component={UserPlayerNickname} />
           <Route
             exact
-            path="/play/instruction"
+            path="/play/instruction/:name/:id"
             component={UserPlayerInstruction}
           />
           <Route exact path="/play/start" component={UserPlayerGetReady} />

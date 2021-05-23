@@ -5,11 +5,13 @@ import { Box, Icon } from '@chakra-ui/react'
 import { FiChevronRight, FiUser } from 'react-icons/fi'
 import { useHistory, useParams } from 'react-router-dom'
 import axios from '../config/axios'
+import { socket } from '../contexts/SocketContextProvider'
 
 function CreatorLobbyPage() {
   const { id } = useParams()
   const history = useHistory()
   const [squizz, setSquizz] = useState('')
+  const [players, setPlayers] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
   const getSquizz = async () => {
@@ -27,7 +29,21 @@ function CreatorLobbyPage() {
     getSquizz()
   }, [])
 
+  useEffect(() => {
+    socket.on('show_players', (player) => {
+      setPlayers([...players, player])
+      console.log(player, 'joined')
+      console.log(players)
+    })
+  }, [players])
+
+  console.log(players)
+
+  const handleSkipButton = () => {}
+
   const handleStartButton = () => {
+    const data = { status: 'start', pin: squizz.pin }
+    socket.emit('start_quiz', data)
     history.push(`/creator-play/${id}`)
   }
 
@@ -82,10 +98,12 @@ function CreatorLobbyPage() {
         </div>
       </div>
       <Content className="background-content pb-4 flex flex-col items-center">
-        <div className="flex justify-between px-4 w-full mt-2">
+        <div className="flex justify-between px-4 w-full mt-2 mb-40">
           <div className="background-detail text-white h-full px-2 flex items-center rounded">
             <Icon as={FiUser} w={6} h={6} />
-            <p className="ml-2 text-2xl font-bold">0</p>
+            <p className="ml-2 text-2xl font-bold">
+              {players ? players.length : 0}
+            </p>
           </div>
           <div className="flex flex-col items-center">
             <p className="text-4xl text-white font-bold mb-0.5">Squizz!</p>
@@ -99,10 +117,23 @@ function CreatorLobbyPage() {
           </button>
         </div>
 
-        <div className="background-detail px-6 py-1 rounded mt-40">
-          <p className="text-white text-3xl font-bold">
-            Waiting for players...
-          </p>
+        <div className="flex flex-wrap">
+          {players ? (
+            players.map((item, index) => (
+              <p
+                className="text-white text-xl font-bold m-1 py-1 px-4 rounded background-detail"
+                key={index}
+              >
+                {item.name}
+              </p>
+            ))
+          ) : (
+            <div className="background-detail px-6 py-1 rounded flex flex-wrap">
+              <p className="text-white text-3xl font-bold">
+                Waiting for players...
+              </p>
+            </div>
+          )}
         </div>
       </Content>
     </Layout>

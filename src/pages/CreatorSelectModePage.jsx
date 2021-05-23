@@ -6,6 +6,7 @@ import { FiGlobe, FiChevronsLeft, FiChevronsDown } from 'react-icons/fi'
 import { CreatorContext } from '../contexts/CreatorContextProvider'
 import { useHistory, useParams } from 'react-router-dom'
 import axios from '../config/axios'
+import { socket } from '../contexts/SocketContextProvider'
 
 function CreatorSelectModePage() {
   const { id } = useParams()
@@ -15,6 +16,7 @@ function CreatorSelectModePage() {
   const [dataCreator, setDataCreator] = useState('')
   const [isOpenGameOption, setIsOpenGameOption] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
+
   const toggleGameOption = () => {
     setIsOpenGameOption((prev) => !prev)
   }
@@ -47,6 +49,7 @@ function CreatorSelectModePage() {
   console.log(squizz)
 
   const handleClassicButton = () => {
+    socket.emit('create_lobby', squizz.pin)
     history.push(`/creator-lobby/${id}`)
   }
 
