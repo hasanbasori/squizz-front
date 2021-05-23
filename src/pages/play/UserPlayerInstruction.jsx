@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from 'react'
 import Layout, { Content, Footer } from '../../components/Layout'
 import './UserPlayerInstruction.postcss'
@@ -6,13 +5,6 @@ import { Heading, Text } from '@chakra-ui/react'
 import { useHistory, useParams } from 'react-router-dom'
 import { socket } from '../../contexts/SocketContextProvider'
 import { set } from 'react-hook-form'
-=======
-import React, {useEffect} from 'react'
-import Layout, { Content, Footer } from '../../components/Layout'
-import './UserPlayerInstruction.postcss'
-import { Heading, Text } from '@chakra-ui/react'
-import {useHistory} from 'react-router-dom'
->>>>>>> eb100b0d602e98dd1d122ba52ff2ff011b5c805b
 
 const contentHeight = 'calc(100vh - var(--footer-height))'
 
@@ -22,12 +14,12 @@ function UserPlayerInstruction() {
   const [statusRoom, setStatusRoom] = useState()
 
   useEffect(() => {
-    socket.on('player_start', (status) => {
-      setStatusRoom(status)
+    socket.on('player_start', (data) => {
+      setStatusRoom(data.status)
 
-      if (statusRoom === 'start') {
-        return history.push('/play/game-block')
-      }
+      history.push(`/play/game-block/${data}`)
+      // if (statusRoom === 'start') {
+      // }
     })
   }, [statusRoom])
   console.log(statusRoom)

@@ -11,16 +11,26 @@ import ShowResultComp from '../components/resultComp/ShowResultComp'
 
 function CreatorPlayQuizPage() {
   const { id } = useParams()
-  const [index, setIndex] = useState(0)
-  const [questions, setQuestions] = useState('')
+  const [questions, setQuestions] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [countdown, setCountdown] = useState('')
+  const [activeIndex, setActiveIndex] = useState(null)
+  const [timeLimit, setTimeLimit] = useState(null)
 
   const getQuestions = async () => {
     try {
       const res = await axios.get(`/quiz/each-quiz/${id}`)
       console.log(res)
-      if (res) setQuestions(res.data.quiz.Questions)
+      if (res) {
+        const { Questions } = res.data.quiz
+        if (Questions.length <= 0) {
+          return console.log('error, this is no questions')
+        }
+
+        setQuestions(Questions)
+        setActiveIndex(0)
+        setTimeLimit(Number(Questions[0].timeLimit))
+      }
+
       setIsLoading(false)
     } catch (err) {
       console.log(err)
@@ -31,6 +41,28 @@ function CreatorPlayQuizPage() {
     getQuestions()
   }, [])
   console.log(questions)
+
+  useEffect(() => {
+    if (timeLimit === null) {
+      return
+    }
+
+    const interval = setInterval(() => {
+      if (timeLimit === 0) {
+        setTimeLimit(null)
+      } else {
+        setTimeLimit(timeLimit - 1)
+      }
+    }, 1000)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [timeLimit])
+  console.log(timeLimit)
+
+  if (questions === null) {
+    return <div>loading</div>
+  }
 
   const handleSkipButton = () => {
     // if (questions.length - 1 > index) {
@@ -49,12 +81,12 @@ function CreatorPlayQuizPage() {
     socket.emit('hello', test.name)
   }
 
-  console.log(index)
-  console.log(questions.length - 1)
-
   if (isLoading) {
     return <p>data is loading</p>
   }
+
+  const activeQuestion = questions[activeIndex]
+  // const { id, title, options_1, options_2, time_limit } = activeQuestion
 
   return (
     <Layout>
@@ -62,7 +94,7 @@ function CreatorPlayQuizPage() {
         <div className="flex flex-col items-end">
           <div className="bg-white w-full py-8 shadow-md relative mb-2">
             <p className="text-3xl font-bold text-center">
-              {questions[index].title}
+              {activeQuestion.title}
             </p>
           </div>
 
@@ -77,11 +109,11 @@ function CreatorPlayQuizPage() {
         <div className="flex flex-col items-center w-full mb-8">
           <div className="w-full flex items-center justify-between px-4">
             <p className="bg-red-300 p-6 rounded-full text-4xl font-bold text-white">
-              {questions[index].timeLimit}
+              {timeLimit}
             </p>
-            {questions[index].questionImg ? (
+            {activeQuestion.questionImg ? (
               <img
-                src={questions[index].questionImg}
+                src={activeQuestion.questionImg}
                 alt=""
                 className="w-1/3 rounded shadow-md"
               />
@@ -97,19 +129,19 @@ function CreatorPlayQuizPage() {
 
         <div className="flex justify-evenly flex-wrap w-full text-left">
           <div className="w-5/12 pl-4 py-8 border shadow-md bg-red-700 rounded text-white font-semibold text-2xl">
-            {questions[index].option1}
+            {activeQuestion.option1}
           </div>
           <div className="w-5/12 pl-4  py-8 border shadow-md bg-blue-700 rounded text-white font-semibold text-2xl">
-            {questions[index].option2}
+            {activeQuestion.option2}
           </div>
-          {questions[index].option3 ? (
+          {activeQuestion.option3 ? (
             <div className="w-5/12 pl-4 py-8 border shadow-md bg-green-700 rounded text-white font-semibold text-2xl">
-              {questions[index].option3}
+              {activeQuestion.option3}
             </div>
           ) : null}
-          {questions[index].option4 ? (
+          {activeQuestion.option4 ? (
             <div className="w-5/12 pl-4  py-8 border shadow-md bg-yellow-700 rounded text-white font-semibold text-2xl">
-              {questions[index].option4}
+              {activeQuestion.option4}
             </div>
           ) : null}
         </div>

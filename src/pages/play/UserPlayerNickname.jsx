@@ -2,12 +2,8 @@ import React, { useState } from 'react'
 import Layout, { Content } from '../../components/Layout'
 import './UserPlayerNickname.postcss'
 import { Input, FormControl, Button, Text } from '@chakra-ui/react'
-<<<<<<< HEAD
 import { socket } from '../../contexts/SocketContextProvider'
 import { useHistory, useParams } from 'react-router-dom'
-=======
-import { useHistory } from 'react-router-dom'
->>>>>>> eb100b0d602e98dd1d122ba52ff2ff011b5c805b
 
 function UserPlayerNickname() {
   const { id } = useParams()
@@ -23,7 +19,6 @@ function UserPlayerNickname() {
     history.push(`/play/instruction/${name}/${id}`)
   }
 
-  const history = useHistory()
   return (
     <Layout>
       <Content className="user-player-nickname">
@@ -62,17 +57,10 @@ function UserPlayerNickname() {
                 />
                 <div>
                   <Button
-<<<<<<< HEAD
                     w="281px"
                     h="40px"
                     colorScheme="blackAlpha"
                     onClick={handleOkButton}
-=======
-                    onClick={() => history.push('/play/instruction')}
-                    w="281px"
-                    h="40px"
-                    colorScheme="blackAlpha"
->>>>>>> eb100b0d602e98dd1d122ba52ff2ff011b5c805b
                   >
                     Ok,go!
                   </Button>

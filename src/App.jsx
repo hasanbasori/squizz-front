@@ -171,7 +171,6 @@ function App() {
                 />
               )
             })}
-          <Route exact path="/play/game-block" component={GameBlock} />
           <Route exact path="/play" component={UserPlayerPin} />
           <Route exact path="/play/join/:id" component={UserPlayerNickname} />
           <Route
@@ -180,14 +179,15 @@ function App() {
             component={UserPlayerInstruction}
           />
           <Route exact path="/play/start" component={UserPlayerGetReady} />
+          <Route exact path="/play/game-block/:id" component={GameBlock} />
           <Route
             exact
             path="/play/next-question"
             component={UserPlayerNextQuestion}
           />
           <Route exact path="/play/result" component={Result} />
-          <Route exact path="/play/ranking" component={RankingPage} />
           <Route exact path="/play/sent" component={SentPage} />
+          <Route exact path="/play/ranking" component={RankingPage} />
 
           <Redirect to="/" />
         </Switch>

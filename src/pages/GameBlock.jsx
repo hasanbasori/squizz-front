@@ -1,15 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout, { Content } from '../components/Layout'
 import './GameBlock.postcss'
 import PlayButton from '../components/PlayButton'
 import { FaCircle } from 'react-icons/fa'
 import { BsFillTriangleFill, BsSquareFill } from 'react-icons/bs'
 import { FaStar } from 'react-icons/fa'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { Flex, Text, Grid } from '@chakra-ui/react'
+import { socket } from '../contexts/SocketContextProvider'
 
 function Play() {
   const history = useHistory()
+  const [isLoading, setIsLoading] = useState(true)
+  const [question, setQuestion] = useState([])
+
+  useEffect(() => {
+    socket.on('question_to_player', (squizz) => {
+      setQuestion(squizz.Questions)
+      console.log(squizz)
+    })
+    setIsLoading(false)
+    // getSocket()
+  }, [])
+
+  console.log(question)
+
+  if (isLoading) return <p>data is loading</p>
+
   return (
     <Layout>
       <Content className="play-page">
@@ -38,6 +55,7 @@ function Play() {
           >
             <BsFillTriangleFill className="icon-size" />
           </PlayButton>
+
           <PlayButton
             onClick={() => {
               history.push('/play/result')
@@ -48,6 +66,7 @@ function Play() {
           >
             <FaStar size="60px" />
           </PlayButton>
+
           <PlayButton
             onClick={() => {
               history.push('/play/result')
@@ -58,6 +77,7 @@ function Play() {
           >
             <FaCircle size="70px" />
           </PlayButton>
+
           <PlayButton
             onClick={() => {
               history.push('/play/result')
