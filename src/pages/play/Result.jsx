@@ -29,8 +29,9 @@ function Result() {
         className="user-player-result-wrapper"
       >
         {/* <CorrectAnswer /> */}
-        <InCorrectAnswer />
+        {/* <InCorrectAnswer /> */}
         {/* <TimesUp /> */}
+        <ShowResultComp />
       </Content>
       <Footer>
         <div className="footer-bar">
